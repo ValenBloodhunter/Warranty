@@ -78,14 +78,13 @@
 
 
   function money(x) {
+  const n = Number(x);
 
-    const n = Number(x);
+  if (!Number.isFinite(n)) {
+    return "$0.0000";
+  }
 
-    if (!Number.isFinite(n)) {
-      return "$0.000";
-    }
-
-    return "$" + n.toFixed(3);
+  return "$" + n.toFixed(4);
   }
 
 

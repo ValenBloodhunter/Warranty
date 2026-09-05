@@ -359,7 +359,10 @@
       if (upperBound <= eps) {
 
         best = {
-          tau: routed[routed.length - 1].score,
+          tau:
+            cut === 0
+             ? 1.01
+             : routed[routed.length - 1].score,
 
           n: cut,
 

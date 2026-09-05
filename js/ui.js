@@ -1498,8 +1498,8 @@ rows.forEach((row, index) => {
 
     if (
       !window.Router ||
-      typeof Router.predictPHAT !==
-        "function"
+      typeof window.Router.predictPHAT !==
+      "function"
     ) {
 
       throw new Error(

@@ -30,14 +30,25 @@
           {
             label: "WARRANTY",
             data: [],
-            pointRadius: 7,
-            pointHoverRadius: 10
+            showLine: true,
+            fill: false,
+            tension: 0.25,
+            pointRadius: 3,
+            pointHoverRadius: 7
           },
           {
             label: "Baselines",
             data: [],
+            showLine: false,
             pointRadius: 6,
             pointHoverRadius: 9
+          },
+          {
+            label: "Current ε",
+            data: [],
+            showLine: false,
+            pointRadius: 9,
+            pointHoverRadius: 12
           }
         ]
       },
@@ -80,7 +91,6 @@
               display: true,
               text: "Cost"
             },
-
             beginAtZero: true
           },
 
@@ -89,7 +99,6 @@
               display: true,
               text: "Accuracy"
             },
-
             min: 0,
             max: 1
           }
@@ -100,23 +109,40 @@
     return paretoChart;
   }
 
-  function updatePareto(warrantyPoint, baselinePoints) {
+  function updatePareto(
+    warrantyCurve,
+    baselinePoints,
+    currentPoint
+  ) {
     if (!paretoChart) {
       initPareto();
     }
 
     if (!paretoChart) return;
 
-    warrantyPoint = warrantyPoint || null;
-    baselinePoints = Array.isArray(baselinePoints)
-      ? baselinePoints
-      : [];
+    warrantyCurve =
+      Array.isArray(warrantyCurve)
+        ? warrantyCurve
+        : [];
+
+    baselinePoints =
+      Array.isArray(baselinePoints)
+        ? baselinePoints
+        : [];
+
+    currentPoint =
+      currentPoint || null;
 
     paretoChart.data.datasets[0].data =
-      warrantyPoint ? [warrantyPoint] : [];
+      warrantyCurve;
 
     paretoChart.data.datasets[1].data =
       baselinePoints;
+
+    paretoChart.data.datasets[2].data =
+      currentPoint
+        ? [currentPoint]
+        : [];
 
     paretoChart.update();
   }
@@ -125,7 +151,8 @@
     let canvas = canvasOrId;
 
     if (typeof canvasOrId === "string") {
-      canvas = document.getElementById(canvasOrId);
+      canvas =
+        document.getElementById(canvasOrId);
     }
 
     if (!canvas) {
@@ -138,7 +165,12 @@
     const width = canvas.width;
     const height = canvas.height;
 
-    ctx.clearRect(0, 0, width, height);
+    ctx.clearRect(
+      0,
+      0,
+      width,
+      height
+    );
 
     const centerX = width / 2;
     const centerY = height * 0.82;
@@ -158,19 +190,16 @@
       current = 0;
     }
 
-    current = Math.max(
-      0,
-      Math.min(current, max)
-    );
+    current =
+      Math.max(
+        0,
+        Math.min(current, max)
+      );
 
-    const ratio = current / max;
+    const ratio =
+      current / max;
 
     const startAngle = Math.PI;
-    const endAngle = Math.PI * 2;
-
-    /*
-      Gauge background
-    */
 
     ctx.beginPath();
 
@@ -179,16 +208,12 @@
       centerY,
       radius,
       startAngle,
-      endAngle
+      Math.PI * 2
     );
 
     ctx.lineWidth = 18;
     ctx.strokeStyle = "#e5e7eb";
     ctx.stroke();
-
-    /*
-      Gauge progress
-    */
 
     ctx.beginPath();
 
@@ -204,12 +229,9 @@
     ctx.strokeStyle = "#111827";
     ctx.stroke();
 
-    /*
-      Needle
-    */
-
     const needleAngle =
-      startAngle + Math.PI * ratio;
+      startAngle +
+      Math.PI * ratio;
 
     const needleLength =
       radius * 0.82;
@@ -226,16 +248,19 @@
 
     ctx.beginPath();
 
-    ctx.moveTo(centerX, centerY);
-    ctx.lineTo(needleX, needleY);
+    ctx.moveTo(
+      centerX,
+      centerY
+    );
+
+    ctx.lineTo(
+      needleX,
+      needleY
+    );
 
     ctx.lineWidth = 4;
     ctx.strokeStyle = "#111827";
     ctx.stroke();
-
-    /*
-      Center circle
-    */
 
     ctx.beginPath();
 
@@ -250,16 +275,11 @@
     ctx.fillStyle = "#111827";
     ctx.fill();
 
-    /*
-      Value text
-    */
-
     ctx.font =
       "600 22px Arial";
 
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-
     ctx.fillStyle = "#111827";
 
     ctx.fillText(

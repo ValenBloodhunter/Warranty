@@ -1,828 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WARRANTY — Certified LLM Router</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Tailwind CDN (required by stack; most layout below uses the custom stylesheet) -->
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Chart.js CDN — must load before js/charts.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<style>
-:root{
-  --bg:#F5F1EA;
-  --bg2:#EFE8DA;
-  --panel:#FFFFFF;
-  --panel2:#FBF8F2;
-  --line:rgba(32,28,22,.09);
-  --line2:rgba(32,28,22,.17);
-  --text:#211D16;
-  --muted:#726954;
-  --muted2:#8F8570;
-  --faint:#AFA48C;
-  --accent:#5B54D6;
-  --gold:#B08A46;
-  --rose:#BD7C68;
-  --sage:#6C8F6A;
-  --ease:cubic-bezier(.16,1,.3,1);
-}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-
-html,body{height:100%;}
-
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:"Inter",sans-serif;
-  overflow:hidden;
-}
-
-button,input,select{font:inherit;}
-button{cursor:pointer;}
-
-/* APP SHELL */
-
-.app{
-  height:100vh;
-  display:grid;
-  grid-template-rows:auto auto auto auto 1fr;
-  gap:14px;
-  padding:16px 22px 18px;
-}
-
-/* HEADER */
-
-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.seal{
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  border:1.5px solid var(--accent);
-  display:grid;
-  place-items:center;
-  position:relative;
-}
-
-.seal:after{
-  content:"✓";
-  color:var(--accent);
-  font-size:15px;
-  font-weight:700;
-}
-
-.brand-text h1{
-  font-size:16px;
-  font-weight:700;
-  letter-spacing:-.02em;
-  line-height:1.1;
-}
-
-.brand-text span{
-  display:block;
-  font-size:9.5px;
-  color:var(--muted2);
-  letter-spacing:.14em;
-  margin-top:1px;
-}
-
-.judge-btn{
-  border:1px solid var(--text);
-  background:var(--text);
-  color:var(--bg);
-  padding:9px 16px;
-  border-radius:8px;
-  font-size:12.5px;
-  font-weight:600;
-  transition:.3s var(--ease);
-}
-
-.judge-btn:hover{
-  box-shadow:0 8px 20px rgba(33,29,22,.18);
-  transform:translateY(-1px);
-}
-
-.judge-btn.running{
-  background:var(--accent);
-  border-color:var(--accent);
-}
-
-/* PROMISE BAR */
-
-.promise-bar{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:14px;
-  display:grid;
-  grid-template-columns:1.4fr 1fr;
-  overflow:hidden;
-}
-
-.promise-left{
-  padding:16px 22px;
-  border-right:1px solid var(--line);
-}
-
-.promise-label{
-  font-size:11px;
-  color:var(--muted2);
-  margin-bottom:10px;
-}
-
-.epsilon-row{
-  display:flex;
-  align-items:center;
-  gap:16px;
-}
-
-.epsilon-value{
-  font-size:26px;
-  font-weight:700;
-  min-width:70px;
-  font-variant-numeric:tabular-nums;
-}
-
-input[type="range"]{
-  flex:1;
-  accent-color:var(--accent);
-}
-
-.criticality-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:12px;
-}
-
-.criticality-row label{
-  font-size:10.5px;
-  color:var(--muted2);
-  letter-spacing:.05em;
-}
-
-#criticality{
-  border:1px solid var(--line2);
-  background:var(--panel2);
-  border-radius:6px;
-  padding:4px 8px;
-  font-size:11.5px;
-  color:var(--text);
-}
-
-.promise-right{
-  padding:14px 20px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:6px;
-}
-
-.cert-stamp{
-  display:flex;
-  align-items:baseline;
-  gap:10px;
-}
-
-#certStatusText{
-  font-size:20px;
-  font-weight:700;
-  letter-spacing:-.01em;
-}
-
-.cert-stamp.cert-good #certStatusText{color:var(--sage);}
-.cert-stamp.cert-bad #certStatusText{color:var(--rose);}
-.cert-stamp.cert-pending #certStatusText{color:var(--muted2);}
-
-.cert-math{
-  font-size:10.5px;
-  color:var(--muted2);
-  font-variant-numeric:tabular-nums;
-  line-height:1.6;
-}
-
-.cert-math b{
-  color:var(--muted);
-  font-weight:600;
-}
-
-/* STAT TILES */
-
-.stat-tiles{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-
-.tile{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:12px 16px;
-}
-
-.tile span{
-  display:block;
-  font-size:10px;
-  color:var(--muted2);
-  letter-spacing:.06em;
-  margin-bottom:6px;
-}
-
-.tile strong{
-  font-size:24px;
-  font-weight:700;
-  font-variant-numeric:tabular-nums;
-}
-
-/* FLOW BAR */
-
-.flow-bar{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-
-.flow-seg{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-left:3px solid var(--faint);
-  border-radius:10px;
-  padding:9px 14px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.flow-seg.cache{border-left-color:var(--muted2);}
-.flow-seg.cheap{border-left-color:var(--sage);}
-.flow-seg.escalated{border-left-color:var(--gold);}
-.flow-seg.frontier{border-left-color:var(--accent);}
-
-.flow-seg .flabel{
-  font-size:11px;
-  color:var(--muted);
-  font-weight:500;
-}
-
-.flow-seg .fnums{
-  text-align:right;
-}
-
-.flow-seg .fpct{
-  font-size:15px;
-  font-weight:700;
-  font-variant-numeric:tabular-nums;
-}
-
-.flow-seg .fcount{
-  font-size:9.5px;
-  color:var(--muted2);
-}
-
-/* MAIN GRID */
-
-.main-grid{
-  display:grid;
-  grid-template-columns:1.5fr 1fr;
-  gap:14px;
-  min-height:0;
-}
-
-.main-left{
-  display:grid;
-  grid-template-rows:1fr 1fr;
-  gap:14px;
-  min-height:0;
-}
-
-.panel{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:14px;
-  display:flex;
-  flex-direction:column;
-  min-height:0;
-  overflow:hidden;
-}
-
-.panel-head{
-  padding:10px 16px;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-shrink:0;
-}
-
-.panel-head h2{
-  font-size:12px;
-  font-weight:600;
-}
-
-.panel-head .tag{
-  font-size:9.5px;
-  color:var(--muted2);
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-
-.panel-body{
-  flex:1;
-  min-height:0;
-  padding:12px 16px;
-  overflow:auto;
-}
-
-/* PARETO */
-
-#paretoChart{
-  width:100%!important;
-  height:100%!important;
-}
-
-/* ABLATION TABLE */
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:11.5px;
-}
-
-thead th{
-  text-align:left;
-  color:var(--muted2);
-  font-weight:500;
-  font-size:10px;
-  letter-spacing:.05em;
-  text-transform:uppercase;
-  padding:4px 8px;
-  border-bottom:1px solid var(--line);
-  position:sticky;
-  top:0;
-  background:var(--panel);
-}
-
-tbody td{
-  padding:6px 8px;
-  border-bottom:1px solid var(--line);
-  font-variant-numeric:tabular-nums;
-}
-
-tbody tr:last-child td{border-bottom:0;}
-
-tbody tr.highlight{
-  background:rgba(91,84,214,.05);
-  font-weight:600;
-}
-
-/* REPLAY PANEL */
-
-.replay-controls{
-  display:flex;
-  gap:8px;
-  padding:10px 16px;
-  border-bottom:1px solid var(--line);
-  flex-shrink:0;
-}
-
-.replay-btn{
-  border:1px solid var(--line2);
-  background:var(--panel2);
-  color:var(--text);
-  padding:7px 13px;
-  border-radius:8px;
-  font-size:11.5px;
-  font-weight:500;
-  transition:.3s var(--ease);
-}
-
-.replay-btn:hover{
-  border-color:var(--accent);
-  background:rgba(91,84,214,.06);
-}
-
-#driftBtn:hover{
-  border-color:var(--rose);
-  background:rgba(189,124,104,.08);
-}
-
-#replayTicker{
-  display:flex;
-  flex-wrap:wrap;
-  gap:3px;
-  padding:12px 16px;
-  align-content:flex-start;
-  flex:1;
-  min-height:0;
-  overflow:auto;
-}
-
-.tick{
-  width:9px;
-  height:9px;
-  border-radius:2px;
-  background:var(--line2);
-  cursor:pointer;
-  flex-shrink:0;
-}
-
-.tick.cheap{background:var(--sage);}
-.tick.regression{background:var(--rose);}
-.tick.frontier{background:var(--accent);}
-.tick.cache{background:var(--muted2);}
-
-.gauge-wrap{
-  padding:10px 16px 14px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  flex-shrink:0;
-}
-
-#regressionGauge{
-  width:150px;
-  height:80px;
-}
-
-.gauge-label{
-  font-size:10px;
-  color:var(--muted2);
-  margin-top:2px;
-}
-
-/* TRACE PANEL (slide-over) */
-
-.trace-panel{
-  position:fixed;
-  top:0;
-  right:0;
-  bottom:0;
-  width:340px;
-  background:var(--panel);
-  border-left:1px solid var(--line2);
-  box-shadow:-14px 0 40px rgba(33,29,22,.10);
-  transform:translateX(100%);
-  transition:transform .4s var(--ease);
-  z-index:100;
-  display:flex;
-  flex-direction:column;
-}
-
-.trace-panel.open{
-  transform:translateX(0);
-}
-
-.trace-head{
-  padding:16px 18px;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.trace-head h2{font-size:13px;font-weight:700;}
-
-#traceClose{
-  border:0;
-  background:transparent;
-  color:var(--muted2);
-  font-size:18px;
-  line-height:1;
-}
-
-.trace-body{
-  padding:18px;
-  overflow:auto;
-  flex:1;
-  font-size:12px;
-}
-
-.trace-section{margin-bottom:18px;}
-
-.trace-section h3{
-  font-size:9.5px;
-  color:var(--muted2);
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  margin-bottom:6px;
-}
-
-#traceQuery{
-  color:var(--text);
-  line-height:1.5;
-}
-
-#traceNeighbors{
-  list-style:none;
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
-
-#traceNeighbors li{
-  display:flex;
-  justify-content:space-between;
-  color:var(--muted);
-}
-
-.trace-bar-track{
-  position:relative;
-  height:6px;
-  background:var(--bg2);
-  border-radius:4px;
-  margin:18px 0 6px;
-}
-
-#traceBarFill{
-  position:absolute;
-  left:0;
-  top:0;
-  bottom:0;
-  background:var(--accent);
-  border-radius:4px;
-  width:0%;
-}
-
-.trace-bar-labels{
-  display:flex;
-  justify-content:space-between;
-  font-size:9.5px;
-  color:var(--muted2);
-}
-
-#traceRoute{
-  font-size:14px;
-  font-weight:700;
-  color:var(--accent);
-}
-
-.trace-panel-backdrop{
-  position:fixed;
-  inset:0;
-  background:rgba(33,29,22,.12);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .4s var(--ease);
-  z-index:90;
-}
-
-.trace-panel-backdrop.open{
-  opacity:1;
-  pointer-events:auto;
-}
-
-@media(prefers-reduced-motion:reduce){
-  *{transition-duration:.01ms!important;}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WARRANTY — Certified LLM Router</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    #trace-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 340px;
+      transform: translateX(100%);
+      transition: transform 180ms ease-out;
+      z-index: 50;
+    }
+
+    #trace-panel.open {
+      transform: translateX(0);
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-slate-950 text-white h-screen">
 
-<div class="app">
+  <div class="h-full max-w-7xl mx-auto p-4 grid grid-rows-[auto_auto_auto_1fr] gap-4">
 
-  <!-- HEADER -->
-  <header>
-    <div class="brand">
-      <div class="seal"></div>
-      <div class="brand-text">
-        <h1>WARRANTY</h1>
-        <span>CERTIFIED LLM ROUTER</span>
-      </div>
-    </div>
+    <!-- HEADER -->
+    <header class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-bold tracking-tight">
+          WARRANTY
+        </h1>
 
-    <button class="judge-btn" id="judgeModeBtn">▶ Judge Mode</button>
-  </header>
-
-  <!-- PROMISE BAR -->
-  <div class="promise-bar">
-
-    <div class="promise-left">
-      <div class="promise-label">How much error can you afford?</div>
-
-      <div class="epsilon-row">
-        <div class="epsilon-value"><span id="epsilonValue">—</span>%</div>
-        <input type="range" id="epsilonSlider" min="0" max="25" step="1" value="0">
+        <p class="text-slate-400 text-sm mt-0.5">
+          Certified LLM Router
+        </p>
       </div>
 
-      <div class="criticality-row">
-        <label for="criticality">MODE</label>
-        <select id="criticality">
-          <option value="normal">Normal</option>
-          <option value="critical">Critical</option>
-        </select>
-      </div>
-    </div>
+      <button
+        id="judge-mode-btn"
+        class="px-4 py-2 rounded-xl bg-white text-black font-semibold text-sm">
+        ▶ Judge Mode
+      </button>
+    </header>
 
-    <div class="promise-right">
-      <div class="cert-stamp cert-pending" id="certStamp">
-        <span id="certStatusText">AWAITING DATA</span>
-      </div>
 
-      <div class="cert-math">
-        <b>τ</b> <span id="certTau">—</span> ·
-        <b>n</b> <span id="certN">—</span> ·
-        <b>failures</b> <span id="certFailures">—</span> ·
-        <b>risk</b> <span id="certRisk">—</span> ·
-        <b>p</b> <span id="certPValue">—</span>
-      </div>
-    </div>
+    <!-- PROMISE BAR -->
+    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
 
-  </div>
+      <div class="flex items-center justify-between">
 
-  <!-- STAT TILES -->
-  <div class="stat-tiles">
-    <div class="tile">
-      <span>Cost saved</span>
-      <strong id="statCostSaved">—</strong>
-    </div>
-    <div class="tile">
-      <span>Cheap traffic</span>
-      <strong id="statCheapTraffic">—</strong>
-    </div>
-    <div class="tile">
-      <span>Regression</span>
-      <strong id="statRegression">—</strong>
-    </div>
-    <div class="tile">
-      <span>Overhead</span>
-      <strong id="statOverhead">—</strong>
-    </div>
-  </div>
+        <div>
+          <p class="text-xs text-slate-400">
+            Allowed Quality Regression
+          </p>
 
-  <!-- FLOW BAR -->
-  <div class="flow-bar">
-    <div class="flow-seg cache">
-      <span class="flabel">Cache hit</span>
-      <div class="fnums">
-        <div class="fpct" id="flowCachePct">—</div>
-        <div class="fcount" id="flowCacheCount">— reqs</div>
-      </div>
-    </div>
-    <div class="flow-seg cheap">
-      <span class="flabel">Cheap accepted</span>
-      <div class="fnums">
-        <div class="fpct" id="flowCheapPct">—</div>
-        <div class="fcount" id="flowCheapCount">— reqs</div>
-      </div>
-    </div>
-    <div class="flow-seg escalated">
-      <span class="flabel">Escalated</span>
-      <div class="fnums">
-        <div class="fpct" id="flowEscalatedPct">—</div>
-        <div class="fcount" id="flowEscalatedCount">— reqs</div>
-      </div>
-    </div>
-    <div class="flow-seg frontier">
-      <span class="flabel">Frontier</span>
-      <div class="fnums">
-        <div class="fpct" id="flowFrontierPct">—</div>
-        <div class="fcount" id="flowFrontierCount">— reqs</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MAIN GRID -->
-  <div class="main-grid">
-
-    <div class="main-left">
-
-      <!-- PARETO CHART -->
-      <div class="panel">
-        <div class="panel-head">
-          <h2>Quality / Cost Frontier</h2>
-          <span class="tag" id="paretoTag">No data</span>
+          <p class="text-xl font-semibold">
+            ε = <span id="epsValue">8%</span>
+          </p>
         </div>
-        <div class="panel-body">
+
+        <div
+          id="certStamp"
+          class="px-4 py-1.5 rounded-full border border-green-500 text-green-400 text-sm font-medium">
+          ✓ CERTIFIED
+        </div>
+
+      </div>
+
+      <input
+        id="epsSlider"
+        type="range"
+        min="0"
+        max="25"
+        step="1"
+        value="8"
+        class="w-full mt-4 cursor-pointer"
+        aria-label="Allowed Quality Regression"
+      >
+
+      <div class="flex justify-between text-xs text-slate-500 mt-1">
+        <span>0%</span>
+        <span>25%</span>
+      </div>
+
+      <p
+        id="stampDetail"
+        class="text-xs text-slate-400 mt-3">
+        Certification statistics loading...
+      </p>
+
+    </section>
+
+
+    <!-- STAT TILES -->
+    <section class="grid grid-cols-8 gap-3">
+
+      <!-- COST -->
+      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
+        <p class="text-slate-400 text-xs">
+          Cost Saved
+        </p>
+
+        <p
+          id="stat-cost-saved"
+          class="text-2xl font-bold mt-1">
+          —
+        </p>
+      </div>
+
+
+      <!-- CHEAP TRAFFIC -->
+      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
+        <p class="text-slate-400 text-xs">
+          Cheap Traffic
+        </p>
+
+        <p
+          id="stat-cheap-traffic"
+          class="text-2xl font-bold mt-1">
+          —
+        </p>
+      </div>
+
+
+      <!-- REGRESSION -->
+      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
+        <p class="text-slate-400 text-xs">
+          Regression
+        </p>
+
+        <p
+          id="stat-regression"
+          class="text-2xl font-bold mt-1">
+          —
+        </p>
+      </div>
+
+
+      <!-- OVERHEAD -->
+      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
+        <p class="text-slate-400 text-xs">
+          Overhead
+        </p>
+
+        <p
+          id="stat-overhead"
+          class="text-2xl font-bold mt-1">
+          —
+        </p>
+      </div>
+
+
+      <!-- ROUTING FLOW -->
+      <div class="col-span-8 bg-slate-900 border border-slate-800 rounded-2xl p-3">
+
+        <p class="text-xs text-slate-400 mb-2">
+          ROUTING FLOW
+        </p>
+
+        <div class="grid grid-cols-4 gap-3">
+
+          <div class="bg-slate-800 rounded-xl p-2 text-center">
+            <div class="text-[10px] text-slate-400">
+              CACHE HIT
+            </div>
+
+            <div
+              id="flow-cache"
+              class="font-semibold mt-0.5">
+              0%
+            </div>
+          </div>
+
+
+          <div class="bg-slate-800 rounded-xl p-2 text-center">
+            <div class="text-[10px] text-slate-400">
+              CHEAP ACCEPTED
+            </div>
+
+            <div
+              id="flow-cheap"
+              class="font-semibold mt-0.5">
+              0%
+            </div>
+          </div>
+
+
+          <div class="bg-slate-800 rounded-xl p-2 text-center">
+            <div class="text-[10px] text-slate-400">
+              ESCALATED
+            </div>
+
+            <div
+              id="flow-escalated"
+              class="font-semibold mt-0.5">
+              0%
+            </div>
+          </div>
+
+
+          <div class="bg-slate-800 rounded-xl p-2 text-center">
+            <div class="text-[10px] text-slate-400">
+              FRONTIER
+            </div>
+
+            <div
+              id="flow-frontier"
+              class="font-semibold mt-0.5">
+              100%
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- MAIN CONTENT -->
+    <section class="grid grid-cols-2 grid-rows-[1fr_auto] gap-4 min-h-0">
+
+
+      <!-- PARETO -->
+      <div
+        class="bg-slate-900 border border-slate-800 rounded-2xl p-4 min-h-0 flex flex-col">
+
+        <div class="flex items-center justify-between mb-2">
+
+          <h2 class="text-sm font-semibold text-slate-300">
+            Pareto Frontier
+          </h2>
+
+          <span class="text-[10px] text-slate-500">
+            cost vs accuracy
+          </span>
+
+        </div>
+
+        <div class="flex-1 min-h-0 relative">
+
           <canvas id="paretoChart"></canvas>
+
         </div>
+
       </div>
 
-      <!-- ABLATION TABLE -->
-      <div class="panel">
-        <div class="panel-head">
-          <h2>Ablation</h2>
-          <span class="tag">Baselines vs Ours</span>
+
+      <!-- ABLATION -->
+      <div
+        class="bg-slate-900 border border-slate-800 rounded-2xl p-4 min-h-0 flex flex-col">
+
+        <div class="flex items-center justify-between mb-2">
+
+          <h2 class="text-sm font-semibold text-slate-300">
+            Ablation
+          </h2>
+
+          <span class="text-[10px] text-slate-500">
+            held-out test
+          </span>
+
         </div>
-        <div class="panel-body">
-          <table>
-            <thead>
-              <tr>
-                <th>Method</th>
-                <th>Accuracy</th>
-                <th>Cost</th>
-                <th>Cheap %</th>
-              </tr>
-            </thead>
-            <tbody id="ablationBody">
-              <!-- rows injected by ui.js -->
-            </tbody>
-          </table>
+
+
+        <div class="grid grid-cols-4 text-[10px] text-slate-500 px-1">
+          <span>Variant</span>
+          <span>Acc</span>
+          <span>Cost</span>
+          <span>Regret</span>
         </div>
+
+
+        <div
+          id="ablationBody"
+          class="flex-1 overflow-y-auto mt-1 space-y-1 text-xs">
+        </div>
+
       </div>
+
+
+      <!-- REPLAY -->
+      <div
+        class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center gap-4">
+
+        <button
+          id="replay-btn"
+          class="px-4 py-2 rounded-lg bg-white text-black text-sm whitespace-nowrap">
+          ▶ Replay
+        </button>
+
+
+        <button
+          id="drift-btn"
+          class="px-4 py-2 rounded-lg bg-slate-800 text-sm whitespace-nowrap">
+          ⚡ Inject Drift
+        </button>
+
+
+        <div
+          id="replay-ticker"
+          class="flex-1 flex items-center gap-[2px] overflow-hidden h-6">
+        </div>
+
+
+        <canvas
+          id="regression-gauge"
+          width="90"
+          height="50"
+          class="flex-shrink-0">
+        </canvas>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- TRACE PANEL -->
+  <div
+    id="trace-panel"
+    class="bg-slate-900 border-l border-slate-800 p-4 flex flex-col gap-2 overflow-y-auto">
+
+    <div class="flex items-center justify-between">
+
+      <span class="text-sm font-semibold text-slate-200">
+        Decision Trace
+      </span>
+
+      <button
+        id="trace-close-btn"
+        class="text-slate-500 hover:text-slate-200 text-xs">
+        ✕ ESC
+      </button>
 
     </div>
 
-    <!-- REPLAY PANEL -->
-    <div class="panel">
-      <div class="panel-head">
-        <h2>Replay</h2>
-        <span class="tag" id="replayTag">Standby</span>
-      </div>
 
-      <div class="replay-controls">
-        <button class="replay-btn" id="replayBtn">▶ Replay</button>
-        <button class="replay-btn" id="driftBtn">⚡ Inject Drift</button>
-      </div>
-
-      <div id="replayTicker">
-        <!-- ticker squares injected by replay.js -->
-      </div>
-
-      <div class="gauge-wrap">
-        <canvas id="regressionGauge"></canvas>
-        <div class="gauge-label">Live regression</div>
-      </div>
+    <div
+      id="trace-content"
+      class="text-sm text-slate-400 flex flex-col gap-2">
     </div>
 
   </div>
 
-</div>
 
-<!-- TRACE PANEL -->
-<div class="trace-panel-backdrop" id="traceBackdrop"></div>
-<div class="trace-panel" id="tracePanel">
-
-  <div class="trace-head">
-    <h2>Decision Trace</h2>
-    <button id="traceClose">×</button>
+  <!-- JUDGE MODE CAPTION -->
+  <div
+    id="judge-caption"
+    class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-200 z-40">
   </div>
 
-  <div class="trace-body">
 
-    <div class="trace-section">
-      <h3>Query</h3>
-      <div id="traceQuery">—</div>
-    </div>
-
-    <div class="trace-section">
-      <h3>Nearest neighbours</h3>
-      <ul id="traceNeighbors"></ul>
-    </div>
-
-    <div class="trace-section">
-      <h3>p-hat vs tau</h3>
-      <div class="trace-bar-track">
-        <div id="traceBarFill"></div>
-      </div>
-      <div class="trace-bar-labels">
-        <span>τ = <span id="traceTau">—</span></span>
-        <span>p̂ = <span id="tracePHat">—</span></span>
-      </div>
-    </div>
-
-    <div class="trace-section">
-      <h3>Route</h3>
-      <div id="traceRoute">—</div>
-    </div>
-
-    <div class="trace-section">
-      <h3>Result</h3>
-      <div>Final: <span id="traceFinal">—</span></div>
-      <div>Gold: <span id="traceGold">—</span></div>
-      <div>Cost: <span id="traceCost">—</span></div>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- SCRIPTS — order matters -->
-<script src="js/router.js"></script>
-<script src="js/certify.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/replay.js"></script>
-<script src="js/trace.js"></script>
-<script src="js/judge.js"></script>
+  <!-- SCRIPTS -->
+  <script src="js/router.js"></script>
+  <script src="js/certify.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/replay.js"></script>
+  <script src="js/trace.js"></script>
+  <script src="js/judge.js"></script>
 
 </body>
 </html>

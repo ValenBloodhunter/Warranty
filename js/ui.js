@@ -309,31 +309,26 @@
 
 
     let totalCost = 0;
-    let correct = 0;
-    let regret = 0;
-    let cheapCount = 0;
+let correctCount = 0;
+let regret = 0;
+let cheapCount = 0;
 
+rows.forEach((row, index) => {
+  const route =
+    choose(row, index);
 
-    rows.forEach((row, index) => {
+  if (route === "cheap") {
+    cheapCount++;
+  }
 
-      const route =
-        choose(row, index);
+  const rowCorrect =
+    route === "cheap"
+      ? cheapCorrect(row)
+      : frontierCorrect(row);
 
-
-      if (route === "cheap") {
-        cheapCount++;
-      }
-
-
-      const correct =
-        route === "cheap"
-          ? cheapCorrect(row)
-          : frontierCorrect(row);
-
-
-      if (correct) {
-        correct++;
-      }
+  if (rowCorrect) {
+    correctCount++;
+  }
 
 
       // Regression means:
@@ -358,9 +353,8 @@
     const n = rows.length;
 
 
-    const accuracy =
-      correct / n;
-
+     const accuracy =
+       correctCount / n;
 
     const avgCost =
       totalCost / n;

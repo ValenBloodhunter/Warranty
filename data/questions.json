@@ -1,0 +1,3602 @@
+[
+  {
+    "id": "math_0001",
+    "slice": "math",
+    "query": "A shop starts the day with 120 notebooks. It sells 18 before lunch and 15 after lunch, then receives a delivery of 25 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "112"
+  },
+  {
+    "id": "math_0002",
+    "slice": "math",
+    "query": "A shop starts the day with 127 notebooks. It sells 21 before lunch and 19 after lunch, then receives a delivery of 31 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "118"
+  },
+  {
+    "id": "math_0003",
+    "slice": "math",
+    "query": "A shop starts the day with 134 notebooks. It sells 24 before lunch and 23 after lunch, then receives a delivery of 37 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "124"
+  },
+  {
+    "id": "math_0004",
+    "slice": "math",
+    "query": "A shop starts the day with 141 notebooks. It sells 27 before lunch and 27 after lunch, then receives a delivery of 43 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "130"
+  },
+  {
+    "id": "math_0005",
+    "slice": "math",
+    "query": "A shop starts the day with 148 notebooks. It sells 30 before lunch and 31 after lunch, then receives a delivery of 49 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "136"
+  },
+  {
+    "id": "math_0006",
+    "slice": "math",
+    "query": "A shop starts the day with 155 notebooks. It sells 33 before lunch and 35 after lunch, then receives a delivery of 25 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "112"
+  },
+  {
+    "id": "math_0007",
+    "slice": "math",
+    "query": "A shop starts the day with 162 notebooks. It sells 36 before lunch and 39 after lunch, then receives a delivery of 31 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "118"
+  },
+  {
+    "id": "math_0008",
+    "slice": "math",
+    "query": "A shop starts the day with 169 notebooks. It sells 39 before lunch and 15 after lunch, then receives a delivery of 37 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "152"
+  },
+  {
+    "id": "math_0009",
+    "slice": "math",
+    "query": "A shop starts the day with 176 notebooks. It sells 42 before lunch and 19 after lunch, then receives a delivery of 43 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "158"
+  },
+  {
+    "id": "math_0010",
+    "slice": "math",
+    "query": "A shop starts the day with 183 notebooks. It sells 18 before lunch and 23 after lunch, then receives a delivery of 49 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "191"
+  },
+  {
+    "id": "math_0011",
+    "slice": "math",
+    "query": "A shop starts the day with 190 notebooks. It sells 21 before lunch and 27 after lunch, then receives a delivery of 25 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "167"
+  },
+  {
+    "id": "math_0012",
+    "slice": "math",
+    "query": "A shop starts the day with 197 notebooks. It sells 24 before lunch and 31 after lunch, then receives a delivery of 31 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "173"
+  },
+  {
+    "id": "math_0013",
+    "slice": "math",
+    "query": "A shop starts the day with 204 notebooks. It sells 27 before lunch and 35 after lunch, then receives a delivery of 37 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "179"
+  },
+  {
+    "id": "math_0014",
+    "slice": "math",
+    "query": "A shop starts the day with 211 notebooks. It sells 30 before lunch and 39 after lunch, then receives a delivery of 43 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "185"
+  },
+  {
+    "id": "math_0015",
+    "slice": "math",
+    "query": "A shop starts the day with 218 notebooks. It sells 33 before lunch and 15 after lunch, then receives a delivery of 49 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "219"
+  },
+  {
+    "id": "math_0016",
+    "slice": "math",
+    "query": "A shop starts the day with 225 notebooks. It sells 36 before lunch and 19 after lunch, then receives a delivery of 25 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "195"
+  },
+  {
+    "id": "math_0017",
+    "slice": "math",
+    "query": "A shop starts the day with 232 notebooks. It sells 39 before lunch and 23 after lunch, then receives a delivery of 31 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "201"
+  },
+  {
+    "id": "math_0018",
+    "slice": "math",
+    "query": "A shop starts the day with 239 notebooks. It sells 42 before lunch and 27 after lunch, then receives a delivery of 37 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "207"
+  },
+  {
+    "id": "math_0019",
+    "slice": "math",
+    "query": "A shop starts the day with 246 notebooks. It sells 18 before lunch and 31 after lunch, then receives a delivery of 43 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "240"
+  },
+  {
+    "id": "math_0020",
+    "slice": "math",
+    "query": "A shop starts the day with 253 notebooks. It sells 21 before lunch and 35 after lunch, then receives a delivery of 49 notebooks. How many notebooks does the shop have at the end of the day?",
+    "gold": "246"
+  },
+  {
+    "id": "math_0021",
+    "slice": "math",
+    "query": "A buyer purchases 3 identical packs. Each pack contains 8 pens and costs $12 before a 0% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.5"
+  },
+  {
+    "id": "math_0022",
+    "slice": "math",
+    "query": "A buyer purchases 4 identical packs. Each pack contains 10 pens and costs $15 before a 5% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.425"
+  },
+  {
+    "id": "math_0023",
+    "slice": "math",
+    "query": "A buyer purchases 5 identical packs. Each pack contains 12 pens and costs $18 before a 10% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.35"
+  },
+  {
+    "id": "math_0024",
+    "slice": "math",
+    "query": "A buyer purchases 6 identical packs. Each pack contains 14 pens and costs $21 before a 15% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.275"
+  },
+  {
+    "id": "math_0025",
+    "slice": "math",
+    "query": "A buyer purchases 7 identical packs. Each pack contains 16 pens and costs $24 before a 20% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.2"
+  },
+  {
+    "id": "math_0026",
+    "slice": "math",
+    "query": "A buyer purchases 3 identical packs. Each pack contains 18 pens and costs $27 before a 0% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.5"
+  },
+  {
+    "id": "math_0027",
+    "slice": "math",
+    "query": "A buyer purchases 4 identical packs. Each pack contains 8 pens and costs $30 before a 5% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "3.5625"
+  },
+  {
+    "id": "math_0028",
+    "slice": "math",
+    "query": "A buyer purchases 5 identical packs. Each pack contains 10 pens and costs $12 before a 10% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.08"
+  },
+  {
+    "id": "math_0029",
+    "slice": "math",
+    "query": "A buyer purchases 6 identical packs. Each pack contains 12 pens and costs $15 before a 15% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.0625"
+  },
+  {
+    "id": "math_0030",
+    "slice": "math",
+    "query": "A buyer purchases 7 identical packs. Each pack contains 14 pens and costs $18 before a 20% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.0286"
+  },
+  {
+    "id": "math_0031",
+    "slice": "math",
+    "query": "A buyer purchases 3 identical packs. Each pack contains 16 pens and costs $21 before a 0% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.3125"
+  },
+  {
+    "id": "math_0032",
+    "slice": "math",
+    "query": "A buyer purchases 4 identical packs. Each pack contains 18 pens and costs $24 before a 5% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.2667"
+  },
+  {
+    "id": "math_0033",
+    "slice": "math",
+    "query": "A buyer purchases 5 identical packs. Each pack contains 8 pens and costs $27 before a 10% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "3.0375"
+  },
+  {
+    "id": "math_0034",
+    "slice": "math",
+    "query": "A buyer purchases 6 identical packs. Each pack contains 10 pens and costs $30 before a 15% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "2.55"
+  },
+  {
+    "id": "math_0035",
+    "slice": "math",
+    "query": "A buyer purchases 7 identical packs. Each pack contains 12 pens and costs $12 before a 20% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "0.8"
+  },
+  {
+    "id": "math_0036",
+    "slice": "math",
+    "query": "A buyer purchases 3 identical packs. Each pack contains 14 pens and costs $15 before a 0% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.0714"
+  },
+  {
+    "id": "math_0037",
+    "slice": "math",
+    "query": "A buyer purchases 4 identical packs. Each pack contains 16 pens and costs $18 before a 5% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.0688"
+  },
+  {
+    "id": "math_0038",
+    "slice": "math",
+    "query": "A buyer purchases 5 identical packs. Each pack contains 18 pens and costs $21 before a 10% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "1.05"
+  },
+  {
+    "id": "math_0039",
+    "slice": "math",
+    "query": "A buyer purchases 6 identical packs. Each pack contains 8 pens and costs $24 before a 15% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "2.55"
+  },
+  {
+    "id": "math_0040",
+    "slice": "math",
+    "query": "A buyer purchases 7 identical packs. Each pack contains 10 pens and costs $27 before a 20% discount is applied to the entire purchase. What is the effective cost per pen in dollars?",
+    "gold": "2.16"
+  },
+  {
+    "id": "math_0041",
+    "slice": "math",
+    "query": "4 workers each assemble 6 parts per hour for 3 hours. Then 1 more workers join, and everyone works at the same rate for another 2 hours. How many parts are assembled in total?",
+    "gold": "132"
+  },
+  {
+    "id": "math_0042",
+    "slice": "math",
+    "query": "5 workers each assemble 7 parts per hour for 4 hours. Then 2 more workers join, and everyone works at the same rate for another 3 hours. How many parts are assembled in total?",
+    "gold": "287"
+  },
+  {
+    "id": "math_0043",
+    "slice": "math",
+    "query": "6 workers each assemble 8 parts per hour for 5 hours. Then 3 more workers join, and everyone works at the same rate for another 4 hours. How many parts are assembled in total?",
+    "gold": "528"
+  },
+  {
+    "id": "math_0044",
+    "slice": "math",
+    "query": "7 workers each assemble 9 parts per hour for 6 hours. Then 1 more workers join, and everyone works at the same rate for another 5 hours. How many parts are assembled in total?",
+    "gold": "738"
+  },
+  {
+    "id": "math_0045",
+    "slice": "math",
+    "query": "8 workers each assemble 10 parts per hour for 3 hours. Then 2 more workers join, and everyone works at the same rate for another 6 hours. How many parts are assembled in total?",
+    "gold": "840"
+  },
+  {
+    "id": "math_0046",
+    "slice": "math",
+    "query": "4 workers each assemble 11 parts per hour for 4 hours. Then 3 more workers join, and everyone works at the same rate for another 2 hours. How many parts are assembled in total?",
+    "gold": "330"
+  },
+  {
+    "id": "math_0047",
+    "slice": "math",
+    "query": "5 workers each assemble 12 parts per hour for 5 hours. Then 1 more workers join, and everyone works at the same rate for another 3 hours. How many parts are assembled in total?",
+    "gold": "516"
+  },
+  {
+    "id": "math_0048",
+    "slice": "math",
+    "query": "6 workers each assemble 6 parts per hour for 6 hours. Then 2 more workers join, and everyone works at the same rate for another 4 hours. How many parts are assembled in total?",
+    "gold": "408"
+  },
+  {
+    "id": "math_0049",
+    "slice": "math",
+    "query": "7 workers each assemble 7 parts per hour for 3 hours. Then 3 more workers join, and everyone works at the same rate for another 5 hours. How many parts are assembled in total?",
+    "gold": "497"
+  },
+  {
+    "id": "math_0050",
+    "slice": "math",
+    "query": "8 workers each assemble 8 parts per hour for 4 hours. Then 1 more workers join, and everyone works at the same rate for another 6 hours. How many parts are assembled in total?",
+    "gold": "688"
+  },
+  {
+    "id": "math_0051",
+    "slice": "math",
+    "query": "4 workers each assemble 9 parts per hour for 5 hours. Then 2 more workers join, and everyone works at the same rate for another 2 hours. How many parts are assembled in total?",
+    "gold": "288"
+  },
+  {
+    "id": "math_0052",
+    "slice": "math",
+    "query": "5 workers each assemble 10 parts per hour for 6 hours. Then 3 more workers join, and everyone works at the same rate for another 3 hours. How many parts are assembled in total?",
+    "gold": "540"
+  },
+  {
+    "id": "math_0053",
+    "slice": "math",
+    "query": "6 workers each assemble 11 parts per hour for 3 hours. Then 1 more workers join, and everyone works at the same rate for another 4 hours. How many parts are assembled in total?",
+    "gold": "506"
+  },
+  {
+    "id": "math_0054",
+    "slice": "math",
+    "query": "7 workers each assemble 12 parts per hour for 4 hours. Then 2 more workers join, and everyone works at the same rate for another 5 hours. How many parts are assembled in total?",
+    "gold": "876"
+  },
+  {
+    "id": "math_0055",
+    "slice": "math",
+    "query": "8 workers each assemble 6 parts per hour for 5 hours. Then 3 more workers join, and everyone works at the same rate for another 6 hours. How many parts are assembled in total?",
+    "gold": "636"
+  },
+  {
+    "id": "math_0056",
+    "slice": "math",
+    "query": "4 workers each assemble 7 parts per hour for 6 hours. Then 1 more workers join, and everyone works at the same rate for another 2 hours. How many parts are assembled in total?",
+    "gold": "238"
+  },
+  {
+    "id": "math_0057",
+    "slice": "math",
+    "query": "5 workers each assemble 8 parts per hour for 3 hours. Then 2 more workers join, and everyone works at the same rate for another 3 hours. How many parts are assembled in total?",
+    "gold": "288"
+  },
+  {
+    "id": "math_0058",
+    "slice": "math",
+    "query": "6 workers each assemble 9 parts per hour for 4 hours. Then 3 more workers join, and everyone works at the same rate for another 4 hours. How many parts are assembled in total?",
+    "gold": "540"
+  },
+  {
+    "id": "math_0059",
+    "slice": "math",
+    "query": "7 workers each assemble 10 parts per hour for 5 hours. Then 1 more workers join, and everyone works at the same rate for another 5 hours. How many parts are assembled in total?",
+    "gold": "750"
+  },
+  {
+    "id": "math_0060",
+    "slice": "math",
+    "query": "8 workers each assemble 11 parts per hour for 6 hours. Then 2 more workers join, and everyone works at the same rate for another 6 hours. How many parts are assembled in total?",
+    "gold": "1188"
+  },
+  {
+    "id": "math_0061",
+    "slice": "math",
+    "query": "The price of a machine is $200. It first increases by 10% and then the new price is reduced by 10%. What is the final price in dollars?",
+    "gold": "198"
+  },
+  {
+    "id": "math_0062",
+    "slice": "math",
+    "query": "The price of a machine is $225. It first increases by 15% and then the new price is reduced by 15%. What is the final price in dollars?",
+    "gold": "219.9375"
+  },
+  {
+    "id": "math_0063",
+    "slice": "math",
+    "query": "The price of a machine is $250. It first increases by 20% and then the new price is reduced by 20%. What is the final price in dollars?",
+    "gold": "240"
+  },
+  {
+    "id": "math_0064",
+    "slice": "math",
+    "query": "The price of a machine is $275. It first increases by 25% and then the new price is reduced by 5%. What is the final price in dollars?",
+    "gold": "326.5625"
+  },
+  {
+    "id": "math_0065",
+    "slice": "math",
+    "query": "The price of a machine is $300. It first increases by 10% and then the new price is reduced by 10%. What is the final price in dollars?",
+    "gold": "297"
+  },
+  {
+    "id": "math_0066",
+    "slice": "math",
+    "query": "The price of a machine is $325. It first increases by 15% and then the new price is reduced by 15%. What is the final price in dollars?",
+    "gold": "317.6875"
+  },
+  {
+    "id": "math_0067",
+    "slice": "math",
+    "query": "The price of a machine is $350. It first increases by 20% and then the new price is reduced by 20%. What is the final price in dollars?",
+    "gold": "336"
+  },
+  {
+    "id": "math_0068",
+    "slice": "math",
+    "query": "The price of a machine is $375. It first increases by 25% and then the new price is reduced by 5%. What is the final price in dollars?",
+    "gold": "445.3125"
+  },
+  {
+    "id": "math_0069",
+    "slice": "math",
+    "query": "The price of a machine is $400. It first increases by 10% and then the new price is reduced by 10%. What is the final price in dollars?",
+    "gold": "396"
+  },
+  {
+    "id": "math_0070",
+    "slice": "math",
+    "query": "The price of a machine is $425. It first increases by 15% and then the new price is reduced by 15%. What is the final price in dollars?",
+    "gold": "415.4375"
+  },
+  {
+    "id": "math_0071",
+    "slice": "math",
+    "query": "The price of a machine is $450. It first increases by 20% and then the new price is reduced by 20%. What is the final price in dollars?",
+    "gold": "432"
+  },
+  {
+    "id": "math_0072",
+    "slice": "math",
+    "query": "The price of a machine is $475. It first increases by 25% and then the new price is reduced by 5%. What is the final price in dollars?",
+    "gold": "564.0625"
+  },
+  {
+    "id": "math_0073",
+    "slice": "math",
+    "query": "The price of a machine is $500. It first increases by 10% and then the new price is reduced by 10%. What is the final price in dollars?",
+    "gold": "495"
+  },
+  {
+    "id": "math_0074",
+    "slice": "math",
+    "query": "The price of a machine is $525. It first increases by 15% and then the new price is reduced by 15%. What is the final price in dollars?",
+    "gold": "513.1875"
+  },
+  {
+    "id": "math_0075",
+    "slice": "math",
+    "query": "The price of a machine is $550. It first increases by 20% and then the new price is reduced by 20%. What is the final price in dollars?",
+    "gold": "528"
+  },
+  {
+    "id": "math_0076",
+    "slice": "math",
+    "query": "The price of a machine is $575. It first increases by 25% and then the new price is reduced by 5%. What is the final price in dollars?",
+    "gold": "682.8125"
+  },
+  {
+    "id": "math_0077",
+    "slice": "math",
+    "query": "The price of a machine is $600. It first increases by 10% and then the new price is reduced by 10%. What is the final price in dollars?",
+    "gold": "594"
+  },
+  {
+    "id": "math_0078",
+    "slice": "math",
+    "query": "The price of a machine is $625. It first increases by 15% and then the new price is reduced by 15%. What is the final price in dollars?",
+    "gold": "610.9375"
+  },
+  {
+    "id": "math_0079",
+    "slice": "math",
+    "query": "The price of a machine is $650. It first increases by 20% and then the new price is reduced by 20%. What is the final price in dollars?",
+    "gold": "624"
+  },
+  {
+    "id": "math_0080",
+    "slice": "math",
+    "query": "The price of a machine is $675. It first increases by 25% and then the new price is reduced by 5%. What is the final price in dollars?",
+    "gold": "801.5625"
+  },
+  {
+    "id": "math_0081",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 2:3, with 40 tokens in total. Then 0 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "8"
+  },
+  {
+    "id": "math_0082",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 3:5, with 72 tokens in total. Then 3 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "21"
+  },
+  {
+    "id": "math_0083",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 4:7, with 110 tokens in total. Then 8 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "38"
+  },
+  {
+    "id": "math_0084",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 5:3, with 88 tokens in total. Then 15 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "-7"
+  },
+  {
+    "id": "math_0085",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 6:5, with 132 tokens in total. Then 0 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "-12"
+  },
+  {
+    "id": "math_0086",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 2:7, with 117 tokens in total. Then 2 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "67"
+  },
+  {
+    "id": "math_0087",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 3:3, with 84 tokens in total. Then 6 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "6"
+  },
+  {
+    "id": "math_0088",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 4:5, with 135 tokens in total. Then 12 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "27"
+  },
+  {
+    "id": "math_0089",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 5:7, with 192 tokens in total. Then 0 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "32"
+  },
+  {
+    "id": "math_0090",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 6:3, with 153 tokens in total. Then 6 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "-45"
+  },
+  {
+    "id": "math_0091",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 2:5, with 126 tokens in total. Then 4 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "58"
+  },
+  {
+    "id": "math_0092",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 3:7, with 190 tokens in total. Then 9 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "85"
+  },
+  {
+    "id": "math_0093",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 4:3, with 140 tokens in total. Then 0 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "-20"
+  },
+  {
+    "id": "math_0094",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 5:5, with 210 tokens in total. Then 5 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "5"
+  },
+  {
+    "id": "math_0095",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 6:7, with 286 tokens in total. Then 12 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "34"
+  },
+  {
+    "id": "math_0096",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 2:3, with 115 tokens in total. Then 6 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "29"
+  },
+  {
+    "id": "math_0097",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 3:5, with 192 tokens in total. Then 0 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "48"
+  },
+  {
+    "id": "math_0098",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 4:7, with 275 tokens in total. Then 4 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "79"
+  },
+  {
+    "id": "math_0099",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 5:3, with 208 tokens in total. Then 10 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "-42"
+  },
+  {
+    "id": "math_0100",
+    "slice": "math",
+    "query": "A box contains red and blue tokens in the ratio 6:5, with 297 tokens in total. Then 18 red tokens are removed. How many more blue tokens than red tokens remain?",
+    "gold": "-9"
+  },
+  {
+    "id": "math_0101",
+    "slice": "math",
+    "query": "The average score of 5 quizzes is 60. A new quiz score of 70 is then added. What is the new average score?",
+    "gold": "61.6667"
+  },
+  {
+    "id": "math_0102",
+    "slice": "math",
+    "query": "The average score of 6 quizzes is 61. A new quiz score of 73 is then added. What is the new average score?",
+    "gold": "62.7143"
+  },
+  {
+    "id": "math_0103",
+    "slice": "math",
+    "query": "The average score of 7 quizzes is 62. A new quiz score of 76 is then added. What is the new average score?",
+    "gold": "63.75"
+  },
+  {
+    "id": "math_0104",
+    "slice": "math",
+    "query": "The average score of 8 quizzes is 63. A new quiz score of 79 is then added. What is the new average score?",
+    "gold": "64.7778"
+  },
+  {
+    "id": "math_0105",
+    "slice": "math",
+    "query": "The average score of 5 quizzes is 64. A new quiz score of 82 is then added. What is the new average score?",
+    "gold": "67"
+  },
+  {
+    "id": "math_0106",
+    "slice": "math",
+    "query": "The average score of 6 quizzes is 65. A new quiz score of 85 is then added. What is the new average score?",
+    "gold": "67.8571"
+  },
+  {
+    "id": "math_0107",
+    "slice": "math",
+    "query": "The average score of 7 quizzes is 66. A new quiz score of 88 is then added. What is the new average score?",
+    "gold": "68.75"
+  },
+  {
+    "id": "math_0108",
+    "slice": "math",
+    "query": "The average score of 8 quizzes is 67. A new quiz score of 91 is then added. What is the new average score?",
+    "gold": "69.6667"
+  },
+  {
+    "id": "math_0109",
+    "slice": "math",
+    "query": "The average score of 5 quizzes is 68. A new quiz score of 94 is then added. What is the new average score?",
+    "gold": "72.3333"
+  },
+  {
+    "id": "math_0110",
+    "slice": "math",
+    "query": "The average score of 6 quizzes is 69. A new quiz score of 72 is then added. What is the new average score?",
+    "gold": "69.4286"
+  },
+  {
+    "id": "math_0111",
+    "slice": "math",
+    "query": "The average score of 7 quizzes is 60. A new quiz score of 75 is then added. What is the new average score?",
+    "gold": "61.875"
+  },
+  {
+    "id": "math_0112",
+    "slice": "math",
+    "query": "The average score of 8 quizzes is 61. A new quiz score of 78 is then added. What is the new average score?",
+    "gold": "62.8889"
+  },
+  {
+    "id": "math_0113",
+    "slice": "math",
+    "query": "The average score of 5 quizzes is 62. A new quiz score of 81 is then added. What is the new average score?",
+    "gold": "65.1667"
+  },
+  {
+    "id": "math_0114",
+    "slice": "math",
+    "query": "The average score of 6 quizzes is 63. A new quiz score of 84 is then added. What is the new average score?",
+    "gold": "66"
+  },
+  {
+    "id": "math_0115",
+    "slice": "math",
+    "query": "The average score of 7 quizzes is 64. A new quiz score of 87 is then added. What is the new average score?",
+    "gold": "66.875"
+  },
+  {
+    "id": "math_0116",
+    "slice": "math",
+    "query": "The average score of 8 quizzes is 65. A new quiz score of 90 is then added. What is the new average score?",
+    "gold": "67.7778"
+  },
+  {
+    "id": "math_0117",
+    "slice": "math",
+    "query": "The average score of 5 quizzes is 66. A new quiz score of 93 is then added. What is the new average score?",
+    "gold": "70.5"
+  },
+  {
+    "id": "math_0118",
+    "slice": "math",
+    "query": "The average score of 6 quizzes is 67. A new quiz score of 71 is then added. What is the new average score?",
+    "gold": "67.5714"
+  },
+  {
+    "id": "math_0119",
+    "slice": "math",
+    "query": "The average score of 7 quizzes is 68. A new quiz score of 74 is then added. What is the new average score?",
+    "gold": "68.75"
+  },
+  {
+    "id": "math_0120",
+    "slice": "math",
+    "query": "The average score of 8 quizzes is 69. A new quiz score of 77 is then added. What is the new average score?",
+    "gold": "69.8889"
+  },
+  {
+    "id": "math_0121",
+    "slice": "math",
+    "query": "A bus travels at 40 km/h for 2 hours, stops for 15 minutes, and then travels at 50 km/h for 1 hours. How many kilometres does it travel in total?",
+    "gold": "130"
+  },
+  {
+    "id": "math_0122",
+    "slice": "math",
+    "query": "A bus travels at 45 km/h for 3 hours, stops for 25 minutes, and then travels at 55 km/h for 2 hours. How many kilometres does it travel in total?",
+    "gold": "245"
+  },
+  {
+    "id": "math_0123",
+    "slice": "math",
+    "query": "A bus travels at 50 km/h for 4 hours, stops for 35 minutes, and then travels at 60 km/h for 3 hours. How many kilometres does it travel in total?",
+    "gold": "380"
+  },
+  {
+    "id": "math_0124",
+    "slice": "math",
+    "query": "A bus travels at 55 km/h for 2 hours, stops for 45 minutes, and then travels at 65 km/h for 4 hours. How many kilometres does it travel in total?",
+    "gold": "370"
+  },
+  {
+    "id": "math_0125",
+    "slice": "math",
+    "query": "A bus travels at 60 km/h for 3 hours, stops for 15 minutes, and then travels at 70 km/h for 1 hours. How many kilometres does it travel in total?",
+    "gold": "250"
+  },
+  {
+    "id": "math_0126",
+    "slice": "math",
+    "query": "A bus travels at 65 km/h for 4 hours, stops for 25 minutes, and then travels at 50 km/h for 2 hours. How many kilometres does it travel in total?",
+    "gold": "360"
+  },
+  {
+    "id": "math_0127",
+    "slice": "math",
+    "query": "A bus travels at 40 km/h for 2 hours, stops for 35 minutes, and then travels at 55 km/h for 3 hours. How many kilometres does it travel in total?",
+    "gold": "245"
+  },
+  {
+    "id": "math_0128",
+    "slice": "math",
+    "query": "A bus travels at 45 km/h for 3 hours, stops for 45 minutes, and then travels at 60 km/h for 4 hours. How many kilometres does it travel in total?",
+    "gold": "375"
+  },
+  {
+    "id": "math_0129",
+    "slice": "math",
+    "query": "A bus travels at 50 km/h for 4 hours, stops for 15 minutes, and then travels at 65 km/h for 1 hours. How many kilometres does it travel in total?",
+    "gold": "265"
+  },
+  {
+    "id": "math_0130",
+    "slice": "math",
+    "query": "A bus travels at 55 km/h for 2 hours, stops for 25 minutes, and then travels at 70 km/h for 2 hours. How many kilometres does it travel in total?",
+    "gold": "250"
+  },
+  {
+    "id": "math_0131",
+    "slice": "math",
+    "query": "A bus travels at 60 km/h for 3 hours, stops for 35 minutes, and then travels at 50 km/h for 3 hours. How many kilometres does it travel in total?",
+    "gold": "330"
+  },
+  {
+    "id": "math_0132",
+    "slice": "math",
+    "query": "A bus travels at 65 km/h for 4 hours, stops for 45 minutes, and then travels at 55 km/h for 4 hours. How many kilometres does it travel in total?",
+    "gold": "480"
+  },
+  {
+    "id": "math_0133",
+    "slice": "math",
+    "query": "A bus travels at 40 km/h for 2 hours, stops for 15 minutes, and then travels at 60 km/h for 1 hours. How many kilometres does it travel in total?",
+    "gold": "140"
+  },
+  {
+    "id": "math_0134",
+    "slice": "math",
+    "query": "A bus travels at 45 km/h for 3 hours, stops for 25 minutes, and then travels at 65 km/h for 2 hours. How many kilometres does it travel in total?",
+    "gold": "265"
+  },
+  {
+    "id": "math_0135",
+    "slice": "math",
+    "query": "A bus travels at 50 km/h for 4 hours, stops for 35 minutes, and then travels at 70 km/h for 3 hours. How many kilometres does it travel in total?",
+    "gold": "410"
+  },
+  {
+    "id": "math_0136",
+    "slice": "math",
+    "query": "A bus travels at 55 km/h for 2 hours, stops for 45 minutes, and then travels at 50 km/h for 4 hours. How many kilometres does it travel in total?",
+    "gold": "310"
+  },
+  {
+    "id": "math_0137",
+    "slice": "math",
+    "query": "A bus travels at 60 km/h for 3 hours, stops for 15 minutes, and then travels at 55 km/h for 1 hours. How many kilometres does it travel in total?",
+    "gold": "235"
+  },
+  {
+    "id": "math_0138",
+    "slice": "math",
+    "query": "A bus travels at 65 km/h for 4 hours, stops for 25 minutes, and then travels at 60 km/h for 2 hours. How many kilometres does it travel in total?",
+    "gold": "380"
+  },
+  {
+    "id": "math_0139",
+    "slice": "math",
+    "query": "A bus travels at 40 km/h for 2 hours, stops for 35 minutes, and then travels at 65 km/h for 3 hours. How many kilometres does it travel in total?",
+    "gold": "275"
+  },
+  {
+    "id": "math_0140",
+    "slice": "math",
+    "query": "A bus travels at 45 km/h for 3 hours, stops for 45 minutes, and then travels at 70 km/h for 4 hours. How many kilometres does it travel in total?",
+    "gold": "415"
+  },
+  {
+    "id": "math_0141",
+    "slice": "math",
+    "query": "A rectangular garden is 12 m long and 7 m wide. A uniform path 1 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "42"
+  },
+  {
+    "id": "math_0142",
+    "slice": "math",
+    "query": "A rectangular garden is 13 m long and 8 m wide. A uniform path 2 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "100"
+  },
+  {
+    "id": "math_0143",
+    "slice": "math",
+    "query": "A rectangular garden is 14 m long and 9 m wide. A uniform path 3 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "174"
+  },
+  {
+    "id": "math_0144",
+    "slice": "math",
+    "query": "A rectangular garden is 15 m long and 10 m wide. A uniform path 1 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "54"
+  },
+  {
+    "id": "math_0145",
+    "slice": "math",
+    "query": "A rectangular garden is 16 m long and 11 m wide. A uniform path 2 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "124"
+  },
+  {
+    "id": "math_0146",
+    "slice": "math",
+    "query": "A rectangular garden is 17 m long and 12 m wide. A uniform path 3 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "210"
+  },
+  {
+    "id": "math_0147",
+    "slice": "math",
+    "query": "A rectangular garden is 18 m long and 13 m wide. A uniform path 1 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "66"
+  },
+  {
+    "id": "math_0148",
+    "slice": "math",
+    "query": "A rectangular garden is 19 m long and 14 m wide. A uniform path 2 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "148"
+  },
+  {
+    "id": "math_0149",
+    "slice": "math",
+    "query": "A rectangular garden is 20 m long and 7 m wide. A uniform path 3 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "198"
+  },
+  {
+    "id": "math_0150",
+    "slice": "math",
+    "query": "A rectangular garden is 21 m long and 8 m wide. A uniform path 1 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "62"
+  },
+  {
+    "id": "math_0151",
+    "slice": "math",
+    "query": "A rectangular garden is 22 m long and 9 m wide. A uniform path 2 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "140"
+  },
+  {
+    "id": "math_0152",
+    "slice": "math",
+    "query": "A rectangular garden is 23 m long and 10 m wide. A uniform path 3 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "234"
+  },
+  {
+    "id": "math_0153",
+    "slice": "math",
+    "query": "A rectangular garden is 24 m long and 11 m wide. A uniform path 1 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "74"
+  },
+  {
+    "id": "math_0154",
+    "slice": "math",
+    "query": "A rectangular garden is 25 m long and 12 m wide. A uniform path 2 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "164"
+  },
+  {
+    "id": "math_0155",
+    "slice": "math",
+    "query": "A rectangular garden is 26 m long and 13 m wide. A uniform path 3 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "270"
+  },
+  {
+    "id": "math_0156",
+    "slice": "math",
+    "query": "A rectangular garden is 27 m long and 14 m wide. A uniform path 1 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "86"
+  },
+  {
+    "id": "math_0157",
+    "slice": "math",
+    "query": "A rectangular garden is 28 m long and 7 m wide. A uniform path 2 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "156"
+  },
+  {
+    "id": "math_0158",
+    "slice": "math",
+    "query": "A rectangular garden is 29 m long and 8 m wide. A uniform path 3 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "258"
+  },
+  {
+    "id": "math_0159",
+    "slice": "math",
+    "query": "A rectangular garden is 30 m long and 9 m wide. A uniform path 1 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "82"
+  },
+  {
+    "id": "math_0160",
+    "slice": "math",
+    "query": "A rectangular garden is 31 m long and 10 m wide. A uniform path 2 m wide is built around the outside of the garden. What is the area of the path in square metres?",
+    "gold": "180"
+  },
+  {
+    "id": "math_0161",
+    "slice": "math",
+    "query": "A number is multiplied by 3, and then 7 is added. The result is 37. What was the original number?",
+    "gold": "10"
+  },
+  {
+    "id": "math_0162",
+    "slice": "math",
+    "query": "A number is multiplied by 4, and then 8 is added. The result is 52. What was the original number?",
+    "gold": "11"
+  },
+  {
+    "id": "math_0163",
+    "slice": "math",
+    "query": "A number is multiplied by 5, and then 9 is added. The result is 69. What was the original number?",
+    "gold": "12"
+  },
+  {
+    "id": "math_0164",
+    "slice": "math",
+    "query": "A number is multiplied by 6, and then 10 is added. The result is 88. What was the original number?",
+    "gold": "13"
+  },
+  {
+    "id": "math_0165",
+    "slice": "math",
+    "query": "A number is multiplied by 7, and then 11 is added. The result is 109. What was the original number?",
+    "gold": "14"
+  },
+  {
+    "id": "math_0166",
+    "slice": "math",
+    "query": "A number is multiplied by 3, and then 12 is added. The result is 57. What was the original number?",
+    "gold": "15"
+  },
+  {
+    "id": "math_0167",
+    "slice": "math",
+    "query": "A number is multiplied by 4, and then 13 is added. The result is 77. What was the original number?",
+    "gold": "16"
+  },
+  {
+    "id": "math_0168",
+    "slice": "math",
+    "query": "A number is multiplied by 5, and then 14 is added. The result is 99. What was the original number?",
+    "gold": "17"
+  },
+  {
+    "id": "math_0169",
+    "slice": "math",
+    "query": "A number is multiplied by 6, and then 15 is added. The result is 123. What was the original number?",
+    "gold": "18"
+  },
+  {
+    "id": "math_0170",
+    "slice": "math",
+    "query": "A number is multiplied by 7, and then 7 is added. The result is 140. What was the original number?",
+    "gold": "19"
+  },
+  {
+    "id": "math_0171",
+    "slice": "math",
+    "query": "A number is multiplied by 3, and then 8 is added. The result is 68. What was the original number?",
+    "gold": "20"
+  },
+  {
+    "id": "math_0172",
+    "slice": "math",
+    "query": "A number is multiplied by 4, and then 9 is added. The result is 93. What was the original number?",
+    "gold": "21"
+  },
+  {
+    "id": "math_0173",
+    "slice": "math",
+    "query": "A number is multiplied by 5, and then 10 is added. The result is 120. What was the original number?",
+    "gold": "22"
+  },
+  {
+    "id": "math_0174",
+    "slice": "math",
+    "query": "A number is multiplied by 6, and then 11 is added. The result is 149. What was the original number?",
+    "gold": "23"
+  },
+  {
+    "id": "math_0175",
+    "slice": "math",
+    "query": "A number is multiplied by 7, and then 12 is added. The result is 180. What was the original number?",
+    "gold": "24"
+  },
+  {
+    "id": "math_0176",
+    "slice": "math",
+    "query": "A number is multiplied by 3, and then 13 is added. The result is 88. What was the original number?",
+    "gold": "25"
+  },
+  {
+    "id": "math_0177",
+    "slice": "math",
+    "query": "A number is multiplied by 4, and then 14 is added. The result is 118. What was the original number?",
+    "gold": "26"
+  },
+  {
+    "id": "math_0178",
+    "slice": "math",
+    "query": "A number is multiplied by 5, and then 15 is added. The result is 150. What was the original number?",
+    "gold": "27"
+  },
+  {
+    "id": "math_0179",
+    "slice": "math",
+    "query": "A number is multiplied by 6, and then 7 is added. The result is 175. What was the original number?",
+    "gold": "28"
+  },
+  {
+    "id": "math_0180",
+    "slice": "math",
+    "query": "A number is multiplied by 7, and then 8 is added. The result is 211. What was the original number?",
+    "gold": "29"
+  },
+  {
+    "id": "math_0181",
+    "slice": "math",
+    "query": "A tank initially contains 45 litres of water. First, one-third of the water is used. Then one-third of the remaining water is used. How many litres remain?",
+    "gold": "20"
+  },
+  {
+    "id": "math_0182",
+    "slice": "math",
+    "query": "A tank initially contains 96 litres of water. First, one-fourth of the water is used. Then one-fourth of the remaining water is used. How many litres remain?",
+    "gold": "54"
+  },
+  {
+    "id": "math_0183",
+    "slice": "math",
+    "query": "A tank initially contains 175 litres of water. First, one-fifth of the water is used. Then one-fifth of the remaining water is used. How many litres remain?",
+    "gold": "112"
+  },
+  {
+    "id": "math_0184",
+    "slice": "math",
+    "query": "A tank initially contains 96 litres of water. First, one-sixth of the water is used. Then one-half of the remaining water is used. How many litres remain?",
+    "gold": "40"
+  },
+  {
+    "id": "math_0185",
+    "slice": "math",
+    "query": "A tank initially contains 81 litres of water. First, one-third of the water is used. Then one-third of the remaining water is used. How many litres remain?",
+    "gold": "36"
+  },
+  {
+    "id": "math_0186",
+    "slice": "math",
+    "query": "A tank initially contains 160 litres of water. First, one-fourth of the water is used. Then one-fourth of the remaining water is used. How many litres remain?",
+    "gold": "90"
+  },
+  {
+    "id": "math_0187",
+    "slice": "math",
+    "query": "A tank initially contains 275 litres of water. First, one-fifth of the water is used. Then one-fifth of the remaining water is used. How many litres remain?",
+    "gold": "176"
+  },
+  {
+    "id": "math_0188",
+    "slice": "math",
+    "query": "A tank initially contains 144 litres of water. First, one-sixth of the water is used. Then one-half of the remaining water is used. How many litres remain?",
+    "gold": "60"
+  },
+  {
+    "id": "math_0189",
+    "slice": "math",
+    "query": "A tank initially contains 117 litres of water. First, one-third of the water is used. Then one-third of the remaining water is used. How many litres remain?",
+    "gold": "52"
+  },
+  {
+    "id": "math_0190",
+    "slice": "math",
+    "query": "A tank initially contains 224 litres of water. First, one-fourth of the water is used. Then one-fourth of the remaining water is used. How many litres remain?",
+    "gold": "126"
+  },
+  {
+    "id": "math_0191",
+    "slice": "math",
+    "query": "A tank initially contains 375 litres of water. First, one-fifth of the water is used. Then one-fifth of the remaining water is used. How many litres remain?",
+    "gold": "240"
+  },
+  {
+    "id": "math_0192",
+    "slice": "math",
+    "query": "A tank initially contains 192 litres of water. First, one-sixth of the water is used. Then one-half of the remaining water is used. How many litres remain?",
+    "gold": "80"
+  },
+  {
+    "id": "math_0193",
+    "slice": "math",
+    "query": "A tank initially contains 153 litres of water. First, one-third of the water is used. Then one-third of the remaining water is used. How many litres remain?",
+    "gold": "68"
+  },
+  {
+    "id": "math_0194",
+    "slice": "math",
+    "query": "A tank initially contains 288 litres of water. First, one-fourth of the water is used. Then one-fourth of the remaining water is used. How many litres remain?",
+    "gold": "162"
+  },
+  {
+    "id": "math_0195",
+    "slice": "math",
+    "query": "A tank initially contains 475 litres of water. First, one-fifth of the water is used. Then one-fifth of the remaining water is used. How many litres remain?",
+    "gold": "304"
+  },
+  {
+    "id": "math_0196",
+    "slice": "math",
+    "query": "A tank initially contains 240 litres of water. First, one-sixth of the water is used. Then one-half of the remaining water is used. How many litres remain?",
+    "gold": "100"
+  },
+  {
+    "id": "math_0197",
+    "slice": "math",
+    "query": "A tank initially contains 189 litres of water. First, one-third of the water is used. Then one-third of the remaining water is used. How many litres remain?",
+    "gold": "84"
+  },
+  {
+    "id": "math_0198",
+    "slice": "math",
+    "query": "A tank initially contains 352 litres of water. First, one-fourth of the water is used. Then one-fourth of the remaining water is used. How many litres remain?",
+    "gold": "198"
+  },
+  {
+    "id": "math_0199",
+    "slice": "math",
+    "query": "A tank initially contains 575 litres of water. First, one-fifth of the water is used. Then one-fifth of the remaining water is used. How many litres remain?",
+    "gold": "368"
+  },
+  {
+    "id": "math_0200",
+    "slice": "math",
+    "query": "A tank initially contains 288 litres of water. First, one-sixth of the water is used. Then one-half of the remaining water is used. How many litres remain?",
+    "gold": "120"
+  },
+  {
+    "id": "math_0201",
+    "slice": "math",
+    "query": "A seller buys 20 items at $8 each. 0 items are damaged and cannot be sold. The remaining 20 items are sold at $12 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "80"
+  },
+  {
+    "id": "math_0202",
+    "slice": "math",
+    "query": "A seller buys 21 items at $9 each. 1 items are damaged and cannot be sold. The remaining 20 items are sold at $14 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "91"
+  },
+  {
+    "id": "math_0203",
+    "slice": "math",
+    "query": "A seller buys 22 items at $10 each. 2 items are damaged and cannot be sold. The remaining 20 items are sold at $16 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "100"
+  },
+  {
+    "id": "math_0204",
+    "slice": "math",
+    "query": "A seller buys 23 items at $11 each. 3 items are damaged and cannot be sold. The remaining 20 items are sold at $18 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "107"
+  },
+  {
+    "id": "math_0205",
+    "slice": "math",
+    "query": "A seller buys 24 items at $12 each. 4 items are damaged and cannot be sold. The remaining 20 items are sold at $16 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "32"
+  },
+  {
+    "id": "math_0206",
+    "slice": "math",
+    "query": "A seller buys 25 items at $13 each. 0 items are damaged and cannot be sold. The remaining 25 items are sold at $18 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "125"
+  },
+  {
+    "id": "math_0207",
+    "slice": "math",
+    "query": "A seller buys 26 items at $14 each. 1 items are damaged and cannot be sold. The remaining 25 items are sold at $20 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "136"
+  },
+  {
+    "id": "math_0208",
+    "slice": "math",
+    "query": "A seller buys 27 items at $8 each. 2 items are damaged and cannot be sold. The remaining 25 items are sold at $15 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "159"
+  },
+  {
+    "id": "math_0209",
+    "slice": "math",
+    "query": "A seller buys 28 items at $9 each. 3 items are damaged and cannot be sold. The remaining 25 items are sold at $13 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "73"
+  },
+  {
+    "id": "math_0210",
+    "slice": "math",
+    "query": "A seller buys 29 items at $10 each. 4 items are damaged and cannot be sold. The remaining 25 items are sold at $15 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "85"
+  },
+  {
+    "id": "math_0211",
+    "slice": "math",
+    "query": "A seller buys 30 items at $11 each. 0 items are damaged and cannot be sold. The remaining 30 items are sold at $17 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "180"
+  },
+  {
+    "id": "math_0212",
+    "slice": "math",
+    "query": "A seller buys 31 items at $12 each. 1 items are damaged and cannot be sold. The remaining 30 items are sold at $19 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "198"
+  },
+  {
+    "id": "math_0213",
+    "slice": "math",
+    "query": "A seller buys 32 items at $13 each. 2 items are damaged and cannot be sold. The remaining 30 items are sold at $17 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "94"
+  },
+  {
+    "id": "math_0214",
+    "slice": "math",
+    "query": "A seller buys 33 items at $14 each. 3 items are damaged and cannot be sold. The remaining 30 items are sold at $19 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "108"
+  },
+  {
+    "id": "math_0215",
+    "slice": "math",
+    "query": "A seller buys 34 items at $8 each. 4 items are damaged and cannot be sold. The remaining 30 items are sold at $14 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "148"
+  },
+  {
+    "id": "math_0216",
+    "slice": "math",
+    "query": "A seller buys 35 items at $9 each. 0 items are damaged and cannot be sold. The remaining 35 items are sold at $16 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "245"
+  },
+  {
+    "id": "math_0217",
+    "slice": "math",
+    "query": "A seller buys 36 items at $10 each. 1 items are damaged and cannot be sold. The remaining 35 items are sold at $14 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "130"
+  },
+  {
+    "id": "math_0218",
+    "slice": "math",
+    "query": "A seller buys 37 items at $11 each. 2 items are damaged and cannot be sold. The remaining 35 items are sold at $16 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "153"
+  },
+  {
+    "id": "math_0219",
+    "slice": "math",
+    "query": "A seller buys 38 items at $12 each. 3 items are damaged and cannot be sold. The remaining 35 items are sold at $18 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "174"
+  },
+  {
+    "id": "math_0220",
+    "slice": "math",
+    "query": "A seller buys 39 items at $13 each. 4 items are damaged and cannot be sold. The remaining 35 items are sold at $20 each. What is the seller's profit in dollars? (Use a negative number if there is a loss.)",
+    "gold": "193"
+  },
+  {
+    "id": "math_0221",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 8 and 5 litres per minute, while a leak removes 2 litres per minute. If all three operate for 4 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "44"
+  },
+  {
+    "id": "math_0222",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 9 and 6 litres per minute, while a leak removes 3 litres per minute. If all three operate for 5 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "60"
+  },
+  {
+    "id": "math_0223",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 10 and 7 litres per minute, while a leak removes 4 litres per minute. If all three operate for 6 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "78"
+  },
+  {
+    "id": "math_0224",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 11 and 8 litres per minute, while a leak removes 2 litres per minute. If all three operate for 7 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "119"
+  },
+  {
+    "id": "math_0225",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 12 and 9 litres per minute, while a leak removes 3 litres per minute. If all three operate for 4 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "72"
+  },
+  {
+    "id": "math_0226",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 13 and 5 litres per minute, while a leak removes 4 litres per minute. If all three operate for 5 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "70"
+  },
+  {
+    "id": "math_0227",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 8 and 6 litres per minute, while a leak removes 2 litres per minute. If all three operate for 6 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "72"
+  },
+  {
+    "id": "math_0228",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 9 and 7 litres per minute, while a leak removes 3 litres per minute. If all three operate for 7 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "91"
+  },
+  {
+    "id": "math_0229",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 10 and 8 litres per minute, while a leak removes 4 litres per minute. If all three operate for 4 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "56"
+  },
+  {
+    "id": "math_0230",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 11 and 9 litres per minute, while a leak removes 2 litres per minute. If all three operate for 5 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "90"
+  },
+  {
+    "id": "math_0231",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 12 and 5 litres per minute, while a leak removes 3 litres per minute. If all three operate for 6 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "84"
+  },
+  {
+    "id": "math_0232",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 13 and 6 litres per minute, while a leak removes 4 litres per minute. If all three operate for 7 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "105"
+  },
+  {
+    "id": "math_0233",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 8 and 7 litres per minute, while a leak removes 2 litres per minute. If all three operate for 4 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "52"
+  },
+  {
+    "id": "math_0234",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 9 and 8 litres per minute, while a leak removes 3 litres per minute. If all three operate for 5 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "70"
+  },
+  {
+    "id": "math_0235",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 10 and 9 litres per minute, while a leak removes 4 litres per minute. If all three operate for 6 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "90"
+  },
+  {
+    "id": "math_0236",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 11 and 5 litres per minute, while a leak removes 2 litres per minute. If all three operate for 7 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "98"
+  },
+  {
+    "id": "math_0237",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 12 and 6 litres per minute, while a leak removes 3 litres per minute. If all three operate for 4 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "60"
+  },
+  {
+    "id": "math_0238",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 13 and 7 litres per minute, while a leak removes 4 litres per minute. If all three operate for 5 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "80"
+  },
+  {
+    "id": "math_0239",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 8 and 8 litres per minute, while a leak removes 2 litres per minute. If all three operate for 6 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "84"
+  },
+  {
+    "id": "math_0240",
+    "slice": "math",
+    "query": "Two pumps add water to a tank at 9 and 9 litres per minute, while a leak removes 3 litres per minute. If all three operate for 7 minutes, by how many litres does the amount of water in the tank increase?",
+    "gold": "105"
+  },
+  {
+    "id": "mcq_0001",
+    "slice": "mcq",
+    "query": "A resistor of 2 ohms is connected across a 6-volt source. What current flows through it?\nA. 0.3333 A\nB. 12 A\nC. 8 A\nD. 3 A",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0002",
+    "slice": "mcq",
+    "query": "A resistor of 3 ohms is connected across a 8-volt source. What current flows through it?\nA. 11 A\nB. 0.375 A\nC. 2.6667 A\nD. 24 A",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0003",
+    "slice": "mcq",
+    "query": "A resistor of 4 ohms is connected across a 10-volt source. What current flows through it?\nA. 40 A\nB. 14 A\nC. 0.4 A\nD. 2.5 A",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0004",
+    "slice": "mcq",
+    "query": "A resistor of 5 ohms is connected across a 12-volt source. What current flows through it?\nA. 60 A\nB. 0.4167 A\nC. 2.4 A\nD. 17 A",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0005",
+    "slice": "mcq",
+    "query": "A resistor of 6 ohms is connected across a 14-volt source. What current flows through it?\nA. 84 A\nB. 0.4286 A\nC. 20 A\nD. 2.3333 A",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0006",
+    "slice": "mcq",
+    "query": "A resistor of 2 ohms is connected across a 16-volt source. What current flows through it?\nA. 32 A\nB. 18 A\nC. 0.125 A\nD. 8 A",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0007",
+    "slice": "mcq",
+    "query": "A resistor of 3 ohms is connected across a 18-volt source. What current flows through it?\nA. 0.1667 A\nB. 54 A\nC. 6 A\nD. 21 A",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0008",
+    "slice": "mcq",
+    "query": "A resistor of 4 ohms is connected across a 20-volt source. What current flows through it?\nA. 80 A\nB. 24 A\nC. 5 A\nD. 0.2 A",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0009",
+    "slice": "mcq",
+    "query": "A resistor of 5 ohms is connected across a 6-volt source. What current flows through it?\nA. 1.2 A\nB. 0.8333 A\nC. 30 A\nD. 11 A",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0010",
+    "slice": "mcq",
+    "query": "A resistor of 6 ohms is connected across a 8-volt source. What current flows through it?\nA. 0.75 A\nB. 14 A\nC. 1.3333 A\nD. 48 A",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0011",
+    "slice": "mcq",
+    "query": "A resistor of 2 ohms is connected across a 10-volt source. What current flows through it?\nA. 0.2 A\nB. 20 A\nC. 12 A\nD. 5 A",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0012",
+    "slice": "mcq",
+    "query": "A resistor of 3 ohms is connected across a 12-volt source. What current flows through it?\nA. 15 A\nB. 0.25 A\nC. 36 A\nD. 4 A",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0013",
+    "slice": "mcq",
+    "query": "A resistor of 4 ohms is connected across a 14-volt source. What current flows through it?\nA. 18 A\nB. 56 A\nC. 3.5 A\nD. 0.2857 A",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0014",
+    "slice": "mcq",
+    "query": "A resistor of 5 ohms is connected across a 16-volt source. What current flows through it?\nA. 0.3125 A\nB. 21 A\nC. 80 A\nD. 3.2 A",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0015",
+    "slice": "mcq",
+    "query": "A resistor of 6 ohms is connected across a 18-volt source. What current flows through it?\nA. 3 A\nB. 108 A\nC. 24 A\nD. 0.3333 A",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0016",
+    "slice": "mcq",
+    "query": "A resistor of 2 ohms is connected across a 20-volt source. What current flows through it?\nA. 22 A\nB. 10 A\nC. 0.1 A\nD. 40 A",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0017",
+    "slice": "mcq",
+    "query": "A resistor of 3 ohms is connected across a 6-volt source. What current flows through it?\nA. 18 A\nB. 9 A\nC. 0.5 A\nD. 2 A",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0018",
+    "slice": "mcq",
+    "query": "A resistor of 4 ohms is connected across a 8-volt source. What current flows through it?\nA. 32 A\nB. 12 A\nC. 2 A\nD. 0.5 A",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0019",
+    "slice": "mcq",
+    "query": "A resistor of 5 ohms is connected across a 10-volt source. What current flows through it?\nA. 15 A\nB. 0.5 A\nC. 50 A\nD. 2 A",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0020",
+    "slice": "mcq",
+    "query": "A resistor of 6 ohms is connected across a 12-volt source. What current flows through it?\nA. 2 A\nB. 72 A\nC. 0.5 A\nD. 18 A",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0021",
+    "slice": "mcq",
+    "query": "A sample has a mass of 20 g and a volume of 10 cm^3. What is its density?\nA. 2 g/cm^3\nB. 10 g/cm^3\nC. 20 g/cm^3\nD. 10 g/cm^3",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0022",
+    "slice": "mcq",
+    "query": "A sample has a mass of 45 g and a volume of 15 cm^3. What is its density?\nA. 3 g/cm^3\nB. 45 g/cm^3\nC. 15 g/cm^3\nD. 22.5 g/cm^3",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0023",
+    "slice": "mcq",
+    "query": "A sample has a mass of 80 g and a volume of 20 cm^3. What is its density?\nA. 40 g/cm^3\nB. 80 g/cm^3\nC. 20 g/cm^3\nD. 4 g/cm^3",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0024",
+    "slice": "mcq",
+    "query": "A sample has a mass of 125 g and a volume of 25 cm^3. What is its density?\nA. 25 g/cm^3\nB. 125 g/cm^3\nC. 5 g/cm^3\nD. 62.5 g/cm^3",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0025",
+    "slice": "mcq",
+    "query": "A sample has a mass of 180 g and a volume of 30 cm^3. What is its density?\nA. 30 g/cm^3\nB. 6 g/cm^3\nC. 90 g/cm^3\nD. 180 g/cm^3",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0026",
+    "slice": "mcq",
+    "query": "A sample has a mass of 70 g and a volume of 35 cm^3. What is its density?\nA. 35 g/cm^3\nB. 70 g/cm^3\nC. 2 g/cm^3\nD. 35 g/cm^3",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0027",
+    "slice": "mcq",
+    "query": "A sample has a mass of 30 g and a volume of 10 cm^3. What is its density?\nA. 30 g/cm^3\nB. 10 g/cm^3\nC. 15 g/cm^3\nD. 3 g/cm^3",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0028",
+    "slice": "mcq",
+    "query": "A sample has a mass of 60 g and a volume of 15 cm^3. What is its density?\nA. 30 g/cm^3\nB. 60 g/cm^3\nC. 4 g/cm^3\nD. 15 g/cm^3",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0029",
+    "slice": "mcq",
+    "query": "A sample has a mass of 100 g and a volume of 20 cm^3. What is its density?\nA. 100 g/cm^3\nB. 50 g/cm^3\nC. 5 g/cm^3\nD. 20 g/cm^3",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0030",
+    "slice": "mcq",
+    "query": "A sample has a mass of 150 g and a volume of 25 cm^3. What is its density?\nA. 6 g/cm^3\nB. 75 g/cm^3\nC. 25 g/cm^3\nD. 150 g/cm^3",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0031",
+    "slice": "mcq",
+    "query": "A sample has a mass of 60 g and a volume of 30 cm^3. What is its density?\nA. 30 g/cm^3\nB. 2 g/cm^3\nC. 60 g/cm^3\nD. 30 g/cm^3",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0032",
+    "slice": "mcq",
+    "query": "A sample has a mass of 105 g and a volume of 35 cm^3. What is its density?\nA. 3 g/cm^3\nB. 105 g/cm^3\nC. 35 g/cm^3\nD. 52.5 g/cm^3",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0033",
+    "slice": "mcq",
+    "query": "A sample has a mass of 40 g and a volume of 10 cm^3. What is its density?\nA. 4 g/cm^3\nB. 20 g/cm^3\nC. 10 g/cm^3\nD. 40 g/cm^3",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0034",
+    "slice": "mcq",
+    "query": "A sample has a mass of 75 g and a volume of 15 cm^3. What is its density?\nA. 37.5 g/cm^3\nB. 75 g/cm^3\nC. 5 g/cm^3\nD. 15 g/cm^3",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0035",
+    "slice": "mcq",
+    "query": "A sample has a mass of 120 g and a volume of 20 cm^3. What is its density?\nA. 60 g/cm^3\nB. 20 g/cm^3\nC. 6 g/cm^3\nD. 120 g/cm^3",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0036",
+    "slice": "mcq",
+    "query": "A sample has a mass of 50 g and a volume of 25 cm^3. What is its density?\nA. 25 g/cm^3\nB. 25 g/cm^3\nC. 50 g/cm^3\nD. 2 g/cm^3",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0037",
+    "slice": "mcq",
+    "query": "A sample has a mass of 90 g and a volume of 30 cm^3. What is its density?\nA. 45 g/cm^3\nB. 3 g/cm^3\nC. 30 g/cm^3\nD. 90 g/cm^3",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0038",
+    "slice": "mcq",
+    "query": "A sample has a mass of 140 g and a volume of 35 cm^3. What is its density?\nA. 4 g/cm^3\nB. 35 g/cm^3\nC. 70 g/cm^3\nD. 140 g/cm^3",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0039",
+    "slice": "mcq",
+    "query": "A sample has a mass of 50 g and a volume of 10 cm^3. What is its density?\nA. 25 g/cm^3\nB. 5 g/cm^3\nC. 50 g/cm^3\nD. 10 g/cm^3",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0040",
+    "slice": "mcq",
+    "query": "A sample has a mass of 90 g and a volume of 15 cm^3. What is its density?\nA. 90 g/cm^3\nB. 45 g/cm^3\nC. 15 g/cm^3\nD. 6 g/cm^3",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0041",
+    "slice": "mcq",
+    "query": "An object of mass 2 kg accelerates at 3 m/s^2. What net force acts on it?\nA. 11 N\nB. 5 N\nC. 6 N\nD. 0.6667 N",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0042",
+    "slice": "mcq",
+    "query": "An object of mass 3 kg accelerates at 4 m/s^2. What net force acts on it?\nA. 0.75 N\nB. 7 N\nC. 12 N\nD. 17 N",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0043",
+    "slice": "mcq",
+    "query": "An object of mass 4 kg accelerates at 5 m/s^2. What net force acts on it?\nA. 25 N\nB. 9 N\nC. 0.8 N\nD. 20 N",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0044",
+    "slice": "mcq",
+    "query": "An object of mass 5 kg accelerates at 6 m/s^2. What net force acts on it?\nA. 35 N\nB. 30 N\nC. 0.8333 N\nD. 11 N",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0045",
+    "slice": "mcq",
+    "query": "An object of mass 6 kg accelerates at 7 m/s^2. What net force acts on it?\nA. 13 N\nB. 42 N\nC. 47 N\nD. 0.8571 N",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0046",
+    "slice": "mcq",
+    "query": "An object of mass 7 kg accelerates at 8 m/s^2. What net force acts on it?\nA. 0.875 N\nB. 56 N\nC. 61 N\nD. 15 N",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0047",
+    "slice": "mcq",
+    "query": "An object of mass 8 kg accelerates at 3 m/s^2. What net force acts on it?\nA. 29 N\nB. 11 N\nC. 2.6667 N\nD. 24 N",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0048",
+    "slice": "mcq",
+    "query": "An object of mass 9 kg accelerates at 4 m/s^2. What net force acts on it?\nA. 13 N\nB. 2.25 N\nC. 36 N\nD. 41 N",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0049",
+    "slice": "mcq",
+    "query": "An object of mass 2 kg accelerates at 5 m/s^2. What net force acts on it?\nA. 15 N\nB. 10 N\nC. 7 N\nD. 0.4 N",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0050",
+    "slice": "mcq",
+    "query": "An object of mass 3 kg accelerates at 6 m/s^2. What net force acts on it?\nA. 9 N\nB. 0.5 N\nC. 23 N\nD. 18 N",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0051",
+    "slice": "mcq",
+    "query": "An object of mass 4 kg accelerates at 7 m/s^2. What net force acts on it?\nA. 33 N\nB. 11 N\nC. 0.5714 N\nD. 28 N",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0052",
+    "slice": "mcq",
+    "query": "An object of mass 5 kg accelerates at 8 m/s^2. What net force acts on it?\nA. 13 N\nB. 45 N\nC. 0.625 N\nD. 40 N",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0053",
+    "slice": "mcq",
+    "query": "An object of mass 6 kg accelerates at 3 m/s^2. What net force acts on it?\nA. 18 N\nB. 23 N\nC. 2 N\nD. 9 N",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0054",
+    "slice": "mcq",
+    "query": "An object of mass 7 kg accelerates at 4 m/s^2. What net force acts on it?\nA. 28 N\nB. 1.75 N\nC. 33 N\nD. 11 N",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0055",
+    "slice": "mcq",
+    "query": "An object of mass 8 kg accelerates at 5 m/s^2. What net force acts on it?\nA. 45 N\nB. 40 N\nC. 1.6 N\nD. 13 N",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0056",
+    "slice": "mcq",
+    "query": "An object of mass 9 kg accelerates at 6 m/s^2. What net force acts on it?\nA. 54 N\nB. 59 N\nC. 15 N\nD. 1.5 N",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0057",
+    "slice": "mcq",
+    "query": "An object of mass 2 kg accelerates at 7 m/s^2. What net force acts on it?\nA. 14 N\nB. 9 N\nC. 0.2857 N\nD. 19 N",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0058",
+    "slice": "mcq",
+    "query": "An object of mass 3 kg accelerates at 8 m/s^2. What net force acts on it?\nA. 11 N\nB. 0.375 N\nC. 29 N\nD. 24 N",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0059",
+    "slice": "mcq",
+    "query": "An object of mass 4 kg accelerates at 3 m/s^2. What net force acts on it?\nA. 1.3333 N\nB. 17 N\nC. 7 N\nD. 12 N",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0060",
+    "slice": "mcq",
+    "query": "An object of mass 5 kg accelerates at 4 m/s^2. What net force acts on it?\nA. 25 N\nB. 20 N\nC. 1.25 N\nD. 9 N",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0061",
+    "slice": "mcq",
+    "query": "A device operates at 20 W for 5 seconds. How much energy does it use?\nA. 25 J\nB. 4 J\nC. 120 J\nD. 100 J",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0062",
+    "slice": "mcq",
+    "query": "A device operates at 30 W for 6 seconds. How much energy does it use?\nA. 210 J\nB. 5 J\nC. 180 J\nD. 36 J",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0063",
+    "slice": "mcq",
+    "query": "A device operates at 40 W for 7 seconds. How much energy does it use?\nA. 47 J\nB. 320 J\nC. 280 J\nD. 5.7143 J",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0064",
+    "slice": "mcq",
+    "query": "A device operates at 50 W for 8 seconds. How much energy does it use?\nA. 400 J\nB. 58 J\nC. 450 J\nD. 6.25 J",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0065",
+    "slice": "mcq",
+    "query": "A device operates at 60 W for 9 seconds. How much energy does it use?\nA. 600 J\nB. 540 J\nC. 6.6667 J\nD. 69 J",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0066",
+    "slice": "mcq",
+    "query": "A device operates at 70 W for 10 seconds. How much energy does it use?\nA. 7 J\nB. 80 J\nC. 700 J\nD. 770 J",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0067",
+    "slice": "mcq",
+    "query": "A device operates at 80 W for 5 seconds. How much energy does it use?\nA. 85 J\nB. 16 J\nC. 400 J\nD. 480 J",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0068",
+    "slice": "mcq",
+    "query": "A device operates at 20 W for 6 seconds. How much energy does it use?\nA. 140 J\nB. 26 J\nC. 3.3333 J\nD. 120 J",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0069",
+    "slice": "mcq",
+    "query": "A device operates at 30 W for 7 seconds. How much energy does it use?\nA. 210 J\nB. 240 J\nC. 37 J\nD. 4.2857 J",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0070",
+    "slice": "mcq",
+    "query": "A device operates at 40 W for 8 seconds. How much energy does it use?\nA. 48 J\nB. 320 J\nC. 5 J\nD. 360 J",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0071",
+    "slice": "mcq",
+    "query": "A device operates at 50 W for 9 seconds. How much energy does it use?\nA. 5.5556 J\nB. 59 J\nC. 500 J\nD. 450 J",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0072",
+    "slice": "mcq",
+    "query": "A device operates at 60 W for 10 seconds. How much energy does it use?\nA. 70 J\nB. 660 J\nC. 600 J\nD. 6 J",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0073",
+    "slice": "mcq",
+    "query": "A device operates at 70 W for 5 seconds. How much energy does it use?\nA. 14 J\nB. 420 J\nC. 350 J\nD. 75 J",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0074",
+    "slice": "mcq",
+    "query": "A device operates at 80 W for 6 seconds. How much energy does it use?\nA. 13.3333 J\nB. 480 J\nC. 560 J\nD. 86 J",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0075",
+    "slice": "mcq",
+    "query": "A device operates at 20 W for 7 seconds. How much energy does it use?\nA. 160 J\nB. 140 J\nC. 27 J\nD. 2.8571 J",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0076",
+    "slice": "mcq",
+    "query": "A device operates at 30 W for 8 seconds. How much energy does it use?\nA. 3.75 J\nB. 270 J\nC. 38 J\nD. 240 J",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0077",
+    "slice": "mcq",
+    "query": "A device operates at 40 W for 9 seconds. How much energy does it use?\nA. 49 J\nB. 400 J\nC. 4.4444 J\nD. 360 J",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0078",
+    "slice": "mcq",
+    "query": "A device operates at 50 W for 10 seconds. How much energy does it use?\nA. 60 J\nB. 5 J\nC. 550 J\nD. 500 J",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0079",
+    "slice": "mcq",
+    "query": "A device operates at 60 W for 5 seconds. How much energy does it use?\nA. 300 J\nB. 12 J\nC. 65 J\nD. 360 J",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0080",
+    "slice": "mcq",
+    "query": "A device operates at 70 W for 6 seconds. How much energy does it use?\nA. 11.6667 J\nB. 420 J\nC. 490 J\nD. 76 J",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0081",
+    "slice": "mcq",
+    "query": "A muscle cell needs large amounts of ATP for repeated contractions. Which structure is most directly involved? (Scenario 1)\nA. lysosomes\nB. ribosomes\nC. Golgi apparatus\nD. mitochondria",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0082",
+    "slice": "mcq",
+    "query": "A cell is producing and exporting many protein hormones. Which structure is most directly involved? (Scenario 2)\nA. ribosomes\nB. centrioles\nC. chloroplasts\nD. vacuoles",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0083",
+    "slice": "mcq",
+    "query": "A plant leaf cell must capture light energy for photosynthesis. Which structure is most directly involved? (Scenario 3)\nA. nucleus\nB. cell membrane\nC. chloroplasts\nD. mitochondria",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0084",
+    "slice": "mcq",
+    "query": "A cell must control which substances enter and leave. Which structure is most directly involved? (Scenario 4)\nA. ribosome\nB. chromosome\nC. cell membrane\nD. nucleolus",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0085",
+    "slice": "mcq",
+    "query": "A eukaryotic cell stores most of its genetic instructions in one compartment. Which structure is most directly involved? (Scenario 5)\nA. cytoplasm\nB. lysosome\nC. Golgi apparatus\nD. nucleus",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0086",
+    "slice": "mcq",
+    "query": "A muscle cell needs large amounts of ATP for repeated contractions. Which structure is most directly involved? (Scenario 6)\nA. mitochondria\nB. Golgi apparatus\nC. ribosomes\nD. lysosomes",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0087",
+    "slice": "mcq",
+    "query": "A cell is producing and exporting many protein hormones. Which structure is most directly involved? (Scenario 7)\nA. chloroplasts\nB. ribosomes\nC. centrioles\nD. vacuoles",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0088",
+    "slice": "mcq",
+    "query": "A plant leaf cell must capture light energy for photosynthesis. Which structure is most directly involved? (Scenario 8)\nA. chloroplasts\nB. cell membrane\nC. mitochondria\nD. nucleus",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0089",
+    "slice": "mcq",
+    "query": "A cell must control which substances enter and leave. Which structure is most directly involved? (Scenario 9)\nA. chromosome\nB. ribosome\nC. cell membrane\nD. nucleolus",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0090",
+    "slice": "mcq",
+    "query": "A eukaryotic cell stores most of its genetic instructions in one compartment. Which structure is most directly involved? (Scenario 10)\nA. lysosome\nB. Golgi apparatus\nC. cytoplasm\nD. nucleus",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0091",
+    "slice": "mcq",
+    "query": "A muscle cell needs large amounts of ATP for repeated contractions. Which structure is most directly involved? (Scenario 11)\nA. Golgi apparatus\nB. ribosomes\nC. lysosomes\nD. mitochondria",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0092",
+    "slice": "mcq",
+    "query": "A cell is producing and exporting many protein hormones. Which structure is most directly involved? (Scenario 12)\nA. vacuoles\nB. centrioles\nC. chloroplasts\nD. ribosomes",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0093",
+    "slice": "mcq",
+    "query": "A plant leaf cell must capture light energy for photosynthesis. Which structure is most directly involved? (Scenario 13)\nA. cell membrane\nB. chloroplasts\nC. nucleus\nD. mitochondria",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0094",
+    "slice": "mcq",
+    "query": "A cell must control which substances enter and leave. Which structure is most directly involved? (Scenario 14)\nA. cell membrane\nB. ribosome\nC. chromosome\nD. nucleolus",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0095",
+    "slice": "mcq",
+    "query": "A eukaryotic cell stores most of its genetic instructions in one compartment. Which structure is most directly involved? (Scenario 15)\nA. Golgi apparatus\nB. cytoplasm\nC. lysosome\nD. nucleus",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0096",
+    "slice": "mcq",
+    "query": "A muscle cell needs large amounts of ATP for repeated contractions. Which structure is most directly involved? (Scenario 16)\nA. lysosomes\nB. ribosomes\nC. mitochondria\nD. Golgi apparatus",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0097",
+    "slice": "mcq",
+    "query": "A cell is producing and exporting many protein hormones. Which structure is most directly involved? (Scenario 17)\nA. centrioles\nB. vacuoles\nC. chloroplasts\nD. ribosomes",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0098",
+    "slice": "mcq",
+    "query": "A plant leaf cell must capture light energy for photosynthesis. Which structure is most directly involved? (Scenario 18)\nA. chloroplasts\nB. cell membrane\nC. mitochondria\nD. nucleus",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0099",
+    "slice": "mcq",
+    "query": "A cell must control which substances enter and leave. Which structure is most directly involved? (Scenario 19)\nA. chromosome\nB. nucleolus\nC. cell membrane\nD. ribosome",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0100",
+    "slice": "mcq",
+    "query": "A eukaryotic cell stores most of its genetic instructions in one compartment. Which structure is most directly involved? (Scenario 20)\nA. lysosome\nB. nucleus\nC. cytoplasm\nD. Golgi apparatus",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0101",
+    "slice": "mcq",
+    "query": "Grass uses sunlight to make sugars. In a food web, how should this organism be classified? (Case 1)\nA. predator\nB. primary consumer\nC. producer\nD. decomposer",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0102",
+    "slice": "mcq",
+    "query": "A rabbit eats grass. In a food web, how should this organism be classified? (Case 2)\nA. primary consumer\nB. producer\nC. top predator\nD. decomposer",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0103",
+    "slice": "mcq",
+    "query": "Fungi break down dead leaves. In a food web, how should this organism be classified? (Case 3)\nA. decomposer\nB. producer\nC. parasite\nD. herbivore",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0104",
+    "slice": "mcq",
+    "query": "A hawk eats a snake that ate a mouse. In a food web, how should this organism be classified? (Case 4)\nA. higher-level consumer\nB. producer\nC. autotroph\nD. decomposer",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0105",
+    "slice": "mcq",
+    "query": "Grass uses sunlight to make sugars. In a food web, how should this organism be classified? (Case 5)\nA. primary consumer\nB. predator\nC. decomposer\nD. producer",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0106",
+    "slice": "mcq",
+    "query": "A rabbit eats grass. In a food web, how should this organism be classified? (Case 6)\nA. top predator\nB. producer\nC. primary consumer\nD. decomposer",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0107",
+    "slice": "mcq",
+    "query": "Fungi break down dead leaves. In a food web, how should this organism be classified? (Case 7)\nA. parasite\nB. decomposer\nC. producer\nD. herbivore",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0108",
+    "slice": "mcq",
+    "query": "A hawk eats a snake that ate a mouse. In a food web, how should this organism be classified? (Case 8)\nA. higher-level consumer\nB. producer\nC. decomposer\nD. autotroph",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0109",
+    "slice": "mcq",
+    "query": "Grass uses sunlight to make sugars. In a food web, how should this organism be classified? (Case 9)\nA. predator\nB. primary consumer\nC. decomposer\nD. producer",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0110",
+    "slice": "mcq",
+    "query": "A rabbit eats grass. In a food web, how should this organism be classified? (Case 10)\nA. primary consumer\nB. top predator\nC. producer\nD. decomposer",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0111",
+    "slice": "mcq",
+    "query": "Fungi break down dead leaves. In a food web, how should this organism be classified? (Case 11)\nA. parasite\nB. decomposer\nC. producer\nD. herbivore",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0112",
+    "slice": "mcq",
+    "query": "A hawk eats a snake that ate a mouse. In a food web, how should this organism be classified? (Case 12)\nA. producer\nB. autotroph\nC. higher-level consumer\nD. decomposer",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0113",
+    "slice": "mcq",
+    "query": "Grass uses sunlight to make sugars. In a food web, how should this organism be classified? (Case 13)\nA. primary consumer\nB. producer\nC. decomposer\nD. predator",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0114",
+    "slice": "mcq",
+    "query": "A rabbit eats grass. In a food web, how should this organism be classified? (Case 14)\nA. primary consumer\nB. decomposer\nC. top predator\nD. producer",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0115",
+    "slice": "mcq",
+    "query": "Fungi break down dead leaves. In a food web, how should this organism be classified? (Case 15)\nA. herbivore\nB. parasite\nC. decomposer\nD. producer",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0116",
+    "slice": "mcq",
+    "query": "A hawk eats a snake that ate a mouse. In a food web, how should this organism be classified? (Case 16)\nA. decomposer\nB. higher-level consumer\nC. producer\nD. autotroph",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0117",
+    "slice": "mcq",
+    "query": "Grass uses sunlight to make sugars. In a food web, how should this organism be classified? (Case 17)\nA. predator\nB. producer\nC. primary consumer\nD. decomposer",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0118",
+    "slice": "mcq",
+    "query": "A rabbit eats grass. In a food web, how should this organism be classified? (Case 18)\nA. primary consumer\nB. top predator\nC. producer\nD. decomposer",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0119",
+    "slice": "mcq",
+    "query": "Fungi break down dead leaves. In a food web, how should this organism be classified? (Case 19)\nA. parasite\nB. herbivore\nC. decomposer\nD. producer",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0120",
+    "slice": "mcq",
+    "query": "A hawk eats a snake that ate a mouse. In a food web, how should this organism be classified? (Case 20)\nA. autotroph\nB. higher-level consumer\nC. producer\nD. decomposer",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0121",
+    "slice": "mcq",
+    "query": "Water freezes in cracks in a rock and expands, gradually breaking the rock apart. Which process is best illustrated? (Example 1)\nA. deposition\nB. physical weathering\nC. condensation\nD. chemical weathering",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0122",
+    "slice": "mcq",
+    "query": "A river carries sediment downstream. Which process is best illustrated? (Example 2)\nA. erosion\nB. crystallization\nC. evaporation\nD. deposition",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0123",
+    "slice": "mcq",
+    "query": "Sediment settles at the bottom of a slow-moving lake. Which process is best illustrated? (Example 3)\nA. deposition\nB. weathering\nC. melting\nD. sublimation",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0124",
+    "slice": "mcq",
+    "query": "Acidic rainwater reacts with limestone and changes its minerals. Which process is best illustrated? (Example 4)\nA. physical weathering\nB. freezing\nC. chemical weathering\nD. erosion",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0125",
+    "slice": "mcq",
+    "query": "Water freezes in cracks in a rock and expands, gradually breaking the rock apart. Which process is best illustrated? (Example 5)\nA. deposition\nB. chemical weathering\nC. physical weathering\nD. condensation",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0126",
+    "slice": "mcq",
+    "query": "A river carries sediment downstream. Which process is best illustrated? (Example 6)\nA. evaporation\nB. crystallization\nC. erosion\nD. deposition",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0127",
+    "slice": "mcq",
+    "query": "Sediment settles at the bottom of a slow-moving lake. Which process is best illustrated? (Example 7)\nA. sublimation\nB. weathering\nC. deposition\nD. melting",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0128",
+    "slice": "mcq",
+    "query": "Acidic rainwater reacts with limestone and changes its minerals. Which process is best illustrated? (Example 8)\nA. freezing\nB. erosion\nC. chemical weathering\nD. physical weathering",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0129",
+    "slice": "mcq",
+    "query": "Water freezes in cracks in a rock and expands, gradually breaking the rock apart. Which process is best illustrated? (Example 9)\nA. physical weathering\nB. deposition\nC. chemical weathering\nD. condensation",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0130",
+    "slice": "mcq",
+    "query": "A river carries sediment downstream. Which process is best illustrated? (Example 10)\nA. crystallization\nB. evaporation\nC. deposition\nD. erosion",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0131",
+    "slice": "mcq",
+    "query": "Sediment settles at the bottom of a slow-moving lake. Which process is best illustrated? (Example 11)\nA. weathering\nB. deposition\nC. melting\nD. sublimation",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0132",
+    "slice": "mcq",
+    "query": "Acidic rainwater reacts with limestone and changes its minerals. Which process is best illustrated? (Example 12)\nA. erosion\nB. physical weathering\nC. freezing\nD. chemical weathering",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0133",
+    "slice": "mcq",
+    "query": "Water freezes in cracks in a rock and expands, gradually breaking the rock apart. Which process is best illustrated? (Example 13)\nA. physical weathering\nB. condensation\nC. deposition\nD. chemical weathering",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0134",
+    "slice": "mcq",
+    "query": "A river carries sediment downstream. Which process is best illustrated? (Example 14)\nA. evaporation\nB. deposition\nC. crystallization\nD. erosion",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0135",
+    "slice": "mcq",
+    "query": "Sediment settles at the bottom of a slow-moving lake. Which process is best illustrated? (Example 15)\nA. weathering\nB. deposition\nC. sublimation\nD. melting",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0136",
+    "slice": "mcq",
+    "query": "Acidic rainwater reacts with limestone and changes its minerals. Which process is best illustrated? (Example 16)\nA. physical weathering\nB. chemical weathering\nC. erosion\nD. freezing",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0137",
+    "slice": "mcq",
+    "query": "Water freezes in cracks in a rock and expands, gradually breaking the rock apart. Which process is best illustrated? (Example 17)\nA. chemical weathering\nB. physical weathering\nC. deposition\nD. condensation",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0138",
+    "slice": "mcq",
+    "query": "A river carries sediment downstream. Which process is best illustrated? (Example 18)\nA. crystallization\nB. deposition\nC. erosion\nD. evaporation",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0139",
+    "slice": "mcq",
+    "query": "Sediment settles at the bottom of a slow-moving lake. Which process is best illustrated? (Example 19)\nA. deposition\nB. sublimation\nC. melting\nD. weathering",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0140",
+    "slice": "mcq",
+    "query": "Acidic rainwater reacts with limestone and changes its minerals. Which process is best illustrated? (Example 20)\nA. freezing\nB. chemical weathering\nC. physical weathering\nD. erosion",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0141",
+    "slice": "mcq",
+    "query": "A metal spoon becomes hot while its lower end sits in hot soup. What is the main mode of heat transfer? (Trial 1)\nA. conduction\nB. convection\nC. evaporation\nD. radiation",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0142",
+    "slice": "mcq",
+    "query": "Warm air rises and cool air sinks in a room. What is the main mode of heat transfer? (Trial 2)\nA. reflection\nB. convection\nC. radiation\nD. conduction",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0143",
+    "slice": "mcq",
+    "query": "Earth receives energy from the Sun through space. What is the main mode of heat transfer? (Trial 3)\nA. conduction\nB. convection\nC. diffusion\nD. radiation",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0144",
+    "slice": "mcq",
+    "query": "Water circulates in a pot as it is heated from below. What is the main mode of heat transfer? (Trial 4)\nA. convection\nB. insulation\nC. conduction\nD. radiation",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0145",
+    "slice": "mcq",
+    "query": "A metal spoon becomes hot while its lower end sits in hot soup. What is the main mode of heat transfer? (Trial 5)\nA. radiation\nB. evaporation\nC. conduction\nD. convection",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0146",
+    "slice": "mcq",
+    "query": "Warm air rises and cool air sinks in a room. What is the main mode of heat transfer? (Trial 6)\nA. convection\nB. conduction\nC. radiation\nD. reflection",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0147",
+    "slice": "mcq",
+    "query": "Earth receives energy from the Sun through space. What is the main mode of heat transfer? (Trial 7)\nA. diffusion\nB. conduction\nC. convection\nD. radiation",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0148",
+    "slice": "mcq",
+    "query": "Water circulates in a pot as it is heated from below. What is the main mode of heat transfer? (Trial 8)\nA. insulation\nB. convection\nC. conduction\nD. radiation",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0149",
+    "slice": "mcq",
+    "query": "A metal spoon becomes hot while its lower end sits in hot soup. What is the main mode of heat transfer? (Trial 9)\nA. conduction\nB. convection\nC. radiation\nD. evaporation",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0150",
+    "slice": "mcq",
+    "query": "Warm air rises and cool air sinks in a room. What is the main mode of heat transfer? (Trial 10)\nA. conduction\nB. radiation\nC. convection\nD. reflection",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0151",
+    "slice": "mcq",
+    "query": "Earth receives energy from the Sun through space. What is the main mode of heat transfer? (Trial 11)\nA. conduction\nB. diffusion\nC. radiation\nD. convection",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0152",
+    "slice": "mcq",
+    "query": "Water circulates in a pot as it is heated from below. What is the main mode of heat transfer? (Trial 12)\nA. insulation\nB. convection\nC. radiation\nD. conduction",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0153",
+    "slice": "mcq",
+    "query": "A metal spoon becomes hot while its lower end sits in hot soup. What is the main mode of heat transfer? (Trial 13)\nA. conduction\nB. convection\nC. evaporation\nD. radiation",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0154",
+    "slice": "mcq",
+    "query": "Warm air rises and cool air sinks in a room. What is the main mode of heat transfer? (Trial 14)\nA. radiation\nB. convection\nC. reflection\nD. conduction",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0155",
+    "slice": "mcq",
+    "query": "Earth receives energy from the Sun through space. What is the main mode of heat transfer? (Trial 15)\nA. diffusion\nB. radiation\nC. conduction\nD. convection",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0156",
+    "slice": "mcq",
+    "query": "Water circulates in a pot as it is heated from below. What is the main mode of heat transfer? (Trial 16)\nA. conduction\nB. radiation\nC. insulation\nD. convection",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0157",
+    "slice": "mcq",
+    "query": "A metal spoon becomes hot while its lower end sits in hot soup. What is the main mode of heat transfer? (Trial 17)\nA. convection\nB. conduction\nC. radiation\nD. evaporation",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0158",
+    "slice": "mcq",
+    "query": "Warm air rises and cool air sinks in a room. What is the main mode of heat transfer? (Trial 18)\nA. radiation\nB. conduction\nC. convection\nD. reflection",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0159",
+    "slice": "mcq",
+    "query": "Earth receives energy from the Sun through space. What is the main mode of heat transfer? (Trial 19)\nA. conduction\nB. radiation\nC. convection\nD. diffusion",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0160",
+    "slice": "mcq",
+    "query": "Water circulates in a pot as it is heated from below. What is the main mode of heat transfer? (Trial 20)\nA. insulation\nB. radiation\nC. convection\nD. conduction",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0161",
+    "slice": "mcq",
+    "query": "For a trait with complete dominance, two heterozygous parents (Aa × Aa) have a child. What is the probability of genotype aa? (Cross 1)\nA. 50%\nB. 75%\nC. 25%\nD. 0%",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0162",
+    "slice": "mcq",
+    "query": "For Aa × aa, what is the probability that an offspring receives genotype aa? (Cross 2)\nA. 25%\nB. 100%\nC. 75%\nD. 50%",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0163",
+    "slice": "mcq",
+    "query": "For AA × aa, what percentage of offspring are expected to be heterozygous Aa? (Cross 3)\nA. 25%\nB. 100%\nC. 50%\nD. 0%",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0164",
+    "slice": "mcq",
+    "query": "For AA × AA, what is the probability of an aa offspring? (Cross 4)\nA. 50%\nB. 75%\nC. 25%\nD. 0%",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0165",
+    "slice": "mcq",
+    "query": "For a trait with complete dominance, two heterozygous parents (Aa × Aa) have a child. What is the probability of genotype aa? (Cross 5)\nA. 0%\nB. 25%\nC. 50%\nD. 75%",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0166",
+    "slice": "mcq",
+    "query": "For Aa × aa, what is the probability that an offspring receives genotype aa? (Cross 6)\nA. 25%\nB. 50%\nC. 75%\nD. 100%",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0167",
+    "slice": "mcq",
+    "query": "For AA × aa, what percentage of offspring are expected to be heterozygous Aa? (Cross 7)\nA. 50%\nB. 25%\nC. 0%\nD. 100%",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0168",
+    "slice": "mcq",
+    "query": "For AA × AA, what is the probability of an aa offspring? (Cross 8)\nA. 50%\nB. 0%\nC. 25%\nD. 75%",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0169",
+    "slice": "mcq",
+    "query": "For a trait with complete dominance, two heterozygous parents (Aa × Aa) have a child. What is the probability of genotype aa? (Cross 9)\nA. 0%\nB. 25%\nC. 75%\nD. 50%",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0170",
+    "slice": "mcq",
+    "query": "For Aa × aa, what is the probability that an offspring receives genotype aa? (Cross 10)\nA. 25%\nB. 75%\nC. 100%\nD. 50%",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0171",
+    "slice": "mcq",
+    "query": "For AA × aa, what percentage of offspring are expected to be heterozygous Aa? (Cross 11)\nA. 100%\nB. 25%\nC. 50%\nD. 0%",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0172",
+    "slice": "mcq",
+    "query": "For AA × AA, what is the probability of an aa offspring? (Cross 12)\nA. 0%\nB. 50%\nC. 75%\nD. 25%",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0173",
+    "slice": "mcq",
+    "query": "For a trait with complete dominance, two heterozygous parents (Aa × Aa) have a child. What is the probability of genotype aa? (Cross 13)\nA. 25%\nB. 0%\nC. 75%\nD. 50%",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0174",
+    "slice": "mcq",
+    "query": "For Aa × aa, what is the probability that an offspring receives genotype aa? (Cross 14)\nA. 100%\nB. 75%\nC. 25%\nD. 50%",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0175",
+    "slice": "mcq",
+    "query": "For AA × aa, what percentage of offspring are expected to be heterozygous Aa? (Cross 15)\nA. 25%\nB. 0%\nC. 50%\nD. 100%",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0176",
+    "slice": "mcq",
+    "query": "For AA × AA, what is the probability of an aa offspring? (Cross 16)\nA. 50%\nB. 75%\nC. 0%\nD. 25%",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0177",
+    "slice": "mcq",
+    "query": "For a trait with complete dominance, two heterozygous parents (Aa × Aa) have a child. What is the probability of genotype aa? (Cross 17)\nA. 0%\nB. 50%\nC. 25%\nD. 75%",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0178",
+    "slice": "mcq",
+    "query": "For Aa × aa, what is the probability that an offspring receives genotype aa? (Cross 18)\nA. 50%\nB. 75%\nC. 25%\nD. 100%",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0179",
+    "slice": "mcq",
+    "query": "For AA × aa, what percentage of offspring are expected to be heterozygous Aa? (Cross 19)\nA. 50%\nB. 0%\nC. 25%\nD. 100%",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0180",
+    "slice": "mcq",
+    "query": "For AA × AA, what is the probability of an aa offspring? (Cross 20)\nA. 50%\nB. 0%\nC. 25%\nD. 75%",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0181",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 2. How should it be classified?\nA. acidic\nB. radioactive\nC. neutral\nD. basic",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0182",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 3. How should it be classified?\nA. neutral\nB. acidic\nC. basic\nD. radioactive",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0183",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 5. How should it be classified?\nA. basic\nB. neutral\nC. acidic\nD. radioactive",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0184",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 7. How should it be classified?\nA. basic\nB. acidic\nC. neutral\nD. radioactive",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0185",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 8. How should it be classified?\nA. acidic\nB. basic\nC. neutral\nD. radioactive",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0186",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 10. How should it be classified?\nA. basic\nB. acidic\nC. radioactive\nD. neutral",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0187",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 12. How should it be classified?\nA. basic\nB. radioactive\nC. neutral\nD. acidic",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0188",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 2. How should it be classified?\nA. radioactive\nB. neutral\nC. basic\nD. acidic",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0189",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 3. How should it be classified?\nA. basic\nB. acidic\nC. radioactive\nD. neutral",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0190",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 5. How should it be classified?\nA. radioactive\nB. basic\nC. neutral\nD. acidic",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0191",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 7. How should it be classified?\nA. radioactive\nB. neutral\nC. acidic\nD. basic",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0192",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 8. How should it be classified?\nA. acidic\nB. radioactive\nC. neutral\nD. basic",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0193",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 10. How should it be classified?\nA. acidic\nB. radioactive\nC. neutral\nD. basic",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0194",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 12. How should it be classified?\nA. basic\nB. radioactive\nC. neutral\nD. acidic",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0195",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 2. How should it be classified?\nA. basic\nB. radioactive\nC. neutral\nD. acidic",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0196",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 3. How should it be classified?\nA. neutral\nB. radioactive\nC. basic\nD. acidic",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0197",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 5. How should it be classified?\nA. neutral\nB. basic\nC. radioactive\nD. acidic",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0198",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 7. How should it be classified?\nA. neutral\nB. radioactive\nC. basic\nD. acidic",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0199",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 8. How should it be classified?\nA. basic\nB. radioactive\nC. acidic\nD. neutral",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0200",
+    "slice": "mcq",
+    "query": "A water-based solution has pH 10. How should it be classified?\nA. neutral\nB. radioactive\nC. basic\nD. acidic",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0201",
+    "slice": "mcq",
+    "query": "A vehicle travels 60 km in 1 hour(s), then 40 km in 2 hour(s). What is its average speed over the whole trip?\nA. 33.3333 km/h\nB. 40 km/h\nC. 25 km/h\nD. 100 km/h",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0202",
+    "slice": "mcq",
+    "query": "A vehicle travels 70 km in 2 hour(s), then 50 km in 3 hour(s). What is its average speed over the whole trip?\nA. 25.8333 km/h\nB. 120 km/h\nC. 24 km/h\nD. 20 km/h",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0203",
+    "slice": "mcq",
+    "query": "A vehicle travels 80 km in 3 hour(s), then 60 km in 1 hour(s). What is its average speed over the whole trip?\nA. 28 km/h\nB. 35 km/h\nC. 140 km/h\nD. 43.3333 km/h",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0204",
+    "slice": "mcq",
+    "query": "A vehicle travels 90 km in 1 hour(s), then 70 km in 2 hour(s). What is its average speed over the whole trip?\nA. 160 km/h\nB. 40 km/h\nC. 62.5 km/h\nD. 53.3333 km/h",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0205",
+    "slice": "mcq",
+    "query": "A vehicle travels 100 km in 2 hour(s), then 80 km in 3 hour(s). What is its average speed over the whole trip?\nA. 38.3333 km/h\nB. 36 km/h\nC. 30 km/h\nD. 180 km/h",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0206",
+    "slice": "mcq",
+    "query": "A vehicle travels 110 km in 3 hour(s), then 40 km in 1 hour(s). What is its average speed over the whole trip?\nA. 38.3333 km/h\nB. 150 km/h\nC. 30 km/h\nD. 37.5 km/h",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0207",
+    "slice": "mcq",
+    "query": "A vehicle travels 60 km in 1 hour(s), then 50 km in 2 hour(s). What is its average speed over the whole trip?\nA. 110 km/h\nB. 42.5 km/h\nC. 27.5 km/h\nD. 36.6667 km/h",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0208",
+    "slice": "mcq",
+    "query": "A vehicle travels 70 km in 2 hour(s), then 60 km in 3 hour(s). What is its average speed over the whole trip?\nA. 27.5 km/h\nB. 130 km/h\nC. 21.6667 km/h\nD. 26 km/h",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0209",
+    "slice": "mcq",
+    "query": "A vehicle travels 80 km in 3 hour(s), then 70 km in 1 hour(s). What is its average speed over the whole trip?\nA. 37.5 km/h\nB. 48.3333 km/h\nC. 150 km/h\nD. 30 km/h",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0210",
+    "slice": "mcq",
+    "query": "A vehicle travels 90 km in 1 hour(s), then 80 km in 2 hour(s). What is its average speed over the whole trip?\nA. 170 km/h\nB. 65 km/h\nC. 56.6667 km/h\nD. 42.5 km/h",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0211",
+    "slice": "mcq",
+    "query": "A vehicle travels 100 km in 2 hour(s), then 40 km in 3 hour(s). What is its average speed over the whole trip?\nA. 140 km/h\nB. 23.3333 km/h\nC. 31.6667 km/h\nD. 28 km/h",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0212",
+    "slice": "mcq",
+    "query": "A vehicle travels 110 km in 3 hour(s), then 50 km in 1 hour(s). What is its average speed over the whole trip?\nA. 160 km/h\nB. 32 km/h\nC. 43.3333 km/h\nD. 40 km/h",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0213",
+    "slice": "mcq",
+    "query": "A vehicle travels 60 km in 1 hour(s), then 60 km in 2 hour(s). What is its average speed over the whole trip?\nA. 45 km/h\nB. 40 km/h\nC. 30 km/h\nD. 120 km/h",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0214",
+    "slice": "mcq",
+    "query": "A vehicle travels 70 km in 2 hour(s), then 70 km in 3 hour(s). What is its average speed over the whole trip?\nA. 23.3333 km/h\nB. 29.1667 km/h\nC. 28 km/h\nD. 140 km/h",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0215",
+    "slice": "mcq",
+    "query": "A vehicle travels 80 km in 3 hour(s), then 80 km in 1 hour(s). What is its average speed over the whole trip?\nA. 40 km/h\nB. 32 km/h\nC. 53.3333 km/h\nD. 160 km/h",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0216",
+    "slice": "mcq",
+    "query": "A vehicle travels 90 km in 1 hour(s), then 40 km in 2 hour(s). What is its average speed over the whole trip?\nA. 130 km/h\nB. 43.3333 km/h\nC. 55 km/h\nD. 32.5 km/h",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0217",
+    "slice": "mcq",
+    "query": "A vehicle travels 100 km in 2 hour(s), then 50 km in 3 hour(s). What is its average speed over the whole trip?\nA. 150 km/h\nB. 25 km/h\nC. 33.3333 km/h\nD. 30 km/h",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0218",
+    "slice": "mcq",
+    "query": "A vehicle travels 110 km in 3 hour(s), then 60 km in 1 hour(s). What is its average speed over the whole trip?\nA. 42.5 km/h\nB. 34 km/h\nC. 170 km/h\nD. 48.3333 km/h",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0219",
+    "slice": "mcq",
+    "query": "A vehicle travels 60 km in 1 hour(s), then 70 km in 2 hour(s). What is its average speed over the whole trip?\nA. 130 km/h\nB. 47.5 km/h\nC. 43.3333 km/h\nD. 32.5 km/h",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0220",
+    "slice": "mcq",
+    "query": "A vehicle travels 70 km in 2 hour(s), then 80 km in 3 hour(s). What is its average speed over the whole trip?\nA. 150 km/h\nB. 30.8333 km/h\nC. 30 km/h\nD. 25 km/h",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0221",
+    "slice": "mcq",
+    "query": "A student tests whether fertilizer amount affects bean plant height. What should be kept the same between groups? (Investigation 1)\nA. the plant species and growing conditions\nB. the final plant height\nC. the measured result\nD. the fertilizer amount",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0222",
+    "slice": "mcq",
+    "query": "A class wants to know whether a new insulation material reduces heat loss from identical cups. Which comparison is best? (Investigation 2)\nA. use identical cups with and without the insulation under the same conditions\nB. change both the liquid volume and insulation\nC. use different cup sizes at different room temperatures\nD. measure only the insulated cup",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0223",
+    "slice": "mcq",
+    "query": "A student repeats the same measurement five times instead of once. What is the main benefit? (Investigation 3)\nA. it guarantees the hypothesis is correct\nB. it changes the independent variable\nC. it removes the need for controls\nD. it helps reduce the effect of random measurement error",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0224",
+    "slice": "mcq",
+    "query": "In an experiment, the amount of light is deliberately changed and plant growth is measured. What is the independent variable? (Investigation 4)\nA. plant species\nB. amount of light\nC. measurement error\nD. plant growth",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0225",
+    "slice": "mcq",
+    "query": "A graph shows temperature on the x-axis and reaction rate on the y-axis. Which quantity is the dependent variable? (Investigation 5)\nA. reaction rate\nB. temperature\nC. time\nD. sample identity",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0226",
+    "slice": "mcq",
+    "query": "A student tests whether fertilizer amount affects bean plant height. What should be kept the same between groups? (Investigation 6)\nA. the plant species and growing conditions\nB. the fertilizer amount\nC. the final plant height\nD. the measured result",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0227",
+    "slice": "mcq",
+    "query": "A class wants to know whether a new insulation material reduces heat loss from identical cups. Which comparison is best? (Investigation 7)\nA. use different cup sizes at different room temperatures\nB. measure only the insulated cup\nC. use identical cups with and without the insulation under the same conditions\nD. change both the liquid volume and insulation",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0228",
+    "slice": "mcq",
+    "query": "A student repeats the same measurement five times instead of once. What is the main benefit? (Investigation 8)\nA. it changes the independent variable\nB. it guarantees the hypothesis is correct\nC. it helps reduce the effect of random measurement error\nD. it removes the need for controls",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0229",
+    "slice": "mcq",
+    "query": "In an experiment, the amount of light is deliberately changed and plant growth is measured. What is the independent variable? (Investigation 9)\nA. plant growth\nB. plant species\nC. measurement error\nD. amount of light",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0230",
+    "slice": "mcq",
+    "query": "A graph shows temperature on the x-axis and reaction rate on the y-axis. Which quantity is the dependent variable? (Investigation 10)\nA. temperature\nB. reaction rate\nC. time\nD. sample identity",
+    "gold": "B"
+  },
+  {
+    "id": "mcq_0231",
+    "slice": "mcq",
+    "query": "A student tests whether fertilizer amount affects bean plant height. What should be kept the same between groups? (Investigation 11)\nA. the plant species and growing conditions\nB. the fertilizer amount\nC. the final plant height\nD. the measured result",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0232",
+    "slice": "mcq",
+    "query": "A class wants to know whether a new insulation material reduces heat loss from identical cups. Which comparison is best? (Investigation 12)\nA. use identical cups with and without the insulation under the same conditions\nB. use different cup sizes at different room temperatures\nC. change both the liquid volume and insulation\nD. measure only the insulated cup",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0233",
+    "slice": "mcq",
+    "query": "A student repeats the same measurement five times instead of once. What is the main benefit? (Investigation 13)\nA. it helps reduce the effect of random measurement error\nB. it changes the independent variable\nC. it guarantees the hypothesis is correct\nD. it removes the need for controls",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0234",
+    "slice": "mcq",
+    "query": "In an experiment, the amount of light is deliberately changed and plant growth is measured. What is the independent variable? (Investigation 14)\nA. measurement error\nB. plant species\nC. plant growth\nD. amount of light",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0235",
+    "slice": "mcq",
+    "query": "A graph shows temperature on the x-axis and reaction rate on the y-axis. Which quantity is the dependent variable? (Investigation 15)\nA. reaction rate\nB. sample identity\nC. temperature\nD. time",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0236",
+    "slice": "mcq",
+    "query": "A student tests whether fertilizer amount affects bean plant height. What should be kept the same between groups? (Investigation 16)\nA. the final plant height\nB. the measured result\nC. the plant species and growing conditions\nD. the fertilizer amount",
+    "gold": "C"
+  },
+  {
+    "id": "mcq_0237",
+    "slice": "mcq",
+    "query": "A class wants to know whether a new insulation material reduces heat loss from identical cups. Which comparison is best? (Investigation 17)\nA. use identical cups with and without the insulation under the same conditions\nB. use different cup sizes at different room temperatures\nC. change both the liquid volume and insulation\nD. measure only the insulated cup",
+    "gold": "A"
+  },
+  {
+    "id": "mcq_0238",
+    "slice": "mcq",
+    "query": "A student repeats the same measurement five times instead of once. What is the main benefit? (Investigation 18)\nA. it removes the need for controls\nB. it guarantees the hypothesis is correct\nC. it changes the independent variable\nD. it helps reduce the effect of random measurement error",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0239",
+    "slice": "mcq",
+    "query": "In an experiment, the amount of light is deliberately changed and plant growth is measured. What is the independent variable? (Investigation 19)\nA. plant species\nB. plant growth\nC. measurement error\nD. amount of light",
+    "gold": "D"
+  },
+  {
+    "id": "mcq_0240",
+    "slice": "mcq",
+    "query": "A graph shows temperature on the x-axis and reaction rate on the y-axis. Which quantity is the dependent variable? (Investigation 20)\nA. reaction rate\nB. sample identity\nC. temperature\nD. time",
+    "gold": "A"
+  },
+  {
+    "id": "support_0001",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? This happened today.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0002",
+    "slice": "support",
+    "query": "I received the wrong item in my order. How do I return it? I need to resolve this before tomorrow.",
+    "gold": "Apologize, verify the order, provide the return or replacement process, and ensure the customer is not charged return shipping for a fulfillment error."
+  },
+  {
+    "id": "support_0003",
+    "slice": "support",
+    "query": "I forgot my password and no longer have access to my old phone number. I am currently traveling.",
+    "gold": "Use the approved account-recovery flow, verify identity through available secure methods, and never bypass authentication controls."
+  },
+  {
+    "id": "support_0004",
+    "slice": "support",
+    "query": "The app crashes every time I open the settings page. This is the first time this has happened.",
+    "gold": "Collect app version and device/OS details, suggest restarting and updating the app, clearing safe temporary data if supported, and escalate with reproducible steps if it continues."
+  },
+  {
+    "id": "support_0005",
+    "slice": "support",
+    "query": "Can I share my subscription with a friend? I am using the service from my phone.",
+    "gold": "Explain the account-sharing policy accurately, including whether the subscription is personal, household-based, or supports additional authorized users."
+  },
+  {
+    "id": "support_0006",
+    "slice": "support",
+    "query": "My renewal price is higher than last month even though I did not change plans. Why? I can provide screenshots if needed.",
+    "gold": "Check the account for a promotion ending, tax change, plan-price update, or add-on; explain the exact cause and offer applicable billing options."
+  },
+  {
+    "id": "support_0007",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? I have not made any other changes.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0008",
+    "slice": "support",
+    "query": "I am not receiving the password reset email. I have already tried once.",
+    "gold": "Confirm the email address, ask the user to check spam and filters, wait briefly, retry once, verify allowed sender domains, and escalate if delivery still fails."
+  },
+  {
+    "id": "support_0009",
+    "slice": "support",
+    "query": "The website loads on mobile data but not on my Wi-Fi. The issue started after a recent change.",
+    "gold": "Check whether other sites work, restart the router, try another browser/device, disable problematic DNS/VPN settings if applicable, and isolate whether the issue is network-specific."
+  },
+  {
+    "id": "support_0010",
+    "slice": "support",
+    "query": "Can I get a refund because I forgot to cancel my renewal? I am using a business account.",
+    "gold": "State the refund policy and eligibility window, check for exceptions, and avoid promising a refund before confirming the account qualifies."
+  },
+  {
+    "id": "support_0011",
+    "slice": "support",
+    "query": "I cancelled before renewal but still see a pending charge. Can it be stopped? This happened today.",
+    "gold": "Check the cancellation timestamp and transaction status. If the charge is only an authorization, explain that it may drop automatically; if captured incorrectly, arrange a refund."
+  },
+  {
+    "id": "support_0012",
+    "slice": "support",
+    "query": "I opened the box but did not use the product. Can I still return it? I need to resolve this before tomorrow.",
+    "gold": "Check the return window and category rules; explain whether opened-but-unused items are eligible and what condition or packaging requirements apply."
+  },
+  {
+    "id": "support_0013",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. I am currently traveling.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0014",
+    "slice": "support",
+    "query": "My file upload stops at 99% every time. This is the first time this has happened.",
+    "gold": "Check file size/type limits and connection stability, retry with a smaller supported file, clear browser cache or use another browser, and escalate with logs if reproducible."
+  },
+  {
+    "id": "support_0015",
+    "slice": "support",
+    "query": "How long do you keep deleted account data? I am using the service from my phone.",
+    "gold": "Explain the documented deletion and retention policy, including any legal/security retention exceptions, without inventing a timeframe not in policy."
+  },
+  {
+    "id": "support_0016",
+    "slice": "support",
+    "query": "I need an invoice with my company name and tax details. How can I get one? I can provide screenshots if needed.",
+    "gold": "Explain where invoices can be downloaded and how billing details can be updated, while noting whether changes apply only to future invoices or can be reissued."
+  },
+  {
+    "id": "support_0017",
+    "slice": "support",
+    "query": "My return tracking says delivered, but I have not received my refund. I have not made any other changes.",
+    "gold": "Confirm the return was received, explain the inspection/refund processing timeline, and escalate if the normal processing window has passed."
+  },
+  {
+    "id": "support_0018",
+    "slice": "support",
+    "query": "I want to change the email address on my account. I have already tried once.",
+    "gold": "Explain the authenticated email-change flow, including verification of the old or new address as required and any restrictions for security-sensitive accounts."
+  },
+  {
+    "id": "support_0019",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. The issue started after a recent change.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0020",
+    "slice": "support",
+    "query": "Can support staff tell me another customer's order status? I am using a business account.",
+    "gold": "No. Explain that account and order information is private and can only be disclosed to an authorized person after appropriate verification."
+  },
+  {
+    "id": "support_0021",
+    "slice": "support",
+    "query": "My card was declined, but my bank says the card is fine. What can I try? This happened today.",
+    "gold": "Suggest checking billing details, card limits, online/international transaction settings, trying another supported method, and contacting support if the decline persists."
+  },
+  {
+    "id": "support_0022",
+    "slice": "support",
+    "query": "I lost the original packaging. Is a return still possible? I need to resolve this before tomorrow.",
+    "gold": "Check product-specific return requirements; explain whether alternate secure packaging is acceptable and whether missing original packaging affects eligibility."
+  },
+  {
+    "id": "support_0023",
+    "slice": "support",
+    "query": "My account is locked after too many login attempts. I am currently traveling.",
+    "gold": "Explain the lockout period or secure unlock flow, suggest password reset if needed, and avoid steps that bypass the account's security protections."
+  },
+  {
+    "id": "support_0024",
+    "slice": "support",
+    "query": "The desktop app says it is offline even though my internet works. This is the first time this has happened.",
+    "gold": "Confirm service status, restart the app, check firewall/proxy/VPN settings, sign out and back in if safe, and gather logs if the issue persists."
+  },
+  {
+    "id": "support_0025",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? I am using the service from my phone.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0026",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? I can provide screenshots if needed.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0027",
+    "slice": "support",
+    "query": "I received the wrong item in my order. How do I return it? I have not made any other changes.",
+    "gold": "Apologize, verify the order, provide the return or replacement process, and ensure the customer is not charged return shipping for a fulfillment error."
+  },
+  {
+    "id": "support_0028",
+    "slice": "support",
+    "query": "I forgot my password and no longer have access to my old phone number. I have already tried once.",
+    "gold": "Use the approved account-recovery flow, verify identity through available secure methods, and never bypass authentication controls."
+  },
+  {
+    "id": "support_0029",
+    "slice": "support",
+    "query": "The app crashes every time I open the settings page. The issue started after a recent change.",
+    "gold": "Collect app version and device/OS details, suggest restarting and updating the app, clearing safe temporary data if supported, and escalate with reproducible steps if it continues."
+  },
+  {
+    "id": "support_0030",
+    "slice": "support",
+    "query": "Can I share my subscription with a friend? I am using a business account.",
+    "gold": "Explain the account-sharing policy accurately, including whether the subscription is personal, household-based, or supports additional authorized users."
+  },
+  {
+    "id": "support_0031",
+    "slice": "support",
+    "query": "My renewal price is higher than last month even though I did not change plans. Why? This happened today.",
+    "gold": "Check the account for a promotion ending, tax change, plan-price update, or add-on; explain the exact cause and offer applicable billing options."
+  },
+  {
+    "id": "support_0032",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? I need to resolve this before tomorrow.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0033",
+    "slice": "support",
+    "query": "I am not receiving the password reset email. I am currently traveling.",
+    "gold": "Confirm the email address, ask the user to check spam and filters, wait briefly, retry once, verify allowed sender domains, and escalate if delivery still fails."
+  },
+  {
+    "id": "support_0034",
+    "slice": "support",
+    "query": "The website loads on mobile data but not on my Wi-Fi. This is the first time this has happened.",
+    "gold": "Check whether other sites work, restart the router, try another browser/device, disable problematic DNS/VPN settings if applicable, and isolate whether the issue is network-specific."
+  },
+  {
+    "id": "support_0035",
+    "slice": "support",
+    "query": "Can I get a refund because I forgot to cancel my renewal? I am using the service from my phone.",
+    "gold": "State the refund policy and eligibility window, check for exceptions, and avoid promising a refund before confirming the account qualifies."
+  },
+  {
+    "id": "support_0036",
+    "slice": "support",
+    "query": "I cancelled before renewal but still see a pending charge. Can it be stopped? I can provide screenshots if needed.",
+    "gold": "Check the cancellation timestamp and transaction status. If the charge is only an authorization, explain that it may drop automatically; if captured incorrectly, arrange a refund."
+  },
+  {
+    "id": "support_0037",
+    "slice": "support",
+    "query": "I opened the box but did not use the product. Can I still return it? I have not made any other changes.",
+    "gold": "Check the return window and category rules; explain whether opened-but-unused items are eligible and what condition or packaging requirements apply."
+  },
+  {
+    "id": "support_0038",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. I have already tried once.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0039",
+    "slice": "support",
+    "query": "My file upload stops at 99% every time. The issue started after a recent change.",
+    "gold": "Check file size/type limits and connection stability, retry with a smaller supported file, clear browser cache or use another browser, and escalate with logs if reproducible."
+  },
+  {
+    "id": "support_0040",
+    "slice": "support",
+    "query": "How long do you keep deleted account data? I am using a business account.",
+    "gold": "Explain the documented deletion and retention policy, including any legal/security retention exceptions, without inventing a timeframe not in policy."
+  },
+  {
+    "id": "support_0041",
+    "slice": "support",
+    "query": "I need an invoice with my company name and tax details. How can I get one? This happened today.",
+    "gold": "Explain where invoices can be downloaded and how billing details can be updated, while noting whether changes apply only to future invoices or can be reissued."
+  },
+  {
+    "id": "support_0042",
+    "slice": "support",
+    "query": "My return tracking says delivered, but I have not received my refund. I need to resolve this before tomorrow.",
+    "gold": "Confirm the return was received, explain the inspection/refund processing timeline, and escalate if the normal processing window has passed."
+  },
+  {
+    "id": "support_0043",
+    "slice": "support",
+    "query": "I want to change the email address on my account. I am currently traveling.",
+    "gold": "Explain the authenticated email-change flow, including verification of the old or new address as required and any restrictions for security-sensitive accounts."
+  },
+  {
+    "id": "support_0044",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. This is the first time this has happened.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0045",
+    "slice": "support",
+    "query": "Can support staff tell me another customer's order status? I am using the service from my phone.",
+    "gold": "No. Explain that account and order information is private and can only be disclosed to an authorized person after appropriate verification."
+  },
+  {
+    "id": "support_0046",
+    "slice": "support",
+    "query": "My card was declined, but my bank says the card is fine. What can I try? I can provide screenshots if needed.",
+    "gold": "Suggest checking billing details, card limits, online/international transaction settings, trying another supported method, and contacting support if the decline persists."
+  },
+  {
+    "id": "support_0047",
+    "slice": "support",
+    "query": "I lost the original packaging. Is a return still possible? I have not made any other changes.",
+    "gold": "Check product-specific return requirements; explain whether alternate secure packaging is acceptable and whether missing original packaging affects eligibility."
+  },
+  {
+    "id": "support_0048",
+    "slice": "support",
+    "query": "My account is locked after too many login attempts. I have already tried once.",
+    "gold": "Explain the lockout period or secure unlock flow, suggest password reset if needed, and avoid steps that bypass the account's security protections."
+  },
+  {
+    "id": "support_0049",
+    "slice": "support",
+    "query": "The desktop app says it is offline even though my internet works. The issue started after a recent change.",
+    "gold": "Confirm service status, restart the app, check firewall/proxy/VPN settings, sign out and back in if safe, and gather logs if the issue persists."
+  },
+  {
+    "id": "support_0050",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? I am using a business account.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0051",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 001; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0052",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 002; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0053",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 003; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0054",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 004; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0055",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 005; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0056",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 006; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0057",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 007; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0058",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 008; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0059",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 009; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0060",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 010; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0061",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 011; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0062",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 012; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0063",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 013; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0064",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 014; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0065",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 015; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0066",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 016; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0067",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 017; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0068",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 018; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0069",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 019; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0070",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 020; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0071",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 021; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0072",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 022; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0073",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 023; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0074",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 024; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0075",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 025; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0076",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 026; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0077",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 027; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0078",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 028; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0079",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 029; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0080",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 030; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0081",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 031; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0082",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 032; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0083",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 033; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0084",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 034; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0085",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 035; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0086",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 036; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0087",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 037; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0088",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 038; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0089",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 039; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0090",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 040; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0091",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 041; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0092",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 042; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0093",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 043; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0094",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 044; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0095",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 045; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0096",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 046; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0097",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 047; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0098",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 048; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0099",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 049; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0100",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 050; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0101",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 051; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0102",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 052; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0103",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 053; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0104",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 054; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0105",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 055; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0106",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 056; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0107",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 057; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0108",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 058; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0109",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 059; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0110",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 060; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0111",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 061; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0112",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 062; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0113",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 063; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0114",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 064; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0115",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 065; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  },
+  {
+    "id": "support_0116",
+    "slice": "support",
+    "query": "The product arrived damaged. Do I need to pay return shipping? Additional context: case reference 066; please give the safest next steps.",
+    "gold": "For an item damaged on arrival, explain the damaged-item return or replacement flow and that the customer should not normally bear return shipping for the seller's error."
+  },
+  {
+    "id": "support_0117",
+    "slice": "support",
+    "query": "Someone logged into my account from a location I do not recognize. Additional context: case reference 067; please give the safest next steps.",
+    "gold": "Advise changing the password immediately, signing out other sessions, enabling multi-factor authentication, reviewing recent activity, and contacting security support if compromise is suspected."
+  },
+  {
+    "id": "support_0118",
+    "slice": "support",
+    "query": "Notifications are enabled but I am not receiving them. Additional context: case reference 068; please give the safest next steps.",
+    "gold": "Check in-app notification settings, OS-level permissions, battery/background restrictions, do-not-disturb modes, and whether the notification event is actually being triggered."
+  },
+  {
+    "id": "support_0119",
+    "slice": "support",
+    "query": "Can you remove a late fee for me? Additional context: case reference 069; please give the safest next steps.",
+    "gold": "Check whether policy allows a waiver, verify eligibility or prior waivers, and explain the available options without promising an exception that has not been approved."
+  },
+  {
+    "id": "support_0120",
+    "slice": "support",
+    "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 070; please give the safest next steps.",
+    "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
+  }
+]

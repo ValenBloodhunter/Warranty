@@ -328,7 +328,7 @@
 
     for (
       let cut = paired.length;
-      cut >= 1;
+      cut >= 0;
       cut--
     ) {
 

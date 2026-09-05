@@ -95,19 +95,31 @@
   function costOf(row, which, prices) {
     if (!row || !prices) return 0;
 
-    const model = row[which];
+  const model = row[which];
 
-    if (!model) return 0;
+  if (!model) return 0;
 
-    const inputTokens = Number(model.in_tok) || 0;
-    const outputTokens = Number(model.out_tok) || 0;
+  const inputTokens = Number(model.in_tok) || 0;
+  const outputTokens = Number(model.out_tok) || 0;
 
-    const inputPrice = Number(prices.in_per_1m) || 0;
-    const outputPrice = Number(prices.out_per_1m) || 0;
+  const price =
+    prices[which] || prices;
 
-    return (
-      (inputTokens * inputPrice) / 1000000 +
-      (outputTokens * outputPrice) / 1000000
+  const inputPrice =
+    Number(
+      price.in_per_1m ??
+      price.input
+    ) || 0;
+
+  const outputPrice =
+    Number(
+      price.out_per_1m ??
+      price.output
+    ) || 0;
+
+  return (
+    (inputTokens * inputPrice) / 1000000 +
+    (outputTokens * outputPrice) / 1000000
     );
   }
 

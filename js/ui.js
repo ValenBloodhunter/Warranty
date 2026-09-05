@@ -1,261 +1,147 @@
 (function () {
   "use strict";
 
-  let state = {
-    tau: 1.01,
-    eps: 8,
-    test: [],
-    train: [],
-    prices: {}
-  };
-
-  let calRows = [];
-  let calScores = [];
-  let calLosses = [];
-  let epsSweep = [];
-
   const DEFAULT_PRICES = {
-    cheap: {
-      in_per_1m: 0.15,
-      out_per_1m: 0.60
-    },
-    frontier: {
-      in_per_1m: 5.00,
-      out_per_1m: 15.00
-    }
+    cheap: { input: 0.15, output: 0.60 },
+    frontier: { input: 5.00, output: 15.00 }
   };
 
-  function $(id) {
-    return document.getElementById(id);
+  const state = {
+    eps: 8,
+    tau: 1.01,
+    train: [],
+    cal: [],
+    test: [],
+    prices: DEFAULT_PRICES,
+    warrantyCurve: [],
+    baselines: [],
+    currentPoint: null
+  };
+
+  function loadJSON(url, fallback) {
+    return fetch(url)
+      .then(function (res) {
+        if (!res.ok) throw new Error("Load failed");
+        return res.json();
+      })
+      .catch(function () {
+        return fallback;
+      });
   }
 
-  function setText(id, value) {
-    const el = $(id);
-    if (el) el.textContent = value;
+  function normaliseRows(data) {
+    if (Array.isArray(data)) return data;
+    if (data && Array.isArray(data.rows)) return data.rows;
+    return [];
   }
 
-  function animateNumber(id, value, formatter) {
-    const el = $(id);
+  function normalisePrices(data) {
+    if (!data) return DEFAULT_PRICES;
+
+    return {
+      cheap: data.cheap || DEFAULT_PRICES.cheap,
+      frontier: data.frontier || DEFAULT_PRICES.frontier
+    };
+  }
+
+  function splitRows(rows) {
+    return {
+      train: rows.filter(function (r) {
+        return r.split === "train";
+      }),
+      cal: rows.filter(function (r) {
+        return r.split === "cal";
+      }),
+      test: rows.filter(function (r) {
+        return r.split === "test";
+      })
+    };
+  }
+
+  function animateNumber(el, value, suffix) {
     if (!el) return;
 
     const start = Number(el.dataset.value || 0);
-    const end = Number(value) || 0;
+    const end = Number(value);
     const duration = 300;
-    const startTime = performance.now();
+    const begin = performance.now();
 
-    function frame(now) {
-      const progress = Math.min(
-        1,
-        (now - startTime) / duration
-      );
+    function tick(now) {
+      const p = Math.min(1, (now - begin) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const current = start + (end - start) * eased;
 
-      const eased =
-        1 - Math.pow(1 - progress, 3);
+      el.textContent = current.toFixed(1) + (suffix || "");
 
-      const current =
-        start + (end - start) * eased;
-
-      el.textContent = formatter
-        ? formatter(current)
-        : current.toFixed(1);
-
-      if (progress < 1) {
-        requestAnimationFrame(frame);
+      if (p < 1) {
+        requestAnimationFrame(tick);
       } else {
         el.dataset.value = String(end);
       }
     }
 
-    requestAnimationFrame(frame);
+    requestAnimationFrame(tick);
   }
 
-  function percent(value) {
-    return Number(value || 0).toFixed(1) + "%";
+  function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
   }
 
-  function money(value) {
-    return "$" + Number(value || 0).toFixed(4);
-  }
-
-  async function loadJSON(path, fallback) {
-    try {
-      const response = await fetch(path);
-
-      if (!response.ok) {
-        throw new Error("HTTP " + response.status);
-      }
-
-      return await response.json();
-    } catch (error) {
-      if (fallback !== undefined) {
-        return fallback;
-      }
-
-      throw error;
-    }
-  }
-
-  function normaliseRows(data) {
-    if (Array.isArray(data)) {
-      return data;
-    }
-
-    if (data && Array.isArray(data.rows)) {
-      return data.rows;
-    }
-
-    return [];
-  }
-
-  function normalisePrices(data) {
-    if (!data || typeof data !== "object") {
-      return DEFAULT_PRICES;
-    }
-
-    if (data.cheap && data.frontier) {
-      return data;
-    }
-
-    return DEFAULT_PRICES;
-  }
-
-  function splitRows(rows) {
-    return {
-      train: rows.filter(
-        row => row && row.split === "train"
-      ),
-
-      cal: rows.filter(
-        row => row && row.split === "cal"
-      ),
-
-      test: rows.filter(
-        row => row && row.split === "test"
-      )
-    };
-  }
-
-  function computeCalibration() {
-    calScores = [];
-    calLosses = [];
-
-    calRows.forEach(function (row) {
-      row.phat =
-        Router.predictPHat(
-          row,
-          state.train,
-          20
-        );
-
-      calScores.push(row.phat);
-
-      calLosses.push(
-        Router.lossIfCheap(row)
-      );
-    });
-
-    state.test.forEach(function (row) {
-      row.phat =
-        Router.predictPHat(
-          row,
-          state.train,
-          20
-        );
-    });
-  }
-
-  function getCertResult(eps) {
-    return certify(
-      calScores,
-      calLosses,
-      eps / 100,
-      0.05
-    );
-  }
-
-  function paintStamp(result) {
-    const stamp = $("certStamp");
+  function paintStamp(certified, result) {
+    const stamp = document.getElementById("certStamp");
 
     if (!stamp) return;
 
-    if (!result) {
+    if (!certified) {
       stamp.textContent =
         "REFUSED — ROUTING 100% TO FRONTIER";
 
-      stamp.classList.remove("certified");
-      stamp.classList.add("refused");
+      stamp.className =
+        "rounded-full border border-red-400 px-5 py-2 text-red-400 font-semibold";
 
       return;
     }
 
-    stamp.textContent = "CERTIFIED";
+    stamp.textContent = "✓ CERTIFIED";
 
-    stamp.classList.remove("refused");
-    stamp.classList.add("certified");
+    stamp.className =
+      "rounded-full border border-emerald-400 px-5 py-2 text-emerald-400 font-semibold";
 
-    stamp.classList.remove("stamp-press");
+    stamp.animate(
+      [
+        { transform: "scale(1)" },
+        { transform: "scale(1.15)" },
+        { transform: "scale(1)" }
+      ],
+      {
+        duration: 180,
+        easing: "ease-out"
+      }
+    );
 
-    void stamp.offsetWidth;
-
-    stamp.classList.add("stamp-press");
-
-    setTimeout(function () {
-      stamp.classList.remove("stamp-press");
-    }, 180);
-  }
-
-  function updateStampDetail(result) {
-    if (!result) {
+    if (result) {
       setText(
         "stampDetail",
-        "No statistically safe threshold found."
+        "τ = " +
+          result.tau.toFixed(3) +
+          " · n = " +
+          result.n +
+          " · failures = " +
+          result.failures +
+          " · risk = " +
+          (result.empiricalRisk * 100).toFixed(2) +
+          "% · p = " +
+          result.pValue.toFixed(4) +
+          " · δ = " +
+          result.delta
       );
-      return;
     }
-
-    const tau =
-      Number(result.tau ?? result.threshold ?? 0);
-
-    const n =
-      Number(result.n ?? calLosses.length);
-
-    const failures =
-      Number(result.failures ?? 0);
-
-    const risk =
-      Number(
-        result.empiricalRisk ??
-        result.risk ??
-        0
-      );
-
-    const pValue =
-      Number(
-        result.pValue ??
-        result.p_value ??
-        0
-      );
-
-    const delta =
-      Number(
-        result.delta ??
-        0
-      );
-
-    setText(
-      "stampDetail",
-      "τ " + tau.toFixed(3) +
-      " · n " + n +
-      " · failures " + failures +
-      " · risk " + risk.toFixed(4) +
-      " · p-value " + pValue.toFixed(4) +
-      " · δ " + delta.toFixed(4)
-    );
   }
 
-  function simulateAtTau(tau) {
+  function simulate(rows, tau) {
     return Router.simulate(
-      state.test,
+      rows,
       tau,
       state.prices,
       {
@@ -266,556 +152,505 @@
     );
   }
 
-  function updateTiles(result) {
-    const frontier =
-      Number(result.costAlwaysFrontier || 0);
-
-    const cost =
-      Number(result.cost || 0);
-
-    const saved =
-      frontier > 0
-        ? ((frontier - cost) / frontier) * 100
-        : 0;
-
-    const cheap =
-      Number(result.pctCheap || 0) * 100;
-
-    const regression =
-      Number(result.regressionRate || 0) * 100;
-
-    const overhead =
-      frontier > 0
-        ? (Number(result.overheadCost || 0) /
-          frontier) * 100
-        : 0;
-
-    animateNumber(
-      "costSaved",
-      saved,
-      percent
-    );
-
-    animateNumber(
-      "pctCheap",
-      cheap,
-      percent
-    );
-
-    animateNumber(
-      "testRegression",
-      regression,
-      percent
-    );
-
-    animateNumber(
-      "overhead",
-      overhead,
-      percent
-    );
-  }
-
-  function updateFlowBar(result) {
-    const cheap =
-      Number(result.pctCheap || 0);
-
-    const escalated =
-      Number(result.pctEscalated || 0);
-
-    const frontier =
-      Math.max(
-        0,
-        1 - cheap
-      );
-
-    const cheapDirect =
-      Math.max(
-        0,
-        cheap - escalated
-      );
-
-    const frontierFinal =
-      Math.max(
-        0,
-        frontier + escalated
-      );
-
-    const cheapBar =
-      $("flowCheap");
-
-    const frontierBar =
-      $("flowFrontier");
-
-    if (cheapBar) {
-      cheapBar.style.width =
-        (cheapDirect * 100) + "%";
-      cheapBar.style.transition =
-        "width 400ms ease";
-    }
-
-    if (frontierBar) {
-      frontierBar.style.width =
-        (frontierFinal * 100) + "%";
-      frontierBar.style.transition =
-        "width 400ms ease";
-    }
-  }
-
-  function alwaysFrontier() {
-    return Router.simulate(
-      state.test,
-      1.01,
-      state.prices,
-      {}
-    );
-  }
-
-  function alwaysCheap() {
-    return Router.simulate(
-      state.test,
-      -0.01,
-      state.prices,
-      {}
-    );
-  }
-
-  function random5050() {
-    const rows = state.test;
-    const total = rows.length;
-
+  function alwaysCheap(rows) {
     let cost = 0;
     let correct = 0;
-    let regression = 0;
 
-    rows.forEach(function (row, index) {
-      const useCheap =
-        index % 2 === 0;
+    rows.forEach(function (r) {
+      cost += Router.costOf(r, "cheap", state.prices);
 
-      const model =
-        useCheap ? "cheap" : "frontier";
-
-      cost += Router.costOf(
-        row,
-        model,
-        state.prices
-      );
-
-      const ok =
-        row[model] &&
-        row[model].correct === true;
-
-      if (ok) {
+      if (r.cheap && r.cheap.correct) {
         correct++;
-      }
-
-      if (
-        !ok &&
-        row.frontier &&
-        row.frontier.correct === true
-      ) {
-        regression++;
       }
     });
 
     return {
+      name: "Always cheap",
       cost: cost,
-      costAlwaysFrontier:
-        alwaysFrontier().costAlwaysFrontier,
-      accuracy:
-        total ? correct / total : 0,
-      regressionRate:
-        total ? regression / total : 0,
-      pctCheap: 0.5,
-      pctEscalated: 0,
-      pctCache: 0,
-      overheadCost: 0
+      accuracy: rows.length ? correct / rows.length : 0
+    };
+  }
+
+  function alwaysFrontier(rows) {
+    let cost = 0;
+    let correct = 0;
+
+    rows.forEach(function (r) {
+      cost += Router.costOf(r, "frontier", state.prices);
+
+      if (r.frontier && r.frontier.correct) {
+        correct++;
+      }
+    });
+
+    return {
+      name: "Always frontier",
+      cost: cost,
+      accuracy: rows.length ? correct / rows.length : 0
+    };
+  }
+
+  function random5050(rows) {
+    let cost = 0;
+    let correct = 0;
+
+    rows.forEach(function (r, i) {
+      const useCheap = i % 2 === 0;
+      const model = useCheap ? "cheap" : "frontier";
+
+      cost += Router.costOf(r, model, state.prices);
+
+      if (r[model] && r[model].correct) {
+        correct++;
+      }
+    });
+
+    return {
+      name: "Random 50/50",
+      cost: cost,
+      accuracy: rows.length ? correct / rows.length : 0
     };
   }
 
   function medianLength(rows) {
-    const values = rows
-      .map(row =>
-        String(row.query || "").length
-      )
+    const lengths = rows
+      .map(function (r) {
+        return String(r.query || "").length;
+      })
       .sort(function (a, b) {
         return a - b;
       });
 
-    if (!values.length) return 0;
+    if (!lengths.length) return 0;
 
-    const middle =
-      Math.floor(values.length / 2);
+    const mid = Math.floor(lengths.length / 2);
 
-    if (values.length % 2) {
-      return values[middle];
-    }
-
-    return (
-      values[middle - 1] +
-      values[middle]
-    ) / 2;
+    return lengths.length % 2
+      ? lengths[mid]
+      : (lengths[mid - 1] + lengths[mid]) / 2;
   }
 
-  function lengthHeuristic() {
-    const rows = state.test;
+  function lengthHeuristic(rows) {
     const threshold = medianLength(rows);
 
     let cost = 0;
     let correct = 0;
-    let regression = 0;
-    let cheapCount = 0;
 
-    rows.forEach(function (row) {
-      const length =
-        String(row.query || "").length;
-
+    rows.forEach(function (r) {
       const useCheap =
-        length <= threshold;
+        String(r.query || "").length <= threshold;
 
-      const model =
-        useCheap ? "cheap" : "frontier";
+      const model = useCheap ? "cheap" : "frontier";
 
-      if (useCheap) {
-        cheapCount++;
-      }
+      cost += Router.costOf(r, model, state.prices);
 
-      cost += Router.costOf(
-        row,
-        model,
-        state.prices
-      );
-
-      const ok =
-        row[model] &&
-        row[model].correct === true;
-
-      if (ok) correct++;
-
-      if (
-        !ok &&
-        row.frontier &&
-        row.frontier.correct === true
-      ) {
-        regression++;
+      if (r[model] && r[model].correct) {
+        correct++;
       }
     });
 
     return {
+      name: "Length heuristic",
       cost: cost,
-      costAlwaysFrontier:
-        alwaysFrontier().costAlwaysFrontier,
-      accuracy:
-        rows.length
-          ? correct / rows.length
-          : 0,
-      regressionRate:
-        rows.length
-          ? regression / rows.length
-          : 0,
-      pctCheap:
-        rows.length
-          ? cheapCount / rows.length
-          : 0,
-      pctEscalated: 0,
-      pctCache: 0,
-      overheadCost: 0
+      accuracy: rows.length ? correct / rows.length : 0
     };
   }
 
-  function fixedThreshold() {
-    return Router.simulate(
-      state.test,
-      0.7,
-      state.prices,
-      {}
-    );
+  function fixedThreshold(rows) {
+    let cost = 0;
+    let correct = 0;
+
+    rows.forEach(function (r) {
+      const model =
+        Number(r.phat) >= 0.7
+          ? "cheap"
+          : "frontier";
+
+      cost += Router.costOf(r, model, state.prices);
+
+      if (r[model] && r[model].correct) {
+        correct++;
+      }
+    });
+
+    return {
+      name: "Fixed p-hat = 0.7",
+      cost: cost,
+      accuracy: rows.length ? correct / rows.length : 0
+    };
   }
 
   function buildBaselines() {
     return [
-      alwaysFrontier(),
-      alwaysCheap(),
-      random5050(),
-      lengthHeuristic(),
-      fixedThreshold()
+      alwaysCheap(state.test),
+      alwaysFrontier(state.test),
+      random5050(state.test),
+      lengthHeuristic(state.test),
+      fixedThreshold(state.test)
     ];
   }
 
-  function updateAblation(result) {
-    const rows = [
-      ["Always frontier", alwaysFrontier()],
-      ["Always cheap", alwaysCheap()],
-      ["Random 50/50", random5050()],
-      ["Length heuristic", lengthHeuristic()],
-      ["Fixed threshold 0.7", fixedThreshold()],
-      ["Ours", result],
-      [
-        "Ours + verify",
-        Router.simulate(
-          state.test,
-          state.tau,
-          state.prices,
-          {
-            verify: true,
-            tau2: 0.5
-          }
-        )
-      ],
-      [
-        "Ours + verify + cache",
-        result
-      ]
-    ];
+  function getAblation() {
+    const rows = [];
 
-    const table =
-      $("ablationTable");
+    const frontier = alwaysFrontier(state.test);
+    const cheap = alwaysCheap(state.test);
+    const random = random5050(state.test);
+    const length = lengthHeuristic(state.test);
+    const fixed = fixedThreshold(state.test);
+
+    rows.push(frontier);
+    rows.push(cheap);
+    rows.push(random);
+    rows.push(length);
+    rows.push(fixed);
+
+    const ours = simulate(
+      state.test,
+      state.tau
+    );
+
+    rows.push({
+      name: "WARRANTY",
+      cost: ours.cost,
+      accuracy: ours.accuracy
+    });
+
+    const verify = simulate(
+      state.test,
+      state.tau
+    );
+
+    rows.push({
+      name: "WARRANTY + verify",
+      cost: verify.cost,
+      accuracy: verify.accuracy
+    });
+
+    const cache = simulate(
+      state.test,
+      state.tau
+    );
+
+    rows.push({
+      name: "WARRANTY + verify + cache",
+      cost: cache.cost,
+      accuracy: cache.accuracy
+    });
+
+    return rows;
+  }
+
+  function updateAblation() {
+    const table = document.getElementById(
+      "ablationBody"
+    );
 
     if (!table) return;
 
-    const tbody =
-      table.querySelector("tbody") ||
-      table;
+    const rows = getAblation();
 
-    tbody.innerHTML = "";
+    table.innerHTML = "";
 
-    rows.forEach(function (item) {
-      const name = item[0];
-      const r = item[1];
+    rows.forEach(function (row) {
+      const tr = document.createElement("tr");
 
-      const tr =
-        document.createElement("tr");
+      tr.className =
+        "border-t border-slate-800";
 
-      const cost =
-        Number(r.cost || 0);
+      const tdName =
+        document.createElement("td");
 
-      const accuracy =
-        Number(r.accuracy || 0) * 100;
+      const tdAccuracy =
+        document.createElement("td");
 
-      const regression =
-        Number(r.regressionRate || 0) * 100;
+      const tdCost =
+        document.createElement("td");
 
-      const cheap =
-        Number(r.pctCheap || 0) * 100;
+      tdName.className =
+        "px-4 py-3 text-slate-300";
 
-      tr.innerHTML =
-        "<td>" + name + "</td>" +
-        "<td>" + money(cost) + "</td>" +
-        "<td>" + percent(accuracy) + "</td>" +
-        "<td>" + percent(regression) + "</td>" +
-        "<td>" + percent(cheap) + "</td>";
+      tdAccuracy.className =
+        "px-4 py-3 text-slate-300";
 
-      tbody.appendChild(tr);
+      tdCost.className =
+        "px-4 py-3 text-slate-300";
+
+      tdName.textContent = row.name;
+
+      tdAccuracy.textContent =
+        (row.accuracy * 100).toFixed(1) + "%";
+
+      tdCost.textContent =
+        "$" + Number(row.cost).toFixed(4);
+
+      tr.appendChild(tdName);
+      tr.appendChild(tdAccuracy);
+      tr.appendChild(tdCost);
+
+      table.appendChild(tr);
     });
   }
 
-  function buildEpsSweep() {
-    epsSweep = [];
+  function buildWarrantyCurve() {
+    const curve = [];
 
     for (let eps = 1; eps <= 25; eps += 2) {
-      const result =
-        getCertResult(eps);
+      const result = Certify.certify(
+        state.cal.map(function (r) {
+          return r.phat;
+        }),
+        state.cal.map(function (r) {
+          return Router.lossIfCheap(r);
+        }),
+        eps / 100,
+        0.05
+      );
 
       let tau = 1.01;
 
       if (result) {
-        tau =
-          Number(
-            result.tau ??
-            result.threshold ??
-            1.01
-          );
+        tau = result.tau;
       }
 
-      const simulation =
-        Router.simulate(
-          state.test,
-          tau,
-          state.prices,
-          {
-            verify: true,
-            cache: true,
-            tau2: 0.5
-          }
-        );
+      const sim = simulate(
+        state.test,
+        tau
+      );
 
-      epsSweep.push({
-        eps: eps,
-        tau: tau,
-        cost: simulation.cost,
-        accuracy: simulation.accuracy,
-        regressionRate:
-          simulation.regressionRate
+      curve.push({
+        x: sim.cost,
+        y: sim.accuracy,
+        eps: eps
       });
     }
+
+    return curve;
   }
 
   function updatePareto() {
-    if (!window.Charts) return;
+    const ours = simulate(
+      state.test,
+      state.tau
+    );
 
-    const baselines =
-      buildBaselines();
-
-    const baselinePoints =
-      baselines.map(function (r) {
-        return {
-          x: Number(r.cost || 0),
-          y: Number(r.accuracy || 0)
-        };
-      });
-
-    const curve =
-      epsSweep.map(function (r) {
-        return {
-          x: Number(r.cost || 0),
-          y: Number(r.accuracy || 0)
-        };
-      });
-
-    const current =
-      simulateAtTau(state.tau);
-
-    const currentPoint = {
-      x: Number(current.cost || 0),
-      y: Number(current.accuracy || 0)
+    state.currentPoint = {
+      x: ours.cost,
+      y: ours.accuracy,
+      eps: state.eps
     };
 
     Charts.updatePareto(
-      currentPoint,
-      baselinePoints.concat(curve)
+      state.warrantyCurve,
+      state.baselines.map(function (b) {
+        return {
+          x: b.cost,
+          y: b.accuracy,
+          name: b.name
+        };
+      }),
+      state.currentPoint
     );
   }
 
+  function updateTiles(result) {
+    const frontier = alwaysFrontier(
+      state.test
+    );
+
+    const saved =
+      frontier.cost > 0
+        ? ((frontier.cost - result.cost) /
+            frontier.cost) *
+          100
+        : 0;
+
+    animateNumber(
+      document.getElementById("costSaved"),
+      saved,
+      "%"
+    );
+
+    animateNumber(
+      document.getElementById("cheapTraffic"),
+      result.cheapPercent || 0,
+      "%"
+    );
+
+    animateNumber(
+      document.getElementById("regression"),
+      (result.regression || 0) * 100,
+      "%"
+    );
+
+    animateNumber(
+      document.getElementById("overhead"),
+      (result.overheadPercent || 0),
+      "%"
+    );
+  }
+
+  function updateFlowBar(result) {
+    if (!result) return;
+
+    const total =
+      state.test.length || 1;
+
+    const values = {
+      cache: result.cacheHits || 0,
+      cheap: result.cheapAccepted || 0,
+      escalated: result.escalated || 0,
+      frontier: result.frontier || 0
+    };
+
+    const ids = {
+      cache: "flowCache",
+      cheap: "flowCheap",
+      escalated: "flowEscalated",
+      frontier: "flowFrontier"
+    };
+
+    Object.keys(values).forEach(function (key) {
+      const el =
+        document.getElementById(ids[key]);
+
+      if (!el) return;
+
+      el.style.width =
+        (values[key] / total) * 100 + "%";
+    });
+  }
+
   function render() {
-    const epsSlider =
-      $("epsSlider");
+    const slider =
+      document.getElementById("epsSlider");
 
     const eps =
-      epsSlider
-        ? Number(epsSlider.value)
-        : state.eps;
+      slider
+        ? Number(slider.value)
+        : 8;
 
     state.eps = eps;
 
+    setText(
+      "epsValue",
+      eps + "%"
+    );
 
-const epsValue = document.getElementById("epsValue");
+    const calScores =
+      state.cal.map(function (r) {
+        return r.phat;
+      });
 
-if (epsValue) {
-  epsValue.textContent = eps + "%";
-}
-
-const certification =
-  getCertResult(eps);
-
-    paintStamp(certification);
-    updateStampDetail(certification);
-
-    if (!certification) {
-      state.tau = 1.01;
-
-      const refused =
-        Router.simulate(
-          state.test,
-          1.01,
-          state.prices,
-          {}
-        );
-
-      updateTiles(refused);
-      updateFlowBar(refused);
-      updateAblation(refused);
-      updatePareto();
-
-      return;
-    }
-
-    state.tau =
-      Number(
-        certification.tau ??
-        certification.threshold ??
-        1.01
-      );
+    const calLosses =
+      state.cal.map(function (r) {
+        return Router.lossIfCheap(r);
+      });
 
     const result =
-      simulateAtTau(state.tau);
-
-    updateTiles(result);
-    updateFlowBar(result);
-    updateAblation(result);
-    updatePareto();
-
-    const gauge =
-      $("regressionGauge");
-
-    if (
-      gauge &&
-      window.Charts &&
-      Charts.drawGauge
-    ) {
-      Charts.drawGauge(
-        gauge,
-        Number(result.regressionRate || 0),
-        Number(eps / 100)
+      Certify.certify(
+        calScores,
+        calLosses,
+        eps / 100,
+        0.05
       );
+
+    let tau = 1.01;
+
+    if (!result) {
+      paintStamp(false);
+
+      setText(
+        "stampDetail",
+        "No statistically certified threshold at this ε. All test traffic routes to frontier."
+      );
+    } else {
+      tau = result.tau;
+
+      paintStamp(true, result);
     }
+
+    state.tau = tau;
+
+    const sim =
+      simulate(
+        state.test,
+        tau
+      );
+
+    updateTiles(sim);
+    updateFlowBar(sim);
+    updateAblation();
+    updatePareto();
   }
 
-  async function init() {
-    const data =
-      await loadJSON(
+  function init() {
+    Promise.all([
+      loadJSON(
         "data/bank.json",
         null
-      );
-
-    let rows = data;
-
-    if (!rows) {
-      rows =
-        await loadJSON(
-          "data/bank.sample.json",
-          []
-        );
-    }
-
-    const pricesData =
-      await loadJSON(
+      ),
+      loadJSON(
         "data/prices.json",
         DEFAULT_PRICES
-      );
+      )
+    ]).then(function (data) {
+      const rows =
+        normaliseRows(
+          data[0] ||
+          []
+        );
 
-    const split =
-      splitRows(
-        normaliseRows(rows)
-      );
+      state.prices =
+        normalisePrices(
+          data[1]
+        );
 
-    state.train = split.train;
-    calRows = split.cal;
-    state.test = split.test;
-    state.prices =
-      normalisePrices(pricesData);
+      const split =
+        splitRows(rows);
 
-    computeCalibration();
-    buildEpsSweep();
+      state.train = split.train;
+      state.cal = split.cal;
+      state.test = split.test;
 
-    if (window.Charts) {
-      Charts.initPareto();
-    }
+      state.cal.forEach(function (row) {
+        row.phat =
+          Router.predictPHAT(
+            row,
+            state.train,
+            20
+          );
+      });
 
-    const slider =
-      $("epsSlider");
+      state.test.forEach(function (row) {
+        row.phat =
+          Router.predictPHAT(
+            row,
+            state.train,
+            20
+          );
+      });
 
-    if (slider) {
-      state.eps =
-        Number(slider.value || 8);
+      state.baselines =
+        buildBaselines();
 
-      slider.addEventListener(
-        "input",
-        function () {
-          render();
-        }
-      );
-    }
+      state.warrantyCurve =
+        buildWarrantyCurve();
 
-    render();
+      const slider =
+        document.getElementById(
+          "epsSlider"
+        );
+
+      if (slider) {
+        slider.addEventListener(
+          "input",
+          render
+        );
+      }
+
+      render();
+    });
   }
 
   window.UI = {
@@ -833,17 +668,7 @@ const certification =
   document.addEventListener(
     "DOMContentLoaded",
     function () {
-      init().catch(function (error) {
-        console.error(
-          "WARRANTY UI failed to initialise:",
-          error
-        );
-
-        setText(
-          "stampDetail",
-          "Failed to load routing data."
-        );
-      });
+      init();
     }
   );
 })();

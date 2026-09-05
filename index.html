@@ -1,384 +1,2809 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REBEKA — Intelligence, Precisely Allocated</title>
 
-  <title>WARRANTY — Certified LLM Router</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{
+  --bg:#F5F1EA;
+  --bg2:#EFE8DA;
+  --panel:#FFFFFF;
+  --panel2:#FBF8F2;
+  --line:rgba(32,28,22,.09);
+  --line2:rgba(32,28,22,.17);
+  --text:#211D16;
+  --muted:#726954;
+  --muted2:#8F8570;
+  --faint:#AFA48C;
+  --blue:#5B54D6;
+  --purple:#9A87BE;
+  --yellow:#B08A46;
+  --red:#BD7C68;
+  --green:#6C8F6A;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
 
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-  <style>
-    html,
-    body {
-      height: 100%;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    body {
-      overflow: hidden;
-    }
+body{
+  background:
+    radial-gradient(circle at 78% 4%,rgba(91,84,214,.05),transparent 32%),
+    radial-gradient(circle at 16% 28%,rgba(176,138,70,.045),transparent 28%),
+    var(--bg);
+  color:var(--text);
+  font-family:"Inter",sans-serif;
+  font-weight:400;
+  overflow-x:hidden;
+}
 
-    #trace-panel {
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100%;
-      width: 340px;
-      transform: translateX(100%);
-      transition: transform 180ms ease-out;
-      z-index: 50;
-    }
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.018;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+  z-index:100;
+}
 
-    #trace-panel.open {
-      transform: translateX(0);
-    }
-  </style>
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.container{
+  width:min(1180px,calc(100% - 40px));
+  margin:auto;
+}
+
+/* NAV */
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:50;
+  height:74px;
+  border-bottom:1px solid var(--line);
+  background:rgba(245,241,234,.78);
+  backdrop-filter:blur(20px);
+}
+
+.nav-inner{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:"Inter";
+  font-weight:600;
+  letter-spacing:-.03em;
+  color:var(--text);
+}
+
+.logo-mark{
+  width:27px;
+  height:27px;
+  border:1px solid var(--blue);
+  border-radius:50%;
+  position:relative;
+  transform:rotate(-18deg);
+}
+
+.logo-mark:after{
+  content:"";
+  position:absolute;
+  width:7px;
+  height:7px;
+  background:var(--blue);
+  border-radius:50%;
+  top:9px;
+  left:9px;
+  box-shadow:0 0 14px rgba(91,84,214,.6);
+}
+
+.nav-links{
+  display:flex;
+  gap:5px;
+  align-items:center;
+}
+
+.nav-links button{
+  border:0;
+  background:transparent;
+  color:var(--muted2);
+  padding:9px 12px;
+  border-radius:8px;
+  font-size:12px;
+  transition:.3s var(--ease);
+}
+
+.nav-links button:hover,
+.nav-links button.active{
+  color:var(--text);
+  background:rgba(32,28,22,.05);
+}
+
+.nav-status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:var(--muted2);
+  font-size:11px;
+}
+
+.status-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 10px rgba(108,143,106,.6);
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  padding-top:74px;
+  display:flex;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.eyebrow{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--muted2);
+  font-size:11px;
+  letter-spacing:.1em;
+  margin-bottom:25px;
+}
+
+.eyebrow span{
+  width:27px;
+  height:1px;
+  background:var(--blue);
+}
+
+.hero h1{
+  font-family:"Inter";
+  font-size:clamp(52px,6.4vw,92px);
+  line-height:.98;
+  letter-spacing:-.045em;
+  font-weight:600;
+  max-width:650px;
+  color:var(--text);
+}
+
+.hero h1 em{
+  color:var(--blue);
+  font-style:normal;
+}
+
+.hero-copy{
+  color:var(--muted);
+  max-width:510px;
+  font-size:16px;
+  line-height:1.75;
+  margin-top:28px;
+}
+
+.hero-actions{
+  display:flex;
+  gap:12px;
+  margin-top:35px;
+}
+
+.btn{
+  border:1px solid var(--line2);
+  color:var(--text);
+  background:rgba(32,28,22,.02);
+  padding:13px 20px;
+  border-radius:9px;
+  font-size:13px;
+  font-weight:500;
+  transition:.45s var(--ease);
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  border-color:rgba(91,84,214,.35);
+  background:rgba(91,84,214,.06);
+}
+
+.btn.primary{
+  background:var(--text);
+  color:var(--bg);
+  border-color:var(--text);
+}
+
+.btn.primary:hover{
+  box-shadow:0 14px 32px rgba(33,29,22,.18);
+}
+
+/* 3D CORE */
+
+.core-stage{
+  height:570px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1000px;
+  position:relative;
+}
+
+.core{
+  width:360px;
+  height:360px;
+  position:relative;
+  transform-style:preserve-3d;
+  animation:coreFloat 7s ease-in-out infinite;
+  transition:transform 1s var(--ease);
+}
+
+.core:hover{
+  transform:rotateX(8deg) rotateY(-12deg) scale(1.03);
+}
+
+.core-glow{
+  position:absolute;
+  inset:30px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(91,84,214,.10),transparent 65%);
+  filter:blur(25px);
+}
+
+.ring{
+  position:absolute;
+  inset:40px;
+  border:1px solid rgba(91,84,214,.42);
+  border-radius:50%;
+  transform-style:preserve-3d;
+}
+
+.ring.r1{
+  animation:spin1 13s linear infinite;
+}
+
+.ring.r2{
+  inset:70px;
+  border-color:rgba(154,135,190,.38);
+  transform:rotateX(70deg);
+  animation:spin2 10s linear infinite reverse;
+}
+
+.ring.r3{
+  inset:20px;
+  border-color:rgba(176,138,70,.30);
+  transform:rotateY(72deg);
+  animation:spin3 15s linear infinite;
+}
+
+.core-center{
+  position:absolute;
+  width:125px;
+  height:125px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) translateZ(60px);
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 30%,#ffffff,#F1EBDD 70%);
+  border:1px solid rgba(91,84,214,.35);
+  box-shadow:
+    0 12px 30px rgba(33,29,22,.10),
+    inset 0 0 30px rgba(91,84,214,.06);
+}
+
+.core-center:after{
+  content:"";
+  position:absolute;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:var(--blue);
+  left:47px;
+  top:47px;
+  box-shadow:0 0 28px rgba(91,84,214,.55);
+  animation:pulse 2.5s ease-in-out infinite;
+}
+
+.node{
+  position:absolute;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--blue);
+  box-shadow:0 0 14px currentColor;
+  transform:translateZ(90px);
+}
+
+.n1{left:42px;top:145px}
+.n2{right:45px;top:80px;color:var(--purple);background:var(--purple)}
+.n3{right:24px;bottom:90px;color:var(--yellow);background:var(--yellow)}
+.n4{left:85px;bottom:38px;color:var(--red);background:var(--red)}
+.n5{left:25px;top:65px;color:var(--green);background:var(--green)}
+
+.core-label{
+  position:absolute;
+  bottom:35px;
+  left:50%;
+  transform:translateX(-50%);
+  color:var(--muted2);
+  font-size:10px;
+  letter-spacing:.16em;
+  white-space:nowrap;
+}
+
+.route-beam{
+  position:absolute;
+  width:420px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--blue),transparent);
+  opacity:.18;
+  animation:beam 3s ease-in-out infinite;
+}
+
+/* SECTIONS */
+
+section{
+  padding:125px 0;
+  position:relative;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:30px;
+  margin-bottom:48px;
+}
+
+.section-number{
+  color:var(--faint);
+  font-size:11px;
+  letter-spacing:.12em;
+  margin-bottom:13px;
+}
+
+.section-title{
+  font-family:"Inter";
+  font-size:clamp(32px,4.4vw,54px);
+  letter-spacing:-.035em;
+  font-weight:600;
+  line-height:1.05;
+  color:var(--text);
+}
+
+.section-description{
+  color:var(--muted);
+  max-width:400px;
+  line-height:1.7;
+  font-size:13px;
+}
+
+/* PANELS */
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 1px 2px rgba(33,29,22,.03),0 10px 28px rgba(33,29,22,.035);
+  transition:.5s var(--ease);
+}
+
+.panel:hover{
+  border-color:var(--line2);
+  box-shadow:0 4px 8px rgba(33,29,22,.04),0 18px 40px rgba(33,29,22,.06);
+}
+
+.panel-head{
+  padding:20px 23px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.panel-title{
+  font-size:13px;
+  font-weight:600;
+  color:var(--text);
+}
+
+.panel-label{
+  color:var(--muted2);
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+
+/* OPTIMIZER */
+
+.optimizer-grid{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:18px;
+}
+
+textarea{
+  width:100%;
+  height:230px;
+  background:transparent;
+  border:0;
+  outline:0;
+  color:var(--text);
+  resize:none;
+  padding:25px;
+  font-size:15px;
+  line-height:1.7;
+}
+
+textarea::placeholder{
+  color:var(--faint);
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--line);
+}
+
+.control{
+  padding:19px 20px;
+  border-right:1px solid var(--line);
+}
+
+.control:last-child{
+  border:0;
+}
+
+.control-name{
+  color:var(--muted2);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.control-value{
+  color:var(--text);
+  font-family:"Inter";
+  font-weight:600;
+  font-size:23px;
+  margin:7px 0 13px;
+}
+
+input[type=range]{
+  width:100%;
+  accent-color:var(--blue);
+}
+
+.optimize-row{
+  padding:18px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:flex-end;
+}
+
+.route-result{
+  min-height:100%;
+}
+
+.route-body{
+  padding:24px;
+}
+
+.route-line{
+  position:relative;
+  padding-left:30px;
+}
+
+.route-line:before{
+  content:"";
+  position:absolute;
+  left:5px;
+  top:7px;
+  bottom:7px;
+  width:1px;
+  background:linear-gradient(var(--blue),rgba(91,84,214,.06));
+}
+
+.route-step{
+  position:relative;
+  margin-bottom:28px;
+}
+
+.route-step:before{
+  content:"";
+  position:absolute;
+  left:-29px;
+  top:4px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--panel);
+  border:1px solid var(--blue);
+  box-shadow:0 0 10px rgba(91,84,214,.3);
+}
+
+.route-step small{
+  color:var(--muted2);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.route-step strong{
+  display:block;
+  margin-top:5px;
+  font-size:14px;
+  color:var(--text);
+  font-weight:500;
+}
+
+.route-metrics{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-top:1px solid var(--line);
+}
+
+.metric{
+  padding:19px;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.metric:nth-child(even){
+  border-right:0;
+}
+
+.metric:nth-last-child(-n+2){
+  border-bottom:0;
+}
+
+.metric span{
+  display:block;
+  color:var(--muted2);
+  font-size:10px;
+  margin-bottom:7px;
+}
+
+.metric strong{
+  font-family:"Inter";
+  font-weight:600;
+  font-size:21px;
+  color:var(--text);
+}
+
+/* INTELLIGENCE */
+
+.intel-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.dna{
+  padding:26px;
+}
+
+.dna-row{
+  display:grid;
+  grid-template-columns:105px 1fr 45px;
+  align-items:center;
+  gap:14px;
+  margin:20px 0;
+}
+
+.dna-row span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.bar{
+  height:3px;
+  background:var(--bg2);
+  overflow:hidden;
+  border-radius:5px;
+}
+
+.bar i{
+  display:block;
+  height:100%;
+  width:70%;
+  background:var(--blue);
+  border-radius:5px;
+  transition:1s var(--ease);
+}
+
+.dna-row:nth-child(2) .bar i{background:var(--yellow)}
+.dna-row:nth-child(3) .bar i{background:var(--red)}
+.dna-row:nth-child(4) .bar i{background:var(--green)}
+.dna-row:nth-child(5) .bar i{background:var(--purple)}
+
+.dna-row b{
+  font-size:11px;
+  text-align:right;
+  color:var(--text);
+  font-weight:600;
+}
+
+.intelligence-number{
+  padding:35px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-height:280px;
+}
+
+.big-number{
+  font-family:"Inter";
+  font-size:80px;
+  font-weight:600;
+  letter-spacing:-.04em;
+  line-height:1;
+  color:var(--text);
+}
+
+.big-number span{
+  font-size:24px;
+  font-weight:500;
+  color:var(--muted2);
+}
+
+.intelligence-number p{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:15px;
+}
+
+/* CACHE */
+
+.cache-layout{
+  display:grid;
+  grid-template-columns:1fr .8fr;
+  gap:18px;
+}
+
+.cache-flow{
+  padding:38px 25px;
+}
+
+.flow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  justify-content:center;
+}
+
+.flow-node{
+  padding:16px 17px;
+  border:1px solid var(--line2);
+  background:var(--panel2);
+  border-radius:10px;
+  text-align:center;
+  min-width:105px;
+  font-size:11px;
+  color:var(--muted);
+  transition:.5s var(--ease);
+}
+
+.flow-node.active{
+  border-color:var(--blue);
+  background:rgba(91,84,214,.05);
+  box-shadow:0 10px 24px rgba(91,84,214,.10);
+  color:var(--text);
+  transform:translateY(-4px);
+}
+
+.flow-arrow{
+  color:var(--faint);
+}
+
+.cache-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
+.cache-stat{
+  padding:24px;
+  border-top:1px solid var(--line);
+  border-right:1px solid var(--line);
+}
+
+.cache-stat:nth-child(even){
+  border-right:0;
+}
+
+.cache-stat span{
+  display:block;
+  font-size:10px;
+  color:var(--muted2);
+  margin-bottom:8px;
+}
+
+.cache-stat strong{
+  font-size:26px;
+  font-weight:600;
+  font-family:"Inter";
+  color:var(--text);
+}
+
+.cache-settings{
+  padding:25px;
+}
+
+.toggle-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:17px 0;
+  border-bottom:1px solid var(--line);
+  color:var(--muted);
+  font-size:13px;
+}
+
+.toggle{
+  width:44px;
+  height:24px;
+  border-radius:30px;
+  background:#E5DDCC;
+  padding:3px;
+  transition:.3s;
+}
+
+.toggle i{
+  display:block;
+  width:18px;
+  height:18px;
+  background:#ffffff;
+  border-radius:50%;
+  box-shadow:0 1px 3px rgba(33,29,22,.2);
+  transition:.3s var(--ease);
+}
+
+.toggle.on{
+  background:rgba(108,143,106,.22);
+}
+
+.toggle.on i{
+  transform:translateX(20px);
+  background:var(--green);
+  box-shadow:0 0 10px rgba(108,143,106,.4);
+}
+
+/* SIMULATION */
+
+.sim-grid{
+  display:grid;
+  grid-template-columns:.75fr 1.25fr;
+  gap:18px;
+}
+
+.sim-controls{
+  padding:26px;
+}
+
+.sim-control{
+  margin-bottom:26px;
+}
+
+.sim-control label{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:12px;
+}
+
+.sim-control label b{
+  color:var(--text);
+}
+
+.simulation-screen{
+  min-height:430px;
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at center,rgba(91,84,214,.07),transparent 32%),
+    #F1EBDD;
+}
+
+.sim-core{
+  position:absolute;
+  width:190px;
+  height:190px;
+  border:1px solid rgba(91,84,214,.30);
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  box-shadow:0 20px 60px rgba(33,29,22,.06);
+}
+
+.sim-core:after{
+  content:"REBEKA";
+  position:absolute;
+  inset:70px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#ffffff;
+  border:1px solid rgba(91,84,214,.30);
+  font-family:"Inter";
+  font-weight:600;
+  font-size:9px;
+  letter-spacing:.1em;
+  color:var(--text);
+}
+
+.particle{
+  position:absolute;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--blue);
+  box-shadow:0 0 12px rgba(91,84,214,.5);
+  animation:particleMove 3s linear infinite;
+}
+
+.sim-status{
+  position:absolute;
+  top:22px;
+  left:22px;
+  color:var(--muted2);
+  font-size:10px;
+  letter-spacing:.1em;
+}
+
+.sim-results{
+  position:absolute;
+  bottom:18px;
+  left:18px;
+  right:18px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:rgba(255,255,255,.86);
+  backdrop-filter:blur(15px);
+  border:1px solid var(--line);
+  border-radius:10px;
+}
+
+.sim-result{
+  padding:16px;
+  border-right:1px solid var(--line);
+}
+
+.sim-result:last-child{
+  border:0;
+}
+
+.sim-result span{
+  display:block;
+  font-size:9px;
+  color:var(--muted2);
+  margin-bottom:5px;
+}
+
+.sim-result strong{
+  font-family:"Inter";
+  font-weight:600;
+  font-size:17px;
+  color:var(--text);
+}
+
+/* MODELS */
+
+.models{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.model{
+  padding:25px;
+  min-height:240px;
+  position:relative;
+}
+
+.model-tag{
+  font-size:9px;
+  color:var(--muted2);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.model h3{
+  font-family:"Inter";
+  font-weight:600;
+  font-size:23px;
+  margin-top:14px;
+  color:var(--text);
+}
+
+.model p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.7;
+  margin-top:9px;
+}
+
+.model-score{
+  position:absolute;
+  right:23px;
+  top:22px;
+  font-family:"Inter";
+  font-weight:600;
+  color:var(--blue);
+}
+
+.model-stats{
+  position:absolute;
+  bottom:23px;
+  left:25px;
+  right:25px;
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted2);
+  font-size:10px;
+}
+
+/* ANALYTICS */
+
+.analytics{
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:18px;
+}
+
+.chart{
+  height:300px;
+  position:relative;
+  padding:25px;
+  overflow:hidden;
+}
+
+.chart-lines{
+  position:absolute;
+  inset:30px;
+  background:
+    linear-gradient(rgba(33,29,22,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(33,29,22,.045) 1px,transparent 1px);
+  background-size:100% 25%,20% 100%;
+}
+
+.curve{
+  position:absolute;
+  left:7%;
+  right:7%;
+  bottom:25%;
+  height:55%;
+  border-top:2px solid var(--blue);
+  transform:skewY(-17deg) rotate(-2deg);
+  border-radius:50%;
+  box-shadow:0 -5px 20px rgba(91,84,214,.10);
+}
+
+.curve:after{
+  content:"QUALITY / COST FRONTIER";
+  position:absolute;
+  right:5%;
+  top:-28px;
+  color:var(--muted2);
+  font-size:9px;
+  letter-spacing:.04em;
+}
+
+.analytics-side{
+  display:grid;
+  grid-template-rows:1fr 1fr;
+  gap:18px;
+}
+
+.projection{
+  padding:25px;
+}
+
+.projection strong{
+  display:block;
+  font-family:"Inter";
+  font-weight:600;
+  font-size:38px;
+  margin:12px 0;
+  color:var(--text);
+}
+
+.projection p{
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* TRAFFIC */
+
+.traffic-screen{
+  height:390px;
+  position:relative;
+  overflow:hidden;
+  background:#F1EBDD;
+}
+
+.traffic-grid{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(91,84,214,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(91,84,214,.06) 1px,transparent 1px);
+  background-size:50px 50px;
+  transform:perspective(500px) rotateX(45deg) scale(1.5);
+  transform-origin:center bottom;
+}
+
+.traffic-center{
+  position:absolute;
+  width:110px;
+  height:110px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  border:1px solid rgba(91,84,214,.35);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 12px 30px rgba(33,29,22,.07);
+  font-family:"Inter";
+  font-weight:600;
+  font-size:11px;
+  color:var(--text);
+}
+
+.traffic-particle{
+  position:absolute;
+  width:4px;
+  height:4px;
+  background:var(--blue);
+  border-radius:50%;
+  animation:traffic 3s linear infinite;
+}
+
+/* FOOTER */
+
+footer{
+  padding:60px 0;
+  border-top:1px solid var(--line);
+  color:var(--muted2);
+  font-size:11px;
+}
+
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+}
+
+/* REVEAL */
+
+.reveal{
+  opacity:0;
+  transform:translateY(35px);
+  transition:1s var(--ease);
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,30px);
+  padding:13px 18px;
+  background:var(--text);
+  color:var(--bg);
+  border-radius:8px;
+  font-size:11px;
+  z-index:200;
+  opacity:0;
+  pointer-events:none;
+  transition:.5s var(--ease);
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* ANIMATIONS */
+
+@keyframes coreFloat{
+  0%,100%{transform:translateY(0) rotateX(0) rotateY(0)}
+  50%{transform:translateY(-13px) rotateX(4deg) rotateY(7deg)}
+}
+
+@keyframes spin1{
+  to{transform:rotateX(360deg) rotateY(180deg)}
+}
+
+@keyframes spin2{
+  to{transform:rotateX(70deg) rotateZ(360deg)}
+}
+
+@keyframes spin3{
+  to{transform:rotateY(432deg)}
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(.75);opacity:.7}
+  50%{transform:scale(1.15);opacity:1}
+}
+
+@keyframes beam{
+  0%,100%{transform:scaleX(.5);opacity:.08}
+  50%{transform:scaleX(1);opacity:.3}
+}
+
+@keyframes particleMove{
+  0%{transform:translate(-30px,180px);opacity:0}
+  15%{opacity:1}
+  85%{opacity:1}
+  100%{transform:translate(430px,0);opacity:0}
+}
+
+@keyframes traffic{
+  0%{
+    left:5%;
+    top:20%;
+    opacity:0;
+  }
+  20%{opacity:1}
+  100%{
+    left:50%;
+    top:50%;
+    opacity:0;
+  }
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero-grid,
+  .optimizer-grid,
+  .intel-grid,
+  .cache-layout,
+  .sim-grid,
+  .analytics{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding-top:120px;
+  }
+
+  .core-stage{
+    height:420px;
+  }
+
+  .core{
+    transform:scale(.78);
+  }
+
+  .models{
+    grid-template-columns:1fr;
+  }
+
+  .section-head{
+    display:block;
+  }
+
+  .section-description{
+    margin-top:18px;
+  }
+}
+
+@media(max-width:600px){
+
+  .container{
+    width:min(100% - 26px,1180px);
+  }
+
+  section{
+    padding:85px 0;
+  }
+
+  .hero h1{
+    font-size:50px;
+  }
+
+  .hero-copy{
+    font-size:14px;
+  }
+
+  .controls{
+    grid-template-columns:1fr;
+  }
+
+  .control{
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .flow{
+    flex-direction:column;
+  }
+
+  .flow-arrow{
+    transform:rotate(90deg);
+  }
+
+  .sim-results{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .sim-result:nth-child(2){
+    border-right:0;
+  }
+
+  .sim-result{
+    border-bottom:1px solid var(--line);
+  }
+
+  .big-number{
+    font-size:60px;
+  }
+
+  .footer-inner{
+    display:block;
+  }
+
+  .footer-inner div+div{
+    margin-top:12px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *:before,
+  *:after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+  }
+}
+
+</style>
 </head>
 
-<body class="bg-slate-950 text-white h-screen">
+<body>
 
-  <div class="h-full max-w-7xl mx-auto p-4 grid grid-rows-[auto_auto_auto_1fr] gap-4">
+<nav>
+  <div class="container nav-inner">
 
-    <!-- HEADER -->
-    <header class="flex items-center justify-between">
-      <div>
-        <h1 class="text-2xl font-bold tracking-tight">
-          WARRANTY
-        </h1>
+    <a href="#overview" class="logo">
+      <span class="logo-mark"></span>
+      REBEKA
+    </a>
 
-        <p class="text-slate-400 text-sm mt-0.5">
-          Certified LLM Router
-        </p>
+    <div class="nav-links">
+      <button class="active" data-target="overview">Overview</button>
+      <button data-target="optimizer">Optimizer</button>
+      <button data-target="intelligence">Intelligence</button>
+      <button data-target="cache">Cache</button>
+      <button data-target="simulation">Simulation</button>
+      <button data-target="analytics">Analytics</button>
+      <button data-target="models">Models</button>
+      <button data-target="traffic">Live</button>
+    </div>
+
+    <div class="nav-status">
+      <i class="status-dot"></i>
+      SYSTEM READY
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="overview">
+
+  <div class="container hero-grid">
+
+    <div class="reveal">
+
+      <div class="eyebrow">
+        <span></span>
+        AI infrastructure intelligence
       </div>
 
-      <button
-        id="judge-mode-btn"
-        class="px-4 py-2 rounded-xl bg-white text-black font-semibold text-sm">
-        ▶ Judge Mode
-      </button>
-    </header>
+      <h1>
+        Intelligence.<br>
+        <em>Precisely</em><br>
+        allocated.
+      </h1>
 
-
-    <!-- PROMISE BAR -->
-    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
-
-      <div class="flex items-center justify-between">
-
-        <div>
-          <p class="text-xs text-slate-400">
-            Allowed Quality Regression
-          </p>
-
-          <p class="text-xl font-semibold">
-            ε = <span id="epsValue">8%</span>
-          </p>
-        </div>
-
-        <div
-          id="certStamp"
-          class="px-4 py-1.5 rounded-full border border-green-500 text-green-400 text-sm font-medium">
-          ✓ CERTIFIED
-        </div>
-
-      </div>
-
-      <input
-        id="epsSlider"
-        type="range"
-        min="0"
-        max="25"
-        step="1"
-        value="8"
-        class="w-full mt-4 cursor-pointer"
-        aria-label="Allowed Quality Regression"
-      >
-
-      <div class="flex justify-between text-xs text-slate-500 mt-1">
-        <span>0%</span>
-        <span>25%</span>
-      </div>
-
-      <p
-        id="stampDetail"
-        class="text-xs text-slate-400 mt-3">
-        Certification statistics loading...
+      <p class="hero-copy">
+        REBEKA dynamically determines the minimum intelligence
+        required for every request — then routes it through the
+        most efficient model and cache path.
       </p>
 
-    </section>
-
-
-    <!-- STAT TILES -->
-    <section class="grid grid-cols-8 gap-3">
-
-      <!-- COST -->
-      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-        <p class="text-slate-400 text-xs">
-          Cost Saved
-        </p>
-
-        <p
-          id="stat-cost-saved"
-          class="text-2xl font-bold mt-1">
-          —
-        </p>
-      </div>
-
-
-      <!-- CHEAP TRAFFIC -->
-      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-        <p class="text-slate-400 text-xs">
-          Cheap Traffic
-        </p>
-
-        <p
-          id="stat-cheap-traffic"
-          class="text-2xl font-bold mt-1">
-          —
-        </p>
-      </div>
-
-
-      <!-- REGRESSION -->
-      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-        <p class="text-slate-400 text-xs">
-          Regression
-        </p>
-
-        <p
-          id="stat-regression"
-          class="text-2xl font-bold mt-1">
-          —
-        </p>
-      </div>
-
-
-      <!-- OVERHEAD -->
-      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-        <p class="text-slate-400 text-xs">
-          Overhead
-        </p>
-
-        <p
-          id="stat-overhead"
-          class="text-2xl font-bold mt-1">
-          —
-        </p>
-      </div>
-
-
-      <!-- ROUTING FLOW -->
-      <div class="col-span-8 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-
-        <p class="text-xs text-slate-400 mb-2">
-          ROUTING FLOW
-        </p>
-
-        <div class="grid grid-cols-4 gap-3">
-
-          <div class="bg-slate-800 rounded-xl p-2 text-center">
-            <div class="text-[10px] text-slate-400">
-              CACHE HIT
-            </div>
-
-            <div
-              id="flow-cache"
-              class="font-semibold mt-0.5">
-              0%
-            </div>
-          </div>
-
-
-          <div class="bg-slate-800 rounded-xl p-2 text-center">
-            <div class="text-[10px] text-slate-400">
-              CHEAP ACCEPTED
-            </div>
-
-            <div
-              id="flow-cheap"
-              class="font-semibold mt-0.5">
-              0%
-            </div>
-          </div>
-
-
-          <div class="bg-slate-800 rounded-xl p-2 text-center">
-            <div class="text-[10px] text-slate-400">
-              ESCALATED
-            </div>
-
-            <div
-              id="flow-escalated"
-              class="font-semibold mt-0.5">
-              0%
-            </div>
-          </div>
-
-
-          <div class="bg-slate-800 rounded-xl p-2 text-center">
-            <div class="text-[10px] text-slate-400">
-              FRONTIER
-            </div>
-
-            <div
-              id="flow-frontier"
-              class="font-semibold mt-0.5">
-              100%
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </section>
-
-
-    <!-- MAIN CONTENT -->
-    <section class="grid grid-cols-2 grid-rows-[1fr_auto] gap-4 min-h-0">
-
-
-      <!-- PARETO -->
-      <div
-        class="bg-slate-900 border border-slate-800 rounded-2xl p-4 min-h-0 flex flex-col">
-
-        <div class="flex items-center justify-between mb-2">
-
-          <h2 class="text-sm font-semibold text-slate-300">
-            Pareto Frontier
-          </h2>
-
-          <span class="text-[10px] text-slate-500">
-            cost vs accuracy
-          </span>
-
-        </div>
-
-        <div class="flex-1 min-h-0 relative">
-
-          <canvas id="paretoChart"></canvas>
-
-        </div>
-
-      </div>
-
-
-      <!-- ABLATION -->
-      <div
-        class="bg-slate-900 border border-slate-800 rounded-2xl p-4 min-h-0 flex flex-col">
-
-        <div class="flex items-center justify-between mb-2">
-
-          <h2 class="text-sm font-semibold text-slate-300">
-            Ablation
-          </h2>
-
-          <span class="text-[10px] text-slate-500">
-            held-out test
-          </span>
-
-        </div>
-
-
-        <div class="grid grid-cols-4 text-[10px] text-slate-500 px-1">
-          <span>Variant</span>
-          <span>Acc</span>
-          <span>Cost</span>
-          <span>Regret</span>
-        </div>
-
-
-        <div
-          id="ablationBody"
-          class="flex-1 overflow-y-auto mt-1 space-y-1 text-xs">
-        </div>
-
-      </div>
-
-
-      <!-- REPLAY -->
-      <div
-        class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center gap-4">
-
-        <button
-          id="replay-btn"
-          class="px-4 py-2 rounded-lg bg-white text-black text-sm whitespace-nowrap">
-          ▶ Replay
+      <div class="hero-actions">
+        <button class="btn primary" onclick="goTo('optimizer')">
+          Open Optimizer
         </button>
 
-
-        <button
-          id="drift-btn"
-          class="px-4 py-2 rounded-lg bg-slate-800 text-sm whitespace-nowrap">
-          ⚡ Inject Drift
+        <button class="btn" onclick="goTo('simulation')">
+          Run Simulation
         </button>
+      </div>
+
+    </div>
 
 
-        <div
-          id="replay-ticker"
-          class="flex-1 flex items-center gap-[2px] overflow-hidden h-6">
+    <div class="core-stage reveal">
+
+      <div class="route-beam"></div>
+
+      <div class="core" id="core">
+
+        <div class="core-glow"></div>
+
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+
+        <div class="node n1"></div>
+        <div class="node n2"></div>
+        <div class="node n3"></div>
+        <div class="node n4"></div>
+        <div class="node n5"></div>
+
+        <div class="core-center"></div>
+
+        <div class="core-label">
+          INTELLIGENCE CORE / ONLINE
         </div>
-
-
-        <canvas
-          id="regression-gauge"
-          width="90"
-          height="50"
-          class="flex-shrink-0">
-        </canvas>
 
       </div>
 
-    </section>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- OPTIMIZER -->
+
+<section id="optimizer">
+
+<div class="container reveal">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-number">01 / OPTIMIZER</div>
+      <h2 class="section-title">Give REBEKA<br>the constraints.</h2>
+    </div>
+
+    <p class="section-description">
+      Define what the request needs. REBEKA finds the
+      lowest-cost route capable of meeting those constraints.
+    </p>
 
   </div>
 
 
-  <!-- TRACE PANEL -->
-  <div
-    id="trace-panel"
-    class="bg-slate-900 border-l border-slate-800 p-4 flex flex-col gap-2 overflow-y-auto">
+  <div class="optimizer-grid">
 
-    <div class="flex items-center justify-between">
+    <div class="panel">
 
-      <span class="text-sm font-semibold text-slate-200">
-        Decision Trace
-      </span>
+      <div class="panel-head">
+        <span class="panel-title">Request Playground</span>
+        <span class="panel-label">LIVE SIMULATION</span>
+      </div>
+
+      <textarea id="prompt" placeholder="Enter an AI request...
+
+Example:
+Explain quantum entanglement to a first-year engineering student using a practical analogy."></textarea>
+
+
+      <div class="controls">
+
+        <div class="control">
+
+          <div class="control-name">Accuracy Target</div>
+
+          <div class="control-value">
+            <span id="accuracyValue">92</span>%
+          </div>
+
+          <input
+            id="accuracy"
+            type="range"
+            min="70"
+            max="99"
+            value="92"
+            oninput="updateControls()"
+          >
+
+        </div>
+
+
+        <div class="control">
+
+          <div class="control-name">Maximum Cost</div>
+
+          <div class="control-value">
+            $<span id="costValue">0.020</span>
+          </div>
+
+          <input
+            id="cost"
+            type="range"
+            min="5"
+            max="50"
+            value="20"
+            oninput="updateControls()"
+          >
+
+        </div>
+
+
+        <div class="control">
+
+          <div class="control-name">Maximum Latency</div>
+
+          <div class="control-value">
+            <span id="latencyValue">2.0</span>s
+          </div>
+
+          <input
+            id="latency"
+            type="range"
+            min="5"
+            max="50"
+            value="20"
+            oninput="updateControls()"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="optimize-row">
+
+        <button class="btn primary" onclick="optimize()">
+          Optimize request
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel route-result">
+
+      <div class="panel-head">
+
+        <span class="panel-title">Optimal Route</span>
+
+        <span class="panel-label" id="routeStatus">
+          WAITING
+        </span>
+
+      </div>
+
+
+      <div class="route-body">
+
+        <div class="route-line">
+
+          <div class="route-step">
+            <small>01 / Input</small>
+            <strong>Incoming request</strong>
+          </div>
+
+          <div class="route-step">
+            <small>02 / Analysis</small>
+            <strong id="routeDNA">Task DNA analysis</strong>
+          </div>
+
+          <div class="route-step">
+            <small>03 / Intelligence</small>
+            <strong id="routeIntelligence">Required intelligence —</strong>
+          </div>
+
+          <div class="route-step">
+            <small>04 / Decision</small>
+            <strong id="selectedModel">Awaiting optimization</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="route-metrics">
+
+        <div class="metric">
+          <span>Estimated Cost</span>
+          <strong id="resultCost">—</strong>
+        </div>
+
+        <div class="metric">
+          <span>Latency</span>
+          <strong id="resultLatency">—</strong>
+        </div>
+
+        <div class="metric">
+          <span>Model Fit</span>
+          <strong id="resultFit">—</strong>
+        </div>
+
+        <div class="metric">
+          <span>Estimated Saving</span>
+          <strong id="resultSaving">—</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- INTELLIGENCE -->
+
+<section id="intelligence">
+
+<div class="container reveal">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-number">02 / INTELLIGENCE MAP</div>
+      <h2 class="section-title">Minimum intelligence<br>required.</h2>
+    </div>
+
+    <p class="section-description">
+      REBEKA doesn't automatically choose the smartest model.
+      It determines how much intelligence the task actually needs.
+    </p>
+
+  </div>
+
+
+  <div class="intel-grid">
+
+    <div class="panel dna">
+
+      <div class="panel-head" style="margin:-26px -26px 20px">
+        <span class="panel-title">Task DNA</span>
+        <span class="panel-label">REQUEST PROFILE</span>
+      </div>
+
+      <div class="dna-row">
+        <span>Reasoning</span>
+        <div class="bar"><i style="width:82%"></i></div>
+        <b>82</b>
+      </div>
+
+      <div class="dna-row">
+        <span>Context</span>
+        <div class="bar"><i style="width:61%"></i></div>
+        <b>61</b>
+      </div>
+
+      <div class="dna-row">
+        <span>Creativity</span>
+        <div class="bar"><i style="width:38%"></i></div>
+        <b>38</b>
+      </div>
+
+      <div class="dna-row">
+        <span>Complexity</span>
+        <div class="bar"><i style="width:74%"></i></div>
+        <b>74</b>
+      </div>
+
+      <div class="dna-row">
+        <span>Freshness</span>
+        <div class="bar"><i style="width:45%"></i></div>
+        <b>45</b>
+      </div>
+
+    </div>
+
+
+    <div class="panel intelligence-number">
+
+      <div class="panel-label">
+        MINIMUM INTELLIGENCE REQUIRED
+      </div>
+
+      <div class="big-number">
+        <span id="intelNumber">7.4</span><span>/10</span>
+      </div>
+
+      <p>
+        Calculated from task complexity, reasoning demand,
+        context and your quality target.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- CACHE -->
+
+<section id="cache">
+
+<div class="container reveal">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-number">03 / CACHE INTELLIGENCE</div>
+      <h2 class="section-title">Don't compute<br>what you already know.</h2>
+    </div>
+
+    <p class="section-description">
+      REBEKA checks reusable context before sending a request
+      to an expensive model.
+    </p>
+
+  </div>
+
+
+  <div class="cache-layout">
+
+    <div class="panel">
+
+      <div class="panel-head">
+        <span class="panel-title">Cache Pipeline</span>
+        <span class="panel-label" id="cacheState">ACTIVE</span>
+      </div>
+
+      <div class="cache-flow">
+
+        <div class="flow">
+
+          <div class="flow-node active" id="flowRequest">
+            REQUEST
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node" id="flowLookup">
+            CACHE LOOKUP
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node" id="flowModel">
+            MODEL
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-node" id="flowResponse">
+            RESPONSE
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="cache-stats">
+
+        <div class="cache-stat">
+          <span>Cache Hit Rate</span>
+          <strong id="cacheRate">68.4%</strong>
+        </div>
+
+        <div class="cache-stat">
+          <span>Tokens Reused</span>
+          <strong>1.84M</strong>
+        </div>
+
+        <div class="cache-stat">
+          <span>Latency Saved</span>
+          <strong>31%</strong>
+        </div>
+
+        <div class="cache-stat">
+          <span>Cost Avoided</span>
+          <strong>$184</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel cache-settings">
+
+      <div class="panel-title">
+        Cache Configuration
+      </div>
+
+      <div class="toggle-row">
+
+        <span>Prompt caching</span>
+
+        <button
+          class="toggle on"
+          id="cacheToggle"
+          onclick="toggleCache()"
+        >
+          <i></i>
+        </button>
+
+      </div>
+
+
+      <div class="toggle-row">
+
+        <span>Semantic matching</span>
+
+        <button class="toggle on">
+          <i></i>
+        </button>
+
+      </div>
+
+
+      <div class="toggle-row">
+
+        <span>Context reuse</span>
+
+        <button class="toggle on">
+          <i></i>
+        </button>
+
+      </div>
+
+
+      <div style="padding-top:25px">
+
+        <div class="control-name">
+          Cache TTL
+        </div>
+
+        <div class="control-value">
+          30 min
+        </div>
+
+        <input
+          type="range"
+          min="5"
+          max="60"
+          value="30"
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- SIMULATION -->
+
+<section id="simulation">
+
+<div class="container reveal">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-number">04 / SIMULATION STUDIO</div>
+      <h2 class="section-title">Stress the system<br>before production.</h2>
+    </div>
+
+    <p class="section-description">
+      Simulate thousands of requests and compare what happens
+      with and without intelligent routing.
+    </p>
+
+  </div>
+
+
+  <div class="sim-grid">
+
+    <div class="panel sim-controls">
+
+      <div class="panel-title">
+        Simulation Parameters
+      </div>
+
+
+      <div class="sim-control">
+
+        <label>
+          <span>Traffic volume</span>
+          <b id="trafficValue">10K</b>
+        </label>
+
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value="10"
+          oninput="simTraffic(this.value)"
+        >
+
+      </div>
+
+
+      <div class="sim-control">
+
+        <label>
+          <span>Accuracy target</span>
+          <b id="simAccuracy">92%</b>
+        </label>
+
+        <input
+          type="range"
+          min="70"
+          max="99"
+          value="92"
+          oninput="document.getElementById('simAccuracy').textContent=this.value+'%'"
+        >
+
+      </div>
+
+
+      <div class="sim-control">
+
+        <label>
+          <span>Cache</span>
+          <b>ENABLED</b>
+        </label>
+
+      </div>
+
 
       <button
-        id="trace-close-btn"
-        class="text-slate-500 hover:text-slate-200 text-xs">
-        ✕ ESC
+        class="btn primary"
+        style="width:100%"
+        onclick="runSimulation()"
+      >
+        Run simulation
       </button>
 
+
+      <div style="margin-top:24px;color:#60736b;font-size:10px;line-height:1.7">
+        Simulation uses synthetic traffic to visualize
+        routing and estimated cost behavior.
+      </div>
+
     </div>
 
 
-    <div
-      id="trace-content"
-      class="text-sm text-slate-400 flex flex-col gap-2">
+    <div class="panel simulation-screen">
+
+      <div class="sim-status" id="simStatus">
+        SIMULATION STANDBY
+      </div>
+
+      <div class="sim-core"></div>
+
+      <div class="particle" style="animation-delay:.1s"></div>
+      <div class="particle" style="animation-delay:.7s"></div>
+      <div class="particle" style="animation-delay:1.3s"></div>
+      <div class="particle" style="animation-delay:2s"></div>
+      <div class="particle" style="animation-delay:2.5s"></div>
+
+
+      <div class="sim-results">
+
+        <div class="sim-result">
+          <span>Baseline Cost</span>
+          <strong id="simBase">$842</strong>
+        </div>
+
+        <div class="sim-result">
+          <span>REBEKA Cost</span>
+          <strong id="simOptimized">$292</strong>
+        </div>
+
+        <div class="sim-result">
+          <span>Cache Hits</span>
+          <strong id="simHits">68%</strong>
+        </div>
+
+        <div class="sim-result">
+          <span>Savings</span>
+          <strong id="simSavings">65%</strong>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
 
+</div>
 
-  <!-- JUDGE MODE CAPTION -->
-  <div
-    id="judge-caption"
-    class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-200 z-40">
+</section>
+
+
+<!-- ROUTING -->
+
+<section id="routing">
+
+<div class="container reveal">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-number">05 / ROUTE STUDIO</div>
+      <h2 class="section-title">Every request.<br>A deliberate route.</h2>
+    </div>
+
+    <p class="section-description">
+      See why a model was selected — and what REBEKA would
+      have spent using a more powerful alternative.
+    </p>
+
   </div>
 
 
-  <!-- SCRIPTS -->
-  <script src="js/router.js"></script>
-  <script src="js/certify.js"></script>
-  <script src="js/charts.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/replay.js"></script>
-  <script src="js/trace.js"></script>
-  <script src="js/judge.js"></script>
+  <div class="panel">
+
+    <div class="panel-head">
+      <span class="panel-title">Routing Decision Engine</span>
+      <span class="panel-label">LIVE</span>
+    </div>
+
+    <div class="route-body">
+
+      <div class="route-line">
+
+        <div class="route-step">
+          <small>REQUEST</small>
+          <strong>User prompt received</strong>
+        </div>
+
+        <div class="route-step">
+          <small>TASK DNA</small>
+          <strong>Reasoning + Context + Complexity evaluated</strong>
+        </div>
+
+        <div class="route-step">
+          <small>CONSTRAINTS</small>
+          <strong>Accuracy + Cost + Latency boundaries applied</strong>
+        </div>
+
+        <div class="route-step">
+          <small>COUNTERFACTUAL</small>
+          <strong>Expensive baseline compared</strong>
+        </div>
+
+        <div class="route-step">
+          <small>ROUTE</small>
+          <strong style="color:var(--blue)">
+            Balanced Core selected
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- ANALYTICS -->
+
+<section id="analytics">
+
+<div class="container reveal">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-number">06 / COST OBSERVATORY</div>
+      <h2 class="section-title">See the money<br>before you spend it.</h2>
+    </div>
+
+    <p class="section-description">
+      Understand the relationship between intelligence,
+      quality, latency and cost.
+    </p>
+
+  </div>
+
+
+  <div class="analytics">
+
+    <div class="panel chart">
+
+      <div class="panel-head" style="margin:-25px -25px 0">
+        <span class="panel-title">Quality / Cost Frontier</span>
+        <span class="panel-label">OPTIMIZED</span>
+      </div>
+
+      <div class="chart-lines"></div>
+      <div class="curve"></div>
+
+    </div>
+
+
+    <div class="analytics-side">
+
+      <div class="panel projection">
+
+        <span class="panel-label">PROJECTED MONTHLY SAVING</span>
+
+        <strong>$12.8K</strong>
+
+        <p>
+          Based on current simulated request volume.
+        </p>
+
+      </div>
+
+
+      <div class="panel projection">
+
+        <span class="panel-label">BUDGET EFFICIENCY</span>
+
+        <strong>84.7%</strong>
+
+        <p>
+          Intelligence delivered relative to baseline cost.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- MODELS -->
+
+<section id="models">
+
+<div class="container reveal">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-number">07 / MODEL UNIVERSE</div>
+      <h2 class="section-title">The right model.<br>Not the biggest model.</h2>
+    </div>
+
+    <p class="section-description">
+      REBEKA compares capability, cost and speed before selecting
+      the optimal route.
+    </p>
+
+  </div>
+
+
+  <div class="models">
+
+    <div class="panel model">
+
+      <div class="model-tag">Fast / economical</div>
+
+      <h3>Swift Mini</h3>
+
+      <p>
+        Designed for classification, extraction,
+        summaries and straightforward requests.
+      </p>
+
+      <div class="model-score">7.1</div>
+
+      <div class="model-stats">
+        <span>$0.002</span>
+        <span>0.4s</span>
+        <span>FAST</span>
+      </div>
+
+    </div>
+
+
+    <div class="panel model">
+
+      <div class="model-tag">Balanced / recommended</div>
+
+      <h3>Balanced Core</h3>
+
+      <p>
+        Strong general-purpose intelligence for
+        most production workloads.
+      </p>
+
+      <div class="model-score">8.2</div>
+
+      <div class="model-stats">
+        <span>$0.008</span>
+        <span>0.9s</span>
+        <span>BALANCED</span>
+      </div>
+
+    </div>
+
+
+    <div class="panel model">
+
+      <div class="model-tag">Deep reasoning</div>
+
+      <h3>Reasoning Pro</h3>
+
+      <p>
+        High-capability reasoning for complex,
+        multi-step and demanding requests.
+      </p>
+
+      <div class="model-score">9.7</div>
+
+      <div class="model-stats">
+        <span>$0.031</span>
+        <span>2.1s</span>
+        <span>POWER</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- LIVE TRAFFIC -->
+
+<section id="traffic">
+
+<div class="container reveal">
+
+  <div class="section-head">
+
+    <div>
+      <div class="section-number">08 / LIVE TRAFFIC</div>
+      <h2 class="section-title">Watch intelligence<br>move.</h2>
+    </div>
+
+    <p class="section-description">
+      A live visual representation of request traffic,
+      routing decisions and model distribution.
+    </p>
+
+  </div>
+
+
+  <div class="panel traffic-screen">
+
+    <div class="traffic-grid"></div>
+
+    <div class="traffic-center">
+      REBEKA
+    </div>
+
+    <div class="traffic-particle"></div>
+    <div class="traffic-particle" style="animation-delay:.5s"></div>
+    <div class="traffic-particle" style="animation-delay:1s"></div>
+    <div class="traffic-particle" style="animation-delay:1.5s"></div>
+    <div class="traffic-particle" style="animation-delay:2s"></div>
+    <div class="traffic-particle" style="animation-delay:2.5s"></div>
+
+  </div>
+
+
+  <div style="
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border:1px solid var(--line);
+    border-top:0;
+    border-radius:0 0 14px 14px;
+  ">
+
+    <div class="metric">
+      <span>REQUESTS / SEC</span>
+      <strong id="liveRequests">148</strong>
+    </div>
+
+    <div class="metric">
+      <span>CACHE HITS</span>
+      <strong>68.4%</strong>
+    </div>
+
+    <div class="metric">
+      <span>AVG LATENCY</span>
+      <strong>0.82s</strong>
+    </div>
+
+    <div class="metric">
+      <span>SAVINGS</span>
+      <strong style="color:var(--green)">64.8%</strong>
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<div class="container footer-inner">
+
+  <div>
+    REBEKA / AI ROUTING & COST OPTIMIZATION
+  </div>
+
+  <div>
+    Intelligence, precisely allocated.
+  </div>
+
+</div>
+
+</footer>
+
+
+<div class="toast" id="toast">
+  Route optimized successfully
+</div>
+
+
+<script>
+
+/* NAVIGATION */
+
+function goTo(id){
+  document.getElementById(id).scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+document.querySelectorAll(".nav-links button").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    goTo(btn.dataset.target);
+
+    document.querySelectorAll(".nav-links button")
+      .forEach(b=>b.classList.remove("active"));
+
+    btn.classList.add("active");
+  });
+});
+
+
+/* SCROLL REVEAL */
+
+const observer=new IntersectionObserver(entries=>{
+
+  entries.forEach(entry=>{
+
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+    }
+
+  });
+
+},{
+  threshold:.12
+});
+
+document.querySelectorAll(".reveal")
+.forEach(el=>observer.observe(el));
+
+
+/* CONTROL VALUES */
+
+function updateControls(){
+
+  const accuracy=
+    document.getElementById("accuracy").value;
+
+  const cost=
+    document.getElementById("cost").value;
+
+  const latency=
+    document.getElementById("latency").value;
+
+  document.getElementById("accuracyValue")
+    .textContent=accuracy;
+
+  document.getElementById("costValue")
+    .textContent=(cost/1000).toFixed(3);
+
+  document.getElementById("latencyValue")
+    .textContent=(latency/10).toFixed(1);
+
+  /*
+    Make the 3D core respond to the
+    intelligence requirement.
+  */
+
+  const core=document.getElementById("core");
+
+  const rotation=(accuracy-70)*.35;
+
+  core.style.transform=
+    `rotateX(${rotation*.2}deg)
+     rotateY(${rotation}deg)
+     scale(${1+(accuracy-70)/500})`;
+}
+
+
+/* OPTIMIZER */
+
+function optimize(){
+
+  const prompt=
+    document.getElementById("prompt").value;
+
+  const accuracy=
+    Number(document.getElementById("accuracy").value);
+
+  const maxCost=
+    Number(document.getElementById("cost").value)/1000;
+
+  const maxLatency=
+    Number(document.getElementById("latency").value)/10;
+
+  if(!prompt.trim()){
+
+    document.getElementById("prompt").focus();
+
+    showToast("Enter a request first");
+
+    return;
+  }
+
+
+  const status=
+    document.getElementById("routeStatus");
+
+  status.textContent="ANALYZING";
+
+  document.getElementById("selectedModel")
+    .textContent="Reading Task DNA…";
+
+  document.getElementById("resultCost")
+    .textContent="…";
+
+  document.getElementById("resultLatency")
+    .textContent="…";
+
+  document.getElementById("resultFit")
+    .textContent="…";
+
+  document.getElementById("resultSaving")
+    .textContent="…";
+
+
+  setTimeout(()=>{
+
+    const length=prompt.length;
+
+    let intelligence;
+
+    if(accuracy>=96)
+      intelligence=9.2;
+    else if(accuracy>=91)
+      intelligence=7.8;
+    else if(length>180)
+      intelligence=7.4;
+    else
+      intelligence=5.9;
+
+
+    let model;
+    let cost;
+    let latency;
+
+    if(intelligence<=6.2){
+
+      model="Swift Mini";
+      cost=.002;
+      latency=.4;
+
+    }else if(intelligence<=8.3){
+
+      model="Balanced Core";
+      cost=.008;
+      latency=.9;
+
+    }else{
+
+      model="Reasoning Pro";
+      cost=.031;
+      latency=2.1;
+
+    }
+
+
+    /*
+      Respect user constraints in the simulation.
+    */
+
+    if(cost>maxCost && maxCost>=.008){
+
+      model="Balanced Core";
+      cost=.008;
+      latency=.9;
+
+    }
+
+    if(latency>maxLatency && maxLatency>=.9){
+
+      model="Balanced Core";
+      cost=.008;
+      latency=.9;
+
+    }
+
+
+    const fit=Math.min(
+      99,
+      Math.round(
+        87+(accuracy-70)*.35
+      )
+    );
+
+    const baseline=.031;
+
+    const saving=
+      Math.max(
+        0,
+        Math.round((1-cost/baseline)*100)
+      );
+
+
+    document.getElementById("routeStatus")
+      .textContent="ROUTE SELECTED";
+
+    document.getElementById("routeDNA")
+      .textContent=
+      `Complexity profile derived from ${prompt.length} characters`;
+
+    document.getElementById("routeIntelligence")
+      .textContent=
+      `Required intelligence ${intelligence.toFixed(1)} / 10`;
+
+    document.getElementById("selectedModel")
+      .textContent=model;
+
+    document.getElementById("resultCost")
+      .textContent="$"+cost.toFixed(3);
+
+    document.getElementById("resultLatency")
+      .textContent=latency.toFixed(1)+"s";
+
+    document.getElementById("resultFit")
+      .textContent=fit+"%";
+
+    document.getElementById("resultSaving")
+      .textContent=saving+"%";
+
+
+    document.getElementById("intelNumber")
+      .textContent=intelligence.toFixed(1);
+
+
+    /*
+      Animate intelligence bars.
+    */
+
+    document.querySelectorAll(".dna-row .bar i")
+      .forEach((bar,i)=>{
+
+        const values=[
+          Math.min(96,intelligence*10+4),
+          Math.min(90,accuracy),
+          Math.min(80,prompt.length/3),
+          Math.min(95,intelligence*9),
+          45
+        ];
+
+        bar.style.width=values[i]+"%";
+
+      });
+
+
+    showToast("Optimal route selected");
+
+  },1100);
+
+}
+
+
+/* CACHE */
+
+let cacheEnabled=true;
+
+function toggleCache(){
+
+  cacheEnabled=!cacheEnabled;
+
+  const toggle=
+    document.getElementById("cacheToggle");
+
+  const state=
+    document.getElementById("cacheState");
+
+  toggle.classList.toggle("on",cacheEnabled);
+
+  state.textContent=
+    cacheEnabled ? "ACTIVE" : "DISABLED";
+
+  if(cacheEnabled){
+
+    document.getElementById("cacheRate")
+      .textContent="68.4%";
+
+    showToast("Prompt cache enabled");
+
+  }else{
+
+    document.getElementById("cacheRate")
+      .textContent="0%";
+
+    showToast("Prompt cache disabled");
+
+  }
+
+}
+
+
+/* CACHE FLOW */
+
+setInterval(()=>{
+
+  if(!cacheEnabled) return;
+
+  const nodes=[
+    document.getElementById("flowRequest"),
+    document.getElementById("flowLookup"),
+    document.getElementById("flowModel"),
+    document.getElementById("flowResponse")
+  ];
+
+  nodes.forEach((node,i)=>{
+
+    setTimeout(()=>{
+
+      node.classList.add("active");
+
+      setTimeout(()=>{
+        node.classList.remove("active");
+      },400);
+
+    },i*280);
+
+  });
+
+},2500);
+
+
+/* SIMULATION */
+
+function simTraffic(value){
+
+  let label;
+
+  if(value<20)
+    label=value+"K";
+  else if(value<70)
+    label=value+"K";
+  else
+    label=value+"K";
+
+  document.getElementById("trafficValue")
+    .textContent=label;
+}
+
+
+function runSimulation(){
+
+  const status=
+    document.getElementById("simStatus");
+
+  status.textContent="SIMULATION RUNNING…";
+
+  const particles=
+    document.querySelectorAll(".particle");
+
+  particles.forEach(p=>{
+    p.style.animation="none";
+    void p.offsetWidth;
+    p.style.animation="particleMove 1.7s linear infinite";
+  });
+
+
+  setTimeout(()=>{
+
+    const traffic=
+      Number(
+        document.getElementById("trafficValue")
+          .textContent.replace("K","")
+      );
+
+    const baseline=
+      Math.round(84.2*traffic/10);
+
+    const optimized=
+      Math.round(baseline*.35);
+
+    const saving=
+      Math.round((1-optimized/baseline)*100);
+
+    document.getElementById("simBase")
+      .textContent="$"+baseline;
+
+    document.getElementById("simOptimized")
+      .textContent="$"+optimized;
+
+    document.getElementById("simHits")
+      .textContent=cacheEnabled?"68%":"0%";
+
+    document.getElementById("simSavings")
+      .textContent=saving+"%";
+
+    status.textContent="SIMULATION COMPLETE";
+
+    showToast("Simulation completed");
+
+  },1900);
+
+}
+
+
+/* LIVE REQUEST COUNTER */
+
+setInterval(()=>{
+
+  const el=
+    document.getElementById("liveRequests");
+
+  if(!el) return;
+
+  const current=
+    Number(el.textContent);
+
+  const next=
+    Math.max(
+      100,
+      current+Math.floor(Math.random()*15-7)
+    );
+
+  el.textContent=next;
+
+},1500);
+
+
+/* MOUSE 3D PARALLAX */
+
+const core=
+  document.getElementById("core");
+
+document.addEventListener("mousemove",e=>{
+
+  if(window.innerWidth<900) return;
+
+  const x=
+    (e.clientX/window.innerWidth-.5);
+
+  const y=
+    (e.clientY/window.innerHeight-.5);
+
+  core.style.transform=
+    `rotateX(${y*-10}deg)
+     rotateY(${x*14}deg)`;
+
+});
+
+
+/* TOAST */
+
+function showToast(message){
+
+  const toast=
+    document.getElementById("toast");
+
+  toast.textContent=message;
+
+  toast.classList.add("show");
+
+  setTimeout(()=>{
+    toast.classList.remove("show");
+  },2200);
+
+}
+
+
+/* INITIAL */
+
+updateControls();
+
+</script>
 
 </body>
 </html>

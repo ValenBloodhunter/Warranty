@@ -1,14 +1,251 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>WARRANTY</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>WARRANTY — Certified LLM Router</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 
-<body>
+<body class="bg-slate-950 text-white min-h-screen">
 
-    <h1>WARRANTY</h1>
+    <div class="max-w-7xl mx-auto p-6">
 
-    <p>Certified LLM Router</p>
+        <!-- HEADER -->
+        <header class="flex items-center justify-between mb-8">
+
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight">
+                    WARRANTY
+                </h1>
+
+                <p class="text-slate-400 mt-1">
+                    Certified LLM Router
+                </p>
+            </div>
+
+            <button
+                class="px-5 py-3 rounded-xl bg-white text-black font-semibold">
+                ▶ Judge Mode
+            </button>
+
+        </header>
+
+
+        <!-- PROMISE BAR -->
+        <section
+            class="bg-slate-900 border border-slate-800 rounded-2xl p-5 mb-6">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+                    <p class="text-sm text-slate-400">
+                        Allowed Quality Regression
+                    </p>
+
+                    <p class="text-2xl font-semibold">
+                        ε = 8%
+                    </p>
+                </div>
+
+                <div
+                    class="px-4 py-2 rounded-full border border-green-500 text-green-400">
+                    ✓ CERTIFIED
+                </div>
+
+            </div>
+
+            <input
+                type="range"
+                min="0"
+                max="25"
+                value="8"
+                class="w-full mt-5">
+
+        </section>
+
+
+        <!-- STAT TILES -->
+        <section class="grid grid-cols-4 gap-4 mb-6">
+
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+                <p class="text-slate-400 text-sm">
+                    Cost Saved
+                </p>
+
+                <p class="text-3xl font-bold mt-2">
+                    72%
+                </p>
+            </div>
+
+
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+                <p class="text-slate-400 text-sm">
+                    Cheap Traffic
+                </p>
+
+                <p class="text-3xl font-bold mt-2">
+                    61%
+                </p>
+            </div>
+
+
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+                <p class="text-slate-400 text-sm">
+                    Regression
+                </p>
+
+                <p class="text-3xl font-bold mt-2">
+                    4.2%
+                </p>
+            </div>
+
+
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+                <p class="text-slate-400 text-sm">
+                    Overhead
+                </p>
+
+                <p class="text-3xl font-bold mt-2">
+                    $0.032
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- FLOW -->
+        <section
+            class="bg-slate-900 border border-slate-800 rounded-2xl p-5 mb-6">
+
+            <p class="text-sm text-slate-400 mb-4">
+                ROUTING FLOW
+            </p>
+
+            <div class="grid grid-cols-4 gap-3">
+
+                <div class="bg-slate-800 rounded-xl p-4 text-center">
+                    CACHE HIT
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-4 text-center">
+                    CHEAP ACCEPTED
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-4 text-center">
+                    ESCALATED
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-4 text-center">
+                    FRONTIER
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MAIN CONTENT -->
+        <section class="grid grid-cols-2 gap-6">
+
+            <!-- PARETO -->
+            <div
+                class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+
+                <h2 class="text-lg font-semibold">
+                    Pareto Frontier
+                </h2>
+
+                <div
+                    class="h-72 flex items-center justify-center text-slate-500">
+
+                    Chart will appear here
+
+                </div>
+
+            </div>
+
+
+            <!-- ABLATION -->
+            <div
+                class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+
+                <h2 class="text-lg font-semibold mb-4">
+                    Ablation
+                </h2>
+
+                <div class="space-y-3 text-sm">
+
+                    <div class="flex justify-between">
+                        <span>Always Cheap</span>
+                        <span>—</span>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <span>Always Frontier</span>
+                        <span>—</span>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <span>Random 50/50</span>
+                        <span>—</span>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <span>Length Heuristic</span>
+                        <span>—</span>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <span>WARRANTY</span>
+                        <span>✓</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- REPLAY -->
+        <section
+            class="bg-slate-900 border border-slate-800 rounded-2xl p-5 mt-6">
+
+            <h2 class="text-lg font-semibold">
+                Replay
+            </h2>
+
+            <p class="text-slate-400 mt-2">
+                Live routing replay will appear here.
+            </p>
+
+            <div class="flex gap-3 mt-5">
+
+                <button
+                    class="px-4 py-2 rounded-lg bg-white text-black">
+                    ▶ Replay
+                </button>
+
+                <button
+                    class="px-4 py-2 rounded-lg bg-slate-800">
+                    ⚡ Inject Drift
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
 
 </body>
+
 </html>

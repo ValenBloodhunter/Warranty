@@ -696,8 +696,15 @@
 
     state.eps = eps;
 
-    const certification =
-      getCertResult(eps);
+
+const epsValue = document.getElementById("epsValue");
+
+if (epsValue) {
+  epsValue.textContent = eps + "%";
+}
+
+const certification =
+  getCertResult(eps);
 
     paintStamp(certification);
     updateStampDetail(certification);

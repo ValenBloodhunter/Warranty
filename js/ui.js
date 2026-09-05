@@ -1,10 +1,15 @@
-(function () {
+// WARRANTY — C8 UI WIRING
+// Commit: Add routing baselines
+
+(() => {
   "use strict";
 
   const DEFAULT_PRICES = {
     cheap: { input: 0.15, output: 0.60 },
     frontier: { input: 5.00, output: 15.00 }
   };
+
+  const $ = id => document.getElementById(id);
 
   const state = {
     eps: 8,
@@ -15,660 +20,651 @@
     prices: DEFAULT_PRICES,
     warrantyCurve: [],
     baselines: [],
-    currentPoint: null
+    current: null
   };
 
-  function loadJSON(url, fallback) {
-    return fetch(url)
-      .then(function (res) {
-        if (!res.ok) throw new Error("Load failed");
-        return res.json();
-      })
-      .catch(function () {
-        return fallback;
-      });
+  async function loadJSON(primary, fallback) {
+    try {
+      const r = await fetch(primary);
+      if (!r.ok) throw new Error("not found");
+      return await r.json();
+    } catch (_) {
+      if (!fallback) return null;
+      const r = await fetch(fallback);
+      if (!r.ok) throw new Error("fallback not found");
+      return await r.json();
+    }
   }
 
-  function normaliseRows(data) {
+  function rowsFrom(data) {
     if (Array.isArray(data)) return data;
     if (data && Array.isArray(data.rows)) return data.rows;
+    if (data && Array.isArray(data.data)) return data.data;
     return [];
   }
 
-  function normalisePrices(data) {
-    if (!data) return DEFAULT_PRICES;
-
+  function split(rows) {
     return {
-      cheap: data.cheap || DEFAULT_PRICES.cheap,
-      frontier: data.frontier || DEFAULT_PRICES.frontier
+      train: rows.filter(r => r.split === "train"),
+      cal: rows.filter(r => r.split === "cal"),
+      test: rows.filter(r => r.split === "test")
     };
   }
 
-  function splitRows(rows) {
-    return {
-      train: rows.filter(function (r) {
-        return r.split === "train";
-      }),
-      cal: rows.filter(function (r) {
-        return r.split === "cal";
-      }),
-      test: rows.filter(function (r) {
-        return r.split === "test";
-      })
-    };
+  function money(n) {
+    return "$" + Number(n || 0).toFixed(3);
   }
 
-  function animateNumber(el, value, suffix) {
-    if (!el) return;
+  function pct(n) {
+    return Number(n || 0).toFixed(1) + "%";
+  }
 
-    const start = Number(el.dataset.value || 0);
-    const end = Number(value);
-    const duration = 300;
-    const begin = performance.now();
+  function value(obj, keys, fallback = 0) {
+    for (const k of keys) {
+      if (obj && Number.isFinite(Number(obj[k]))) return Number(obj[k]);
+    }
+    return fallback;
+  }
 
-    function tick(now) {
-      const p = Math.min(1, (now - begin) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const current = start + (end - start) * eased;
+  function cheapCorrect(r) {
+    return !!(
+      r.cheap_correct ??
+      r.cheap?.correct ??
+      r.cheap?.is_correct
+    );
+  }
 
-      el.textContent = current.toFixed(1) + (suffix || "");
+  function frontierCorrect(r) {
+    return !!(
+      r.frontier_correct ??
+      r.frontier?.correct ??
+      r.frontier?.is_correct
+    );
+  }
 
-      if (p < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        el.dataset.value = String(end);
-      }
+  function queryLength(r) {
+    return String(r.query || "").length;
+  }
+
+  function cost(r, which) {
+    if (window.Router && typeof Router.costOf === "function") {
+      return Number(Router.costOf(r, which, state.prices)) || 0;
     }
 
-    requestAnimationFrame(tick);
+    const p = state.prices[which] || DEFAULT_PRICES[which];
+    const input = Number(
+      r[which]?.input_tokens ??
+      r.input_tokens ??
+      100
+    );
+
+    const output = Number(
+      r[which]?.output_tokens ??
+      r.output_tokens ??
+      50
+    );
+
+    return input / 1e6 * p.input + output / 1e6 * p.output;
   }
 
-  function setText(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = value;
+  function directPolicy(rows, choose) {
+    let totalCost = 0;
+    let correct = 0;
+    let regret = 0;
+
+    rows.forEach(r => {
+      const route = choose(r);
+      const ok = route === "cheap"
+        ? cheapCorrect(r)
+        : frontierCorrect(r);
+
+      if (ok) correct++;
+
+      if (!ok && frontierCorrect(r)) regret++;
+
+      totalCost += cost(r, route);
+    });
+
+    const n = Math.max(1, rows.length);
+    const accuracy = correct / n;
+    const frontierCost =
+      rows.reduce((s, r) => s + cost(r, "frontier"), 0) / n;
+
+    return {
+      accuracy,
+      cost: totalCost / n,
+      regret: regret / n,
+      regression: Math.max(0, 1 - accuracy),
+      cheapPercent:
+        rows.filter(r => choose(r) === "cheap").length / n * 100,
+      costSaved:
+        frontierCost > 0
+          ? (1 - (totalCost / n) / frontierCost) * 100
+          : 0
+    };
   }
 
-  function paintStamp(certified, result) {
-    const stamp = document.getElementById("certStamp");
+  function routerSim(rows, tau, options) {
+    if (!window.Router || typeof Router.simulate !== "function") {
+      return directPolicy(
+        rows,
+        r => Number(r.phat || 0) >= tau ? "cheap" : "frontier"
+      );
+    }
+
+    return Router.simulate(rows, tau, state.prices, options || {});
+  }
+
+  function certification() {
+    const scores = state.cal.map(r => Number(r.phat || 0));
+    const losses = state.cal.map(r =>
+      window.Router.lossIfCheap(r)
+    );
+
+    if (typeof window.certify !== "function") {
+      throw new Error("certify() was not found in certify.js");
+    }
+
+    return window.certify(
+      scores,
+      losses,
+      state.eps / 100,
+      0.05
+    );
+  }
+
+  function updateStamp(result) {
+    const stamp = $("certStamp");
+    const detail = $("stampDetail");
 
     if (!stamp) return;
 
-    if (!certified) {
+    stamp.classList.remove("press");
+
+    if (!result) {
       stamp.textContent =
-        "REFUSED — ROUTING 100% TO FRONTIER";
+        "✕ REFUSED — ROUTING 100% TO FRONTIER";
 
       stamp.className =
-        "rounded-full border border-red-400 px-5 py-2 text-red-400 font-semibold";
+        "px-4 py-1.5 rounded-full border border-red-500 text-red-400 text-sm font-medium";
 
+      if (detail) {
+        detail.textContent =
+          "No threshold passes · routing 100% to frontier · δ = 0.05";
+      }
+
+      state.tau = 1.01;
       return;
     }
 
     stamp.textContent = "✓ CERTIFIED";
 
     stamp.className =
-      "rounded-full border border-emerald-400 px-5 py-2 text-emerald-400 font-semibold";
+      "px-4 py-1.5 rounded-full border border-green-500 text-green-400 text-sm font-medium";
 
-    stamp.animate(
-      [
-        { transform: "scale(1)" },
-        { transform: "scale(1.15)" },
-        { transform: "scale(1)" }
-      ],
-      {
-        duration: 180,
-        easing: "ease-out"
-      }
+    void stamp.offsetWidth;
+    stamp.classList.add("press");
+
+    state.tau = Number(
+      result.tau ??
+      result.threshold ??
+      result.bestTau ??
+      1.01
     );
 
-    if (result) {
-      setText(
-        "stampDetail",
-        "τ = " +
-          result.tau.toFixed(3) +
-          " · n = " +
-          result.n +
-          " · failures = " +
-          result.failures +
-          " · risk = " +
-          (result.empiricalRisk * 100).toFixed(2) +
-          "% · p = " +
-          result.pValue.toFixed(4) +
-          " · δ = " +
-          result.delta
-      );
+    if (detail) {
+      const n = result.n ?? state.cal.length;
+      const failures = result.failures ?? result.k ?? 0;
+      const risk = result.empiricalRisk ?? result.risk ?? 0;
+      const p = result.pValue ?? result.p ?? 0;
+      const delta = result.delta ?? 0.05;
+
+      detail.textContent =
+        `τ = ${state.tau.toFixed(2)} · ` +
+        `n = ${n} · ` +
+        `failures = ${failures} · ` +
+        `risk = ${Number(risk).toFixed(3)} · ` +
+        `p = ${Number(p).toFixed(3)} · ` +
+        `δ = ${delta}`;
     }
   }
 
-  function simulate(rows, tau) {
-    return Router.simulate(
-      rows,
-      tau,
-      state.prices,
-      {
-        verify: true,
-        cache: true,
-        tau2: 0.5
-      }
+  function updateTiles(result) {
+    const costSaved = value(result, [
+      "costSavedPercent",
+      "costSaved",
+      "savingsPercent"
+    ]);
+
+    const cheap = value(result, [
+      "cheapPercent",
+      "cheapTraffic",
+      "cheapPct"
+    ]);
+
+    const regression = value(result, [
+      "regressionPercent",
+      "regression",
+      "qualityRegression"
+    ]) * (value(result, [
+      "regressionPercent",
+      "qualityRegression"
+    ], 0) === 0 ? 100 : 1);
+
+    const overhead = value(result, [
+      "overheadPercent",
+      "overhead"
+    ]);
+
+    if ($("stat-cost-saved"))
+      $("stat-cost-saved").textContent = pct(costSaved);
+
+    if ($("stat-cheap-traffic"))
+      $("stat-cheap-traffic").textContent = pct(cheap);
+
+    if ($("stat-regression"))
+      $("stat-regression").textContent = pct(regression);
+
+    if ($("stat-overhead"))
+      $("stat-overhead").textContent = pct(overhead);
+  }
+
+  function updateFlow(result, rows) {
+    const n = Math.max(1, rows.length);
+
+    const cache = value(result, [
+      "cacheHits",
+      "cacheHitPercent"
+    ]);
+
+    const cheap = value(result, [
+      "cheapAccepted",
+      "cheapPercent"
+    ]);
+
+    const escalated = value(result, [
+      "escalated",
+      "escalatedPercent"
+    ]);
+
+    const frontier = value(result, [
+      "frontier",
+      "frontierPercent"
+    ]);
+
+    const set = (id, x) => {
+      if ($(id)) $(id).textContent = pct(x);
+    };
+
+    set("flow-cache",
+      cache > 1 ? cache : cache / n * 100
+    );
+
+    set("flow-cheap",
+      cheap > 1 ? cheap : cheap / n * 100
+    );
+
+    set("flow-escalated",
+      escalated > 1 ? escalated : escalated / n * 100
+    );
+
+    set("flow-frontier",
+      frontier > 1 ? frontier : frontier / n * 100
     );
   }
 
-  function alwaysCheap(rows) {
-    let cost = 0;
-    let correct = 0;
+  function baselinePoints() {
+    const rows = state.test;
+    if (!rows.length) return [];
 
-    rows.forEach(function (r) {
-      cost += Router.costOf(r, "cheap", state.prices);
-
-      if (r.cheap && r.cheap.correct) {
-        correct++;
-      }
-    });
-
-    return {
-      name: "Always cheap",
-      cost: cost,
-      accuracy: rows.length ? correct / rows.length : 0
-    };
-  }
-
-  function alwaysFrontier(rows) {
-    let cost = 0;
-    let correct = 0;
-
-    rows.forEach(function (r) {
-      cost += Router.costOf(r, "frontier", state.prices);
-
-      if (r.frontier && r.frontier.correct) {
-        correct++;
-      }
-    });
-
-    return {
-      name: "Always frontier",
-      cost: cost,
-      accuracy: rows.length ? correct / rows.length : 0
-    };
-  }
-
-  function random5050(rows) {
-    let cost = 0;
-    let correct = 0;
-
-    rows.forEach(function (r, i) {
-      const useCheap = i % 2 === 0;
-      const model = useCheap ? "cheap" : "frontier";
-
-      cost += Router.costOf(r, model, state.prices);
-
-      if (r[model] && r[model].correct) {
-        correct++;
-      }
-    });
-
-    return {
-      name: "Random 50/50",
-      cost: cost,
-      accuracy: rows.length ? correct / rows.length : 0
-    };
-  }
-
-  function medianLength(rows) {
     const lengths = rows
-      .map(function (r) {
-        return String(r.query || "").length;
-      })
-      .sort(function (a, b) {
-        return a - b;
-      });
+      .map(queryLength)
+      .sort((a, b) => a - b);
 
-    if (!lengths.length) return 0;
+    const median =
+      lengths[Math.floor(lengths.length / 2)];
 
-    const mid = Math.floor(lengths.length / 2);
-
-    return lengths.length % 2
-      ? lengths[mid]
-      : (lengths[mid - 1] + lengths[mid]) / 2;
-  }
-
-  function lengthHeuristic(rows) {
-    const threshold = medianLength(rows);
-
-    let cost = 0;
-    let correct = 0;
-
-    rows.forEach(function (r) {
-      const useCheap =
-        String(r.query || "").length <= threshold;
-
-      const model = useCheap ? "cheap" : "frontier";
-
-      cost += Router.costOf(r, model, state.prices);
-
-      if (r[model] && r[model].correct) {
-        correct++;
+    const policies = [
+      {
+        name: "Always Cheap",
+        choose: () => "cheap"
+      },
+      {
+        name: "Always Frontier",
+        choose: () => "frontier"
+      },
+      {
+        name: "Random 50/50",
+        choose: (_, i) =>
+          i % 2 === 0 ? "cheap" : "frontier"
+      },
+      {
+        name: "Length Heuristic",
+        choose: r =>
+          queryLength(r) <= median ? "cheap" : "frontier"
+      },
+      {
+        name: "Fixed p-hat = 0.7",
+        choose: r =>
+          Number(r.phat || 0) >= 0.7
+            ? "cheap"
+            : "frontier"
       }
-    });
-
-    return {
-      name: "Length heuristic",
-      cost: cost,
-      accuracy: rows.length ? correct / rows.length : 0
-    };
-  }
-
-  function fixedThreshold(rows) {
-    let cost = 0;
-    let correct = 0;
-
-    rows.forEach(function (r) {
-      const model =
-        Number(r.phat) >= 0.7
-          ? "cheap"
-          : "frontier";
-
-      cost += Router.costOf(r, model, state.prices);
-
-      if (r[model] && r[model].correct) {
-        correct++;
-      }
-    });
-
-    return {
-      name: "Fixed p-hat = 0.7",
-      cost: cost,
-      accuracy: rows.length ? correct / rows.length : 0
-    };
-  }
-
-  function buildBaselines() {
-    return [
-      alwaysCheap(state.test),
-      alwaysFrontier(state.test),
-      random5050(state.test),
-      lengthHeuristic(state.test),
-      fixedThreshold(state.test)
     ];
-  }
 
-  function getAblation() {
-    const rows = [];
+    return policies.map(p => {
+      const result = directPolicy(
+        rows,
+        (r, i) => p.choose(r, i)
+      );
 
-    const frontier = alwaysFrontier(state.test);
-    const cheap = alwaysCheap(state.test);
-    const random = random5050(state.test);
-    const length = lengthHeuristic(state.test);
-    const fixed = fixedThreshold(state.test);
-
-    rows.push(frontier);
-    rows.push(cheap);
-    rows.push(random);
-    rows.push(length);
-    rows.push(fixed);
-
-    const ours = simulate(
-      state.test,
-      state.tau
-    );
-
-    rows.push({
-      name: "WARRANTY",
-      cost: ours.cost,
-      accuracy: ours.accuracy
-    });
-
-    const verify = simulate(
-      state.test,
-      state.tau
-    );
-
-    rows.push({
-      name: "WARRANTY + verify",
-      cost: verify.cost,
-      accuracy: verify.accuracy
-    });
-
-    const cache = simulate(
-      state.test,
-      state.tau
-    );
-
-    rows.push({
-      name: "WARRANTY + verify + cache",
-      cost: cache.cost,
-      accuracy: cache.accuracy
-    });
-
-    return rows;
-  }
-
-  function updateAblation() {
-    const table = document.getElementById(
-      "ablationBody"
-    );
-
-    if (!table) return;
-
-    const rows = getAblation();
-
-    table.innerHTML = "";
-
-    rows.forEach(function (row) {
-      const tr = document.createElement("tr");
-
-      tr.className =
-        "border-t border-slate-800";
-
-      const tdName =
-        document.createElement("td");
-
-      const tdAccuracy =
-        document.createElement("td");
-
-      const tdCost =
-        document.createElement("td");
-
-      tdName.className =
-        "px-4 py-3 text-slate-300";
-
-      tdAccuracy.className =
-        "px-4 py-3 text-slate-300";
-
-      tdCost.className =
-        "px-4 py-3 text-slate-300";
-
-      tdName.textContent = row.name;
-
-      tdAccuracy.textContent =
-        (row.accuracy * 100).toFixed(1) + "%";
-
-      tdCost.textContent =
-        "$" + Number(row.cost).toFixed(4);
-
-      tr.appendChild(tdName);
-      tr.appendChild(tdAccuracy);
-      tr.appendChild(tdCost);
-
-      table.appendChild(tr);
+      return {
+        name: p.name,
+        x: result.cost,
+        y: result.accuracy,
+        cost: result.cost,
+        accuracy: result.accuracy
+      };
     });
   }
 
-  function buildWarrantyCurve() {
+  function oursAtEpsilon(eps) {
+    const old = state.eps;
+    state.eps = eps;
+
+    let cert = null;
+
+    try {
+      cert = certification();
+    } catch (_) {
+      cert = null;
+    }
+
+    const tau = cert
+      ? Number(
+          cert.tau ??
+          cert.threshold ??
+          cert.bestTau ??
+          1.01
+        )
+      : 1.01;
+
+    const result = routerSim(
+      state.test,
+      tau,
+      { verify: false, cache: false }
+    );
+
+    state.eps = old;
+
+    return {
+      x: value(result, ["cost", "avgCost"]),
+      y: value(result, ["accuracy"]),
+      accuracy: value(result, ["accuracy"]),
+      cost: value(result, ["cost", "avgCost"]),
+      eps
+    };
+  }
+
+  function buildCurve() {
     const curve = [];
 
     for (let eps = 1; eps <= 25; eps += 2) {
-      const result = Certify.certify(
-        state.cal.map(function (r) {
-          return r.phat;
-        }),
-        state.cal.map(function (r) {
-          return Router.lossIfCheap(r);
-        }),
-        eps / 100,
-        0.05
-      );
-
-      let tau = 1.01;
-
-      if (result) {
-        tau = result.tau;
-      }
-
-      const sim = simulate(
-        state.test,
-        tau
-      );
-
-      curve.push({
-        x: sim.cost,
-        y: sim.accuracy,
-        eps: eps
-      });
+      curve.push(oursAtEpsilon(eps));
     }
 
     return curve;
   }
 
-  function updatePareto() {
-    const ours = simulate(
-      state.test,
-      state.tau
-    );
-
-    state.currentPoint = {
-      x: ours.cost,
-      y: ours.accuracy,
-      eps: state.eps
-    };
-
-    Charts.updatePareto(
-      state.warrantyCurve,
-      state.baselines.map(function (b) {
-        return {
-          x: b.cost,
-          y: b.accuracy,
-          name: b.name
-        };
-      }),
-      state.currentPoint
-    );
-  }
-
-  function updateTiles(result) {
-    const frontier = alwaysFrontier(
-      state.test
-    );
-
-    const saved =
-      frontier.cost > 0
-        ? ((frontier.cost - result.cost) /
-            frontier.cost) *
-          100
-        : 0;
-
-    animateNumber(
-      document.getElementById("costSaved"),
-      saved,
-      "%"
-    );
-
-    animateNumber(
-      document.getElementById("cheapTraffic"),
-      result.cheapPercent || 0,
-      "%"
-    );
-
-    animateNumber(
-      document.getElementById("regression"),
-      (result.regression || 0) * 100,
-      "%"
-    );
-
-    animateNumber(
-      document.getElementById("overhead"),
-      (result.overheadPercent || 0),
-      "%"
-    );
-  }
-
-  function updateFlowBar(result) {
-    if (!result) return;
-
-    const total =
-      state.test.length || 1;
-
-    const values = {
-      cache: result.cacheHits || 0,
-      cheap: result.cheapAccepted || 0,
-      escalated: result.escalated || 0,
-      frontier: result.frontier || 0
-    };
-
-    const ids = {
-      cache: "flowCache",
-      cheap: "flowCheap",
-      escalated: "flowEscalated",
-      frontier: "flowFrontier"
-    };
-
-    Object.keys(values).forEach(function (key) {
-      const el =
-        document.getElementById(ids[key]);
-
-      if (!el) return;
-
-      el.style.width =
-        (values[key] / total) * 100 + "%";
-    });
-  }
-
-  function render() {
-    const slider =
-      document.getElementById("epsSlider");
-
-    const eps =
-      slider
-        ? Number(slider.value)
-        : 8;
-
-    state.eps = eps;
-
-    setText(
-      "epsValue",
-      eps + "%"
-    );
-
-    const calScores =
-      state.cal.map(function (r) {
-        return r.phat;
-      });
-
-    const calLosses =
-      state.cal.map(function (r) {
-        return Router.lossIfCheap(r);
-      });
-
-    const result =
-      Certify.certify(
-        calScores,
-        calLosses,
-        eps / 100,
-        0.05
+  function updatePareto(current) {
+    if (
+      window.Charts &&
+      typeof Charts.updatePareto === "function"
+    ) {
+      Charts.updatePareto(
+        state.warrantyCurve,
+        state.baselines,
+        current
       );
-
-    let tau = 1.01;
-
-    if (!result) {
-      paintStamp(false);
-
-      setText(
-        "stampDetail",
-        "No statistically certified threshold at this ε. All test traffic routes to frontier."
-      );
-    } else {
-      tau = result.tau;
-
-      paintStamp(true, result);
     }
-
-    state.tau = tau;
-
-    const sim =
-      simulate(
-        state.test,
-        tau
-      );
-
-    updateTiles(sim);
-    updateFlowBar(sim);
-    updateAblation();
-    updatePareto();
   }
 
-  function init() {
-    Promise.all([
-      loadJSON(
+  function updateAblation() {
+    const body = $("ablationBody");
+    if (!body) return;
+
+    const rows = state.test;
+    body.innerHTML = "";
+
+    const lengthMedian =
+      rows.map(queryLength)
+        .sort((a, b) => a - b)[
+          Math.floor(rows.length / 2)
+        ];
+
+    const policies = [
+      ["Always Frontier", r => "frontier"],
+      ["Always Cheap", r => "cheap"],
+      ["Random 50/50", (r, i) =>
+        i % 2 === 0 ? "cheap" : "frontier"
+      ],
+      ["Length Heuristic", r =>
+        queryLength(r) <= lengthMedian
+          ? "cheap"
+          : "frontier"
+      ],
+      ["Fixed p-hat = 0.7", r =>
+        Number(r.phat || 0) >= 0.7
+          ? "cheap"
+          : "frontier"
+      ]
+    ];
+
+    policies.push([
+      "WARRANTY",
+      r => Number(r.phat || 0) >= state.tau
+        ? "cheap"
+        : "frontier"
+    ]);
+
+    policies.forEach(([name, choose]) => {
+      const r = directPolicy(rows, choose);
+      addRow(name, r);
+    });
+
+    const verify = routerSim(
+      rows,
+      state.tau,
+      { verify: true, cache: false, tau2: 0.5 }
+    );
+
+    const verifyCache = routerSim(
+      rows,
+      state.tau,
+      { verify: true, cache: true, tau2: 0.5 }
+    );
+
+    addRow("WARRANTY + Verify", verify);
+    addRow("WARRANTY + Verify + Cache", verifyCache);
+  }
+
+  function addRow(name, result) {
+    const body = $("ablationBody");
+    if (!body) return;
+
+    const accuracy = value(result, ["accuracy"]);
+    const costValue = value(result, ["cost", "avgCost"]);
+    const regret = value(result, [
+      "regret",
+      "regretPercent"
+    ]);
+
+    const row = document.createElement("div");
+
+    row.className =
+      "grid grid-cols-4 px-1 py-1 rounded hover:bg-slate-800";
+
+    row.innerHTML = `
+      <span>${name}</span>
+      <span>${(accuracy * 100).toFixed(1)}%</span>
+      <span>${money(costValue)}</span>
+      <span>${(regret * 100).toFixed(1)}%</span>
+    `;
+
+    body.appendChild(row);
+  }
+
+  async function init() {
+    try {
+      const bank = await loadJSON(
         "data/bank.json",
-        null
-      ),
-      loadJSON(
-        "data/prices.json",
-        DEFAULT_PRICES
-      )
-    ]).then(function (data) {
-      const rows =
-        normaliseRows(
-          data[0] ||
-          []
-        );
+        "data/bank.sample.json"
+      );
+
+      const prices =
+        await loadJSON("data/prices.json", null);
+
+      const rows = rowsFrom(bank);
+
+      if (!rows.length) {
+        throw new Error("No benchmark rows found.");
+      }
 
       state.prices =
-        normalisePrices(
-          data[1]
-        );
+        prices || DEFAULT_PRICES;
 
-      const split =
-        splitRows(rows);
+      const parts = split(rows);
 
-      state.train = split.train;
-      state.cal = split.cal;
-      state.test = split.test;
+      state.train = parts.train;
+      state.cal = parts.cal;
+      state.test = parts.test;
 
-      state.cal.forEach(function (row) {
-        row.phat =
-          Router.predictPHAT(
-            row,
-            state.train,
-            20
-          );
-      });
-
-      state.test.forEach(function (row) {
-        row.phat =
-          Router.predictPHAT(
-            row,
-            state.train,
-            20
-          );
-      });
-
-      state.baselines =
-        buildBaselines();
-
-      state.warrantyCurve =
-        buildWarrantyCurve();
-
-      const slider =
-        document.getElementById(
-          "epsSlider"
-        );
-
-      if (slider) {
-        slider.addEventListener(
-          "input",
-          render
+      if (!state.train.length ||
+          !state.cal.length ||
+          !state.test.length) {
+        throw new Error(
+          "Dataset must contain train, cal and test rows."
         );
       }
 
-      render();
-    });
+      [...state.cal, ...state.test].forEach(row => {
+        row.phat = Number(
+          Router.predictPHAT(
+            row,
+            state.train,
+            20
+          )
+        );
+      });
+
+      state.baselines = baselinePoints();
+      state.warrantyCurve = buildCurve();
+
+      if (
+        window.Charts &&
+        typeof Charts.initPareto === "function"
+      ) {
+        Charts.initPareto();
+      }
+
+      await render();
+
+      console.log(
+        "WARRANTY C8 ready:",
+        state.test.length,
+        "test rows"
+      );
+
+    } catch (err) {
+      console.error("WARRANTY UI error:", err);
+
+      const detail = $("stampDetail");
+
+      if (detail) {
+        detail.textContent =
+          "Frontend error: " + err.message;
+      }
+
+      if ($("certStamp")) {
+        $("certStamp").textContent = "✕ ERROR";
+        $("certStamp").className =
+          "px-4 py-1.5 rounded-full border border-red-500 text-red-400 text-sm font-medium";
+      }
+    }
   }
 
-  window.UI = {
-    getState: function () {
-      return {
-        tau: state.tau,
-        eps: state.eps,
-        test: state.test,
-        train: state.train,
-        prices: state.prices
-      };
-    }
-  };
+  async function render() {
+    state.eps =
+      Number($("epsSlider")?.value ?? 8);
 
-  document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-      init();
+    if ($("epsValue")) {
+      $("epsValue").textContent =
+        state.eps + "%";
     }
-  );
+
+    let cert = null;
+
+    try {
+      cert = certification();
+    } catch (err) {
+      console.error(err);
+    }
+
+    updateStamp(cert);
+
+    const result = routerSim(
+      state.test,
+      state.tau,
+      { verify: true, cache: true, tau2: 0.5 }
+    );
+
+    updateTiles(result);
+    updateFlow(result, state.test);
+    updateAblation();
+
+    state.current = {
+      x: value(result, ["cost", "avgCost"]),
+      y: value(result, ["accuracy"]),
+      accuracy: value(result, ["accuracy"]),
+      cost: value(result, ["cost", "avgCost"]),
+      eps: state.eps
+    };
+
+    updatePareto(state.current);
+  }
+
+  function expose() {
+    window.UI = {
+      getState() {
+        return {
+          tau: state.tau,
+          eps: state.eps,
+          test: state.test,
+          train: state.train,
+          prices: state.prices
+        };
+      }
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    expose();
+
+    const slider = $("epsSlider");
+
+    if (slider) {
+      slider.addEventListener("input", async () => {
+        state.eps = Number(slider.value);
+
+        if ($("epsValue")) {
+          $("epsValue").textContent =
+            state.eps + "%";
+        }
+
+        await render();
+      });
+    }
+
+    init();
+  });
 })();

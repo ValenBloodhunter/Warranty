@@ -1,21 +1,12 @@
 (function () {
   "use strict";
 
-  // ---------------------------------------------------------------
-  // logGamma(x)
-  //
-  // Returns ln(Gamma(x)) — the natural log of the Gamma function.
-  // Gamma(n) = (n-1)! for whole numbers, but we need it for the
-  // binomial formula below, where n can be in the thousands and
-  // n! would overflow a normal number instantly. Working in log
-  // space keeps everything small and safe.
-  //
-  // This is the standard Lanczos approximation — every language's
-  // math library uses some version of this under the hood.
-  // ---------------------------------------------------------------
+  // ============================================================
+  // LOG GAMMA
+  // ============================================================
+
   function logGamma(x) {
-    const g = 7;
-    const c = [
+    const coefficients = [
       0.99999999999980993,
       676.5203681218851,
       -1259.1392167224028,
@@ -27,108 +18,129 @@
       1.5056327351493116e-7
     ];
 
+    const g = 7;
+
     if (x < 0.5) {
-      // reflection formula, for small/negative inputs
-      return Math.log(Math.PI / Math.sin(Math.PI * x)) - logGamma(1 - x);
+      return (
+        Math.log(Math.PI) -
+        Math.log(Math.sin(Math.PI * x)) -
+        logGamma(1 - x)
+      );
     }
 
     x -= 1;
-    let a = c[0];
+
+    let a = coefficients[0];
+
+    for (let i = 1; i < coefficients.length; i++) {
+      a += coefficients[i] / (x + i);
+    }
+
     const t = x + g + 0.5;
 
-    for (let i = 1; i < g + 2; i++) {
-      a += c[i] / (x + i);
+    return (
+      0.5 * Math.log(2 * Math.PI) +
+      (x + 0.5) * Math.log(t) -
+      t +
+      Math.log(a)
+    );
+  }
+
+
+  // ============================================================
+  // LOG BINOMIAL COEFFICIENT
+  // ============================================================
+
+  function logChoose(n, k) {
+    if (k < 0 || k > n) {
+      return -Infinity;
     }
 
-    return 0.5 * Math.log(2 * Math.PI) + (x + 0.5) * Math.log(t) - t + Math.log(a);
+    return (
+      logGamma(n + 1) -
+      logGamma(k + 1) -
+      logGamma(n - k + 1)
+    );
   }
 
-  // ---------------------------------------------------------------
-  // logChoose(n, k)
-  //
-  // Returns ln(n choose k) — the log of "how many ways can you
-  // pick k items from n". Built from logGamma because
-  // n choose k = n! / (k! * (n-k)!), and in log space that
-  // division becomes subtraction.
-  // ---------------------------------------------------------------
-  function logChoose(n, k) {
-    if (k < 0 || k > n) return -Infinity;
-    return logGamma(n + 1) - logGamma(k + 1) - logGamma(n - k + 1);
-  }
 
-  // ---------------------------------------------------------------
-  // binomCDF(k, n, p)
+  // ============================================================
+  // BINOMIAL CDF
   //
-  // Answers: "If I flip a coin with probability p of failure, n
-  // times, what's the chance I see k or fewer failures?"
-  //
-  // We use this to test a hypothesis: "is the true failure rate
-  // at most eps?" If we actually observed k failures out of n
-  // calibration examples, and that would be a very UNLIKELY
-  // outcome under the assumption that the true rate is eps,
-  // that's evidence the true rate is really higher than eps —
-  // so we can't certify.
-  // ---------------------------------------------------------------
+  // P(X <= k)
+  // ============================================================
+
   function binomCDF(k, n, p) {
+    if (n <= 0) return 1;
+
+    if (k < 0) return 0;
+
+    if (k >= n) return 1;
+
     if (p <= 0) return 1;
-    if (p >= 1) return k >= n ? 1 : 0;
+
+    if (p >= 1) {
+      return k >= n ? 1 : 0;
+    }
 
     let sum = 0;
+
     for (let i = 0; i <= k; i++) {
       const logP =
-        logChoose(n, i) + i * Math.log(p) + (n - i) * Math.log(1 - p);
+        logChoose(n, i) +
+        i * Math.log(p) +
+        (n - i) * Math.log1p(-p);
+
       sum += Math.exp(logP);
+
+      // Prevent tiny floating point overflow above 1.
+      if (sum >= 1) {
+        return 1;
+      }
     }
-    return Math.min(1, sum);
+
+    return Math.min(1, Math.max(0, sum));
   }
 
-  // ---------------------------------------------------------------
-  // wilson(successes, n, z)
-  //
-  // A quick, well-known confidence interval for "what's the true
-  // success rate, given `successes` out of `n` observed trials".
-  // z defaults to ~1.96, which is the value for 95% confidence.
-  // Not used by certify() itself, but handy for showing error
-  // bars anywhere else in the dashboard.
-  // ---------------------------------------------------------------
-  function wilson(successes, n, z) {
-    z = z || 1.959963984540054;
-    if (n === 0) return { lower: 0, upper: 1 };
 
-    const phat = successes / n;
-    const denom = 1 + (z * z) / n;
-    const center = phat + (z * z) / (2 * n);
-    const margin =
-      z * Math.sqrt((phat * (1 - phat)) / n + (z * z) / (4 * n * n));
+  // ============================================================
+  // CLOPPER-PEARSON UPPER BOUND
+  // ============================================================
 
-    return {
-      lower: (center - margin) / denom,
-      upper: (center + margin) / denom
-    };
-  }
-
-  // ---------------------------------------------------------------
-  // riskUpperBound(failures, n, delta)
-  //
-  // Given that we observed `failures` out of `n` calibration
-  // examples, this finds the worst-case true failure rate we can
-  // still be (1 - delta) confident is not exceeded. This is the
-  // "exact binomial" / Clopper-Pearson style upper confidence
-  // bound, found by binary search instead of a closed formula.
-  // ---------------------------------------------------------------
   function riskUpperBound(failures, n, delta) {
-    if (n === 0) return 1;
+    if (n <= 0) {
+      return 1;
+    }
+
+    failures = Math.max(
+      0,
+      Math.min(n, Math.floor(failures))
+    );
+
+    delta = Math.max(
+      1e-12,
+      Math.min(1 - 1e-12, delta)
+    );
 
     let lo = 0;
     let hi = 1;
 
-    for (let iter = 0; iter < 50; iter++) {
-      const mid = (lo + hi) / 2;
-      const cdf = binomCDF(failures, n, mid);
+    // Find p such that:
+    //
+    // P(X <= failures | p) = delta
+    //
+    // This is the exact one-sided
+    // Clopper-Pearson upper confidence bound.
 
-      // If seeing `failures` or fewer would still be reasonably
-      // likely (cdf > delta) at true rate = mid, mid isn't ruled
-      // out yet — push the search bound up.
+    for (let i = 0; i < 60; i++) {
+      const mid = (lo + hi) / 2;
+
+      const cdf = binomCDF(
+        failures,
+        n,
+        mid
+      );
+
       if (cdf > delta) {
         lo = mid;
       } else {
@@ -139,73 +151,298 @@
     return hi;
   }
 
-  // ---------------------------------------------------------------
-  // certify(scores, losses, eps, delta)
-  //
-  // scores  — one p-hat per calibration example (how confident the
-  //           router was that the cheap model would succeed)
-  // losses  — one 0/1 per calibration example (1 = routing to
-  //           cheap would have been a mistake here)
-  // eps     — the maximum regression rate the person allows
-  //           (from the slider, e.g. 0.08 for 8%)
-  // delta   — how confident we need to be (0.05 = 95% confidence)
-  //
-  // Goal: find the most permissive threshold tau (the one that
-  // sends the MOST traffic to the cheap model) such that we can
-  // still be (1 - delta) confident the true regression rate for
-  // everything routed to cheap is at most eps.
-  //
-  // Returns null if NO threshold is safe (this is what makes the
-  // dashboard show "REFUSED").
-  // ---------------------------------------------------------------
+
+  // ============================================================
+  // WILSON INTERVAL
+  // ============================================================
+
+  function wilson(successes, n, z) {
+    z = z || 1.959963984540054;
+
+    if (n <= 0) {
+      return {
+        lower: 0,
+        upper: 1
+      };
+    }
+
+    const phat = successes / n;
+
+    const denom =
+      1 + (z * z) / n;
+
+    const center =
+      phat +
+      (z * z) / (2 * n);
+
+    const margin =
+      z *
+      Math.sqrt(
+        (phat * (1 - phat)) / n +
+        (z * z) / (4 * n * n)
+      );
+
+    return {
+      lower: Math.max(
+        0,
+        (center - margin) / denom
+      ),
+
+      upper: Math.min(
+        1,
+        (center + margin) / denom
+      )
+    };
+  }
+
+
+  // ============================================================
+  // WARRANTY CERTIFICATION
+  // ============================================================
+
   function certify(scores, losses, eps, delta) {
-    delta = delta || 0.05;
 
-    const n = scores.length;
-    if (n === 0) return null;
+    delta =
+      Number.isFinite(Number(delta))
+        ? Number(delta)
+        : 0.05;
 
-    // Pair each score with its loss, sorted highest-confidence first.
-    const paired = scores
-      .map(function (s, i) {
-        return { score: s, loss: losses[i] };
-      })
-      .sort(function (a, b) {
-        return b.score - a.score;
+    eps = Number(eps);
+
+    // ----------------------------------------------------------
+    // Validate inputs
+    // ----------------------------------------------------------
+
+    if (!Array.isArray(scores)) {
+      console.error(
+        "WARRANTY certify(): scores is not an array"
+      );
+      return null;
+    }
+
+    if (!Array.isArray(losses)) {
+      console.error(
+        "WARRANTY certify(): losses is not an array"
+      );
+      return null;
+    }
+
+    if (scores.length === 0) {
+      console.error(
+        "WARRANTY certify(): calibration set is empty"
+      );
+      return null;
+    }
+
+    if (scores.length !== losses.length) {
+      console.error(
+        "WARRANTY certify(): scores/losses length mismatch",
+        {
+          scores: scores.length,
+          losses: losses.length
+        }
+      );
+
+      return null;
+    }
+
+    if (!Number.isFinite(eps)) {
+      console.error(
+        "WARRANTY certify(): invalid epsilon",
+        eps
+      );
+
+      return null;
+    }
+
+    eps = Math.max(
+      0,
+      Math.min(1, eps)
+    );
+
+
+    // ----------------------------------------------------------
+    // Clean calibration examples
+    // ----------------------------------------------------------
+
+    const paired = [];
+
+    for (let i = 0; i < scores.length; i++) {
+
+      const score = Number(scores[i]);
+
+      if (!Number.isFinite(score)) {
+        console.warn(
+          "WARRANTY: skipping invalid score",
+          i,
+          scores[i]
+        );
+
+        continue;
+      }
+
+      const loss =
+        Number(losses[i]) === 1
+          ? 1
+          : 0;
+
+      paired.push({
+        score: Math.max(
+          0,
+          Math.min(1, score)
+        ),
+
+        loss
       });
+    }
 
-    // Try sending the MOST traffic to cheap first (cut = n, tau =
-    // the lowest score in the whole set), and only get stricter
-    // if that isn't safe. The first cut that IS safe is the best
-    // (most permissive) answer.
-    for (let cut = n; cut >= 1; cut--) {
-      const tau = paired[cut - 1].score;
-      const routed = paired.slice(0, cut);
 
-      const failures = routed.reduce(function (acc, row) {
-        return acc + (row.loss ? 1 : 0);
-      }, 0);
+    if (paired.length === 0) {
+      console.error(
+        "WARRANTY certify(): no valid calibration examples"
+      );
 
-      const upperBound = riskUpperBound(failures, cut, delta);
+      return null;
+    }
+
+
+    // ----------------------------------------------------------
+    // Sort highest confidence first.
+    // ----------------------------------------------------------
+
+    paired.sort(
+      (a, b) => b.score - a.score
+    );
+
+
+    // ----------------------------------------------------------
+    // Try every possible threshold.
+    //
+    // cut = number of calibration examples
+    // routed to cheap.
+    //
+    // Start with the most permissive threshold.
+    // ----------------------------------------------------------
+
+    let best = null;
+
+    for (
+      let cut = paired.length;
+      cut >= 1;
+      cut--
+    ) {
+
+      const routed =
+        paired.slice(0, cut);
+
+      const failures =
+        routed.reduce(
+          (total, row) =>
+            total + row.loss,
+          0
+        );
+
+      const empiricalRisk =
+        failures / cut;
+
+      const upperBound =
+        riskUpperBound(
+          failures,
+          cut,
+          delta
+        );
+
+      // --------------------------------------------------------
+      // Certification condition
+      // --------------------------------------------------------
 
       if (upperBound <= eps) {
-        return {
-          tau: tau,
+
+        best = {
+          tau: routed[routed.length - 1].score,
+
           n: cut,
-          failures: failures,
-          empiricalRisk: failures / cut,
+
+          failures,
+
+          empiricalRisk,
+
           risk: upperBound,
-          pValue: binomCDF(failures, cut, eps),
-          delta: delta
+
+          pValue:
+            binomCDF(
+              failures,
+              cut,
+              eps
+            ),
+
+          delta
         };
+
+        break;
       }
     }
 
-    return null;
+
+    // ----------------------------------------------------------
+    // Debug information
+    // ----------------------------------------------------------
+
+    if (!best) {
+
+      const totalFailures =
+        paired.reduce(
+          (sum, row) =>
+            sum + row.loss,
+          0
+        );
+
+      const totalRisk =
+        totalFailures /
+        paired.length;
+
+      const totalUpper =
+        riskUpperBound(
+          totalFailures,
+          paired.length,
+          delta
+        );
+
+      console.warn(
+        "WARRANTY certification refused",
+        {
+          epsilon: eps,
+          delta,
+          calibrationN: paired.length,
+          calibrationFailures: totalFailures,
+          empiricalRisk: totalRisk,
+          upperBound: totalUpper
+        }
+      );
+
+      return null;
+    }
+
+
+    console.log(
+      "WARRANTY CERTIFIED",
+      best
+    );
+
+    return best;
   }
 
+
+  // ============================================================
+  // EXPORT
+  // ============================================================
+
   window.certify = certify;
+
   window.logGamma = logGamma;
   window.logChoose = logChoose;
   window.binomCDF = binomCDF;
   window.wilson = wilson;
+  window.riskUpperBound = riskUpperBound;
+
 })();

@@ -1,199 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WARRANTY — Certified LLM Router</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- Chart.js: needed for the Pareto chart and the gauge -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <title>WARRANTY — Certified LLM Router</title>
 
-<style>
-  html, body { height: 100%; }
-  body { overflow: hidden; } /* zero page scroll, per the C1 checklist */
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  #trace-panel {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 340px;
-    transform: translateX(100%);
-    transition: transform 180ms ease-out;
-    z-index: 50;
-  }
-  #trace-panel.open { transform: translateX(0); }
-</style>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    #trace-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 340px;
+      transform: translateX(100%);
+      transition: transform 180ms ease-out;
+      z-index: 50;
+    }
+
+    #trace-panel.open {
+      transform: translateX(0);
+    }
+  </style>
 </head>
 
 <body class="bg-slate-950 text-white h-screen">
 
-<div class="h-full max-w-7xl mx-auto p-4 grid grid-rows-[auto_auto_auto_1fr] gap-4">
+  <div class="h-full max-w-7xl mx-auto p-4 grid grid-rows-[auto_auto_auto_1fr] gap-4">
 
-  <!-- HEADER -->
-  <header class="flex items-center justify-between">
-    <div>
-      <h1 class="text-2xl font-bold tracking-tight">WARRANTY</h1>
-      <p class="text-slate-400 text-sm mt-0.5">Certified LLM Router</p>
-    </div>
-    <button id="judge-mode-btn" class="px-4 py-2 rounded-xl bg-white text-black font-semibold text-sm">
-      ▶ Judge Mode
-    </button>
-  </header>
-
-  <!-- PROMISE BAR -->
-  <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
-    <div class="flex items-center justify-between">
+    <!-- HEADER -->
+    <header class="flex items-center justify-between">
       <div>
-        <p class="text-xs text-slate-400">Allowed Quality Regression</p>
-        <p class="text-xl font-semibold">
-          ε = <span id="epsilon-value">8%</span>
+        <h1 class="text-2xl font-bold tracking-tight">
+          WARRANTY
+        </h1>
+
+        <p class="text-slate-400 text-sm mt-0.5">
+          Certified LLM Router
         </p>
       </div>
-      <div id="certification-stamp"
-        class="px-4 py-1.5 rounded-full border border-green-500 text-green-400 text-sm font-medium">
-        ✓ CERTIFIED
-      </div>
-    </div>
-    <input id="epsilon-slider" type="range" min="0" max="25" step="1" value="8" class="w-full mt-4">
-  </section>
 
-  <!-- STAT TILES + FLOW -->
-  <section class="grid grid-cols-8 gap-3">
-    <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-      <p class="text-slate-400 text-xs">Cost Saved</p>
-      <p id="stat-cost-saved" class="text-2xl font-bold mt-1">72%</p>
-    </div>
-    <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-      <p class="text-slate-400 text-xs">Cheap Traffic</p>
-      <p id="stat-cheap-traffic" class="text-2xl font-bold mt-1">61%</p>
-    </div>
-    <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-      <p class="text-slate-400 text-xs">Regression</p>
-      <p id="stat-regression" class="text-2xl font-bold mt-1">4.2%</p>
-    </div>
-    <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-      <p class="text-slate-400 text-xs">Overhead</p>
-      <p id="stat-overhead" class="text-2xl font-bold mt-1">$0.032</p>
-    </div>
-
-    <div class="col-span-8 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-      <p class="text-xs text-slate-400 mb-2">ROUTING FLOW</p>
-      <div class="grid grid-cols-4 gap-3">
-        <div class="bg-slate-800 rounded-xl p-2 text-center">
-          <div class="text-[10px] text-slate-400">CACHE HIT</div>
-          <div id="flow-cache" class="font-semibold mt-0.5">0%</div>
-        </div>
-        <div class="bg-slate-800 rounded-xl p-2 text-center">
-          <div class="text-[10px] text-slate-400">CHEAP ACCEPTED</div>
-          <div id="flow-cheap" class="font-semibold mt-0.5">0%</div>
-        </div>
-        <div class="bg-slate-800 rounded-xl p-2 text-center">
-          <div class="text-[10px] text-slate-400">ESCALATED</div>
-          <div id="flow-escalated" class="font-semibold mt-0.5">0%</div>
-        </div>
-        <div class="bg-slate-800 rounded-xl p-2 text-center">
-          <div class="text-[10px] text-slate-400">FRONTIER</div>
-          <div id="flow-frontier" class="font-semibold mt-0.5">100%</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MAIN CONTENT -->
-  <section class="grid grid-cols-2 grid-rows-[1fr_auto] gap-4 min-h-0">
-
-    <!-- PARETO -->
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 min-h-0 flex flex-col">
-      <h2 class="text-sm font-semibold text-slate-300">Pareto Frontier</h2>
-      <div class="flex-1 min-h-0 mt-2">
-        <canvas id="pareto-chart"></canvas>
-      </div>
-    </div>
-
-    <!-- ABLATION -->
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 min-h-0 flex flex-col">
-      <h2 class="text-sm font-semibold text-slate-300 mb-2">Ablation</h2>
-      <div class="grid grid-cols-4 text-[10px] text-slate-500 px-1">
-        <span>Variant</span><span>Acc</span><span>Cost</span><span>Regret</span>
-      </div>
-      <div id="ablation-table-body" class="flex-1 overflow-y-auto mt-1 space-y-1 text-sm">
-        <!-- rows injected by ui.js, e.g.:
-        <div class="grid grid-cols-4 px-1 py-1 rounded hover:bg-slate-800">
-          <span>Always Cheap</span><span>—</span><span>—</span><span>—</span>
-        </div> -->
-      </div>
-    </div>
-
-    <!-- REPLAY (spans both columns) -->
-    <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center gap-4">
-      <button id="replay-btn" class="px-4 py-2 rounded-lg bg-white text-black text-sm whitespace-nowrap">
-        ▶ Replay
+      <button
+        id="judge-mode-btn"
+        class="px-4 py-2 rounded-xl bg-white text-black font-semibold text-sm">
+        ▶ Judge Mode
       </button>
-      <button id="drift-btn" class="px-4 py-2 rounded-lg bg-slate-800 text-sm whitespace-nowrap">
-        ⚡ Inject Drift
-      </button>
-      <div id="replay-ticker" class="flex-1 flex items-center gap-[2px] overflow-hidden h-6">
-        <!-- ticker squares injected by replay.js -->
+    </header>
+
+
+    <!-- PROMISE BAR -->
+    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+
+      <div class="flex items-center justify-between">
+
+        <div>
+          <p class="text-xs text-slate-400">
+            Allowed Quality Regression
+          </p>
+
+          <p class="text-xl font-semibold">
+            ε = <span id="epsValue">8%</span>
+          </p>
+        </div>
+
+        <div
+          id="certStamp"
+          class="px-4 py-1.5 rounded-full border border-green-500 text-green-400 text-sm font-medium">
+          ✓ CERTIFIED
+        </div>
+
       </div>
-      <canvas id="regression-gauge" width="90" height="50" class="flex-shrink-0"></canvas>
+
+      <input
+        id="epsSlider"
+        type="range"
+        min="0"
+        max="25"
+        step="1"
+        value="8"
+        class="w-full mt-4 cursor-pointer"
+        aria-label="Allowed Quality Regression"
+      >
+
+      <div class="flex justify-between text-xs text-slate-500 mt-1">
+        <span>0%</span>
+        <span>25%</span>
+      </div>
+
+      <p
+        id="stampDetail"
+        class="text-xs text-slate-400 mt-3">
+        Certification statistics loading...
+      </p>
+
+    </section>
+
+
+    <!-- STAT TILES -->
+    <section class="grid grid-cols-8 gap-3">
+
+      <!-- COST -->
+      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
+        <p class="text-slate-400 text-xs">
+          Cost Saved
+        </p>
+
+        <p
+          id="stat-cost-saved"
+          class="text-2xl font-bold mt-1">
+          —
+        </p>
+      </div>
+
+
+      <!-- CHEAP TRAFFIC -->
+      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
+        <p class="text-slate-400 text-xs">
+          Cheap Traffic
+        </p>
+
+        <p
+          id="stat-cheap-traffic"
+          class="text-2xl font-bold mt-1">
+          —
+        </p>
+      </div>
+
+
+      <!-- REGRESSION -->
+      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
+        <p class="text-slate-400 text-xs">
+          Regression
+        </p>
+
+        <p
+          id="stat-regression"
+          class="text-2xl font-bold mt-1">
+          —
+        </p>
+      </div>
+
+
+      <!-- OVERHEAD -->
+      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
+        <p class="text-slate-400 text-xs">
+          Overhead
+        </p>
+
+        <p
+          id="stat-overhead"
+          class="text-2xl font-bold mt-1">
+          —
+        </p>
+      </div>
+
+
+      <!-- ROUTING FLOW -->
+      <div class="col-span-8 bg-slate-900 border border-slate-800 rounded-2xl p-3">
+
+        <p class="text-xs text-slate-400 mb-2">
+          ROUTING FLOW
+        </p>
+
+        <div class="grid grid-cols-4 gap-3">
+
+          <div class="bg-slate-800 rounded-xl p-2 text-center">
+            <div class="text-[10px] text-slate-400">
+              CACHE HIT
+            </div>
+
+            <div
+              id="flow-cache"
+              class="font-semibold mt-0.5">
+              0%
+            </div>
+          </div>
+
+
+          <div class="bg-slate-800 rounded-xl p-2 text-center">
+            <div class="text-[10px] text-slate-400">
+              CHEAP ACCEPTED
+            </div>
+
+            <div
+              id="flow-cheap"
+              class="font-semibold mt-0.5">
+              0%
+            </div>
+          </div>
+
+
+          <div class="bg-slate-800 rounded-xl p-2 text-center">
+            <div class="text-[10px] text-slate-400">
+              ESCALATED
+            </div>
+
+            <div
+              id="flow-escalated"
+              class="font-semibold mt-0.5">
+              0%
+            </div>
+          </div>
+
+
+          <div class="bg-slate-800 rounded-xl p-2 text-center">
+            <div class="text-[10px] text-slate-400">
+              FRONTIER
+            </div>
+
+            <div
+              id="flow-frontier"
+              class="font-semibold mt-0.5">
+              100%
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- MAIN CONTENT -->
+    <section class="grid grid-cols-2 grid-rows-[1fr_auto] gap-4 min-h-0">
+
+
+      <!-- PARETO -->
+      <div
+        class="bg-slate-900 border border-slate-800 rounded-2xl p-4 min-h-0 flex flex-col">
+
+        <div class="flex items-center justify-between mb-2">
+
+          <h2 class="text-sm font-semibold text-slate-300">
+            Pareto Frontier
+          </h2>
+
+          <span class="text-[10px] text-slate-500">
+            cost vs accuracy
+          </span>
+
+        </div>
+
+        <div class="flex-1 min-h-0 relative">
+
+          <canvas id="paretoChart"></canvas>
+
+        </div>
+
+      </div>
+
+
+      <!-- ABLATION -->
+      <div
+        class="bg-slate-900 border border-slate-800 rounded-2xl p-4 min-h-0 flex flex-col">
+
+        <div class="flex items-center justify-between mb-2">
+
+          <h2 class="text-sm font-semibold text-slate-300">
+            Ablation
+          </h2>
+
+          <span class="text-[10px] text-slate-500">
+            held-out test
+          </span>
+
+        </div>
+
+
+        <div class="grid grid-cols-4 text-[10px] text-slate-500 px-1">
+          <span>Variant</span>
+          <span>Acc</span>
+          <span>Cost</span>
+          <span>Regret</span>
+        </div>
+
+
+        <div
+          id="ablationBody"
+          class="flex-1 overflow-y-auto mt-1 space-y-1 text-xs">
+        </div>
+
+      </div>
+
+
+      <!-- REPLAY -->
+      <div
+        class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center gap-4">
+
+        <button
+          id="replay-btn"
+          class="px-4 py-2 rounded-lg bg-white text-black text-sm whitespace-nowrap">
+          ▶ Replay
+        </button>
+
+
+        <button
+          id="drift-btn"
+          class="px-4 py-2 rounded-lg bg-slate-800 text-sm whitespace-nowrap">
+          ⚡ Inject Drift
+        </button>
+
+
+        <div
+          id="replay-ticker"
+          class="flex-1 flex items-center gap-[2px] overflow-hidden h-6">
+        </div>
+
+
+        <canvas
+          id="regression-gauge"
+          width="90"
+          height="50"
+          class="flex-shrink-0">
+        </canvas>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- TRACE PANEL -->
+  <div
+    id="trace-panel"
+    class="bg-slate-900 border-l border-slate-800 p-4 flex flex-col gap-2 overflow-y-auto">
+
+    <div class="flex items-center justify-between">
+
+      <span class="text-sm font-semibold text-slate-200">
+        Decision Trace
+      </span>
+
+      <button
+        id="trace-close-btn"
+        class="text-slate-500 hover:text-slate-200 text-xs">
+        ✕ ESC
+      </button>
+
     </div>
 
-  </section>
-</div>
 
-<!-- TRACE PANEL (off-canvas, slides in when a ticker square is clicked) -->
-<div id="trace-panel" class="bg-slate-900 border-l border-slate-800 p-4 flex flex-col gap-2 overflow-y-auto">
-  <div class="flex items-center justify-between">
-    <span class="text-sm font-semibold text-slate-200">Decision Trace</span>
-    <button id="trace-close-btn" class="text-slate-500 hover:text-slate-200 text-xs">✕ ESC</button>
+    <div
+      id="trace-content"
+      class="text-sm text-slate-400 flex flex-col gap-2">
+    </div>
+
   </div>
-  <div id="trace-content" class="text-sm text-slate-400 flex flex-col gap-2">
-    <!-- populated by trace.js -->
+
+
+  <!-- JUDGE MODE CAPTION -->
+  <div
+    id="judge-caption"
+    class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-200 z-40">
   </div>
-</div>
 
-<!-- JUDGE MODE CAPTION (hidden until running) -->
-<div id="judge-caption"
-  class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-200 z-40">
-</div>
 
-<!-- Scripts load in this exact order: -->
-<script src="js/router.js"></script>
-<script src="js/certify.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/replay.js"></script>
-<script src="js/trace.js"></script>
-<script src="js/judge.js"></script>
-
-<!--
-  TEMPORARY — delete this whole <script> block once C6 (js/ui.js) exists.
-  It only makes the slider visibly do something for now. Real ui.js will
-  replace it with logic that also calls certify() and Router.simulate().
--->
-<script>
-  const epsilonSlider = document.getElementById('epsilon-slider');
-  const epsilonValueLabel = document.getElementById('epsilon-value');
-  const stamp = document.getElementById('certification-stamp');
-
-  epsilonSlider.addEventListener('input', () => {
-    const eps = Number(epsilonSlider.value);
-    epsilonValueLabel.textContent = eps + '%';
-
-    // Placeholder-only rule so the stamp isn't static.
-    // Real certification math (certify.js) replaces this in C6.
-    if (eps === 0) {
-      stamp.textContent = '✕ REFUSED';
-      stamp.className = 'px-4 py-1.5 rounded-full border border-red-500 text-red-400 text-sm font-medium';
-    } else {
-      stamp.textContent = '✓ CERTIFIED';
-      stamp.className = 'px-4 py-1.5 rounded-full border border-green-500 text-green-400 text-sm font-medium';
-    }
-  });
-</script>
+  <!-- SCRIPTS -->
+  <script src="js/router.js"></script>
+  <script src="js/certify.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/replay.js"></script>
+  <script src="js/trace.js"></script>
+  <script src="js/judge.js"></script>
 
 </body>
 </html>

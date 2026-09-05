@@ -1498,12 +1498,12 @@ rows.forEach((row, index) => {
 
     if (
       !window.Router ||
-      typeof window.Router.predictPHAT !==
+      typeof window.Router.predictPHat !==
       "function"
     ) {
 
       throw new Error(
-        "Router.predictPHAT() is not available."
+        "Router.predictPHat() is not available."
       );
     }
 
@@ -1518,7 +1518,7 @@ rows.forEach((row, index) => {
 
       const prediction =
         Number(
-          Router.predictPHAT(
+          Router.predictPHat(
             row,
             state.train,
             20

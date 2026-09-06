@@ -1702,7 +1702,7 @@ const frontier =
         state.tau,
         {
           verify: true,
-          cache: true,
+          cache: false,
           tau2: 0.5
         }
       );

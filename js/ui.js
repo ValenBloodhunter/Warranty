@@ -980,43 +980,32 @@ rows.forEach((row, index) => {
 
 
     const cache =
-      value(
-        result,
-        [
-          "cacheHits",
-          "cacheHitPercent"
-        ]
-      );
+  value(
+    result,
+    ["cacheHitPercent"],
+    0
+  );
 
+const cheap =
+  value(
+    result,
+    ["cheapAcceptedPercent"],
+    0
+  );
 
-    const cheap =
-      value(
-        result,
-        [
-          "cheapAccepted",
-          "cheapPercent"
-        ]
-      );
+const escalated =
+  value(
+    result,
+    ["escalatedPercent"],
+    0
+  );
 
-
-    const escalated =
-      value(
-        result,
-        [
-          "escalated",
-          "escalatedPercent"
-        ]
-      );
-
-
-    const frontier =
-      value(
-        result,
-        [
-          "frontier",
-          "frontierPercent"
-        ]
-      );
+const frontier =
+  value(
+    result,
+    ["frontierPercent"],
+    0
+  );
 
 
     function flowPercent(x) {

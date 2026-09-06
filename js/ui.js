@@ -411,65 +411,141 @@ rows.forEach((row, index) => {
   // ============================================================
 
   function routerSim(
-    rows,
-    tau,
-    options = {}
-  ) {
+  rows,
+  tau,
+  options = {}
+) {
+  tau = Number(tau);
 
-    tau = Number(tau);
-
-    if (!Number.isFinite(tau)) {
-      tau = 1.01;
-    }
-
-
-    // ----------------------------------------------------------
-    // If Router.simulate exists, use it.
-    // ----------------------------------------------------------
-
-    if (
-      window.Router &&
-      typeof Router.simulate === "function"
-    ) {
-
-      try {
-
-        const result =
-          Router.simulate(
-            rows,
-            tau,
-            state.prices,
-            options
-          );
-
-
-        if (result) {
-          return result;
-        }
-
-      } catch (error) {
-
-        console.error(
-          "WARRANTY Router.simulate error:",
-          error
-        );
-      }
-    }
-
-
-    // ----------------------------------------------------------
-    // Safe fallback.
-    // ----------------------------------------------------------
-
-    return directPolicy(
-      rows,
-      row =>
-        Number(row.phat) >= tau
-          ? "cheap"
-          : "frontier"
-    );
+  if (!Number.isFinite(tau)) {
+    tau = 1.01;
   }
 
+  if (
+    window.Router &&
+    typeof Router.simulate === "function"
+  ) {
+    try {
+      const raw = Router.simulate(
+        rows,
+        tau,
+        state.prices,
+        options
+      );
+
+      if (raw) {
+        const n = Math.max(1, rows.length);
+
+        const totalCost =
+          Number(raw.cost) || 0;
+
+        const frontierCost =
+          Number(raw.costAlwaysFrontier) || 0;
+
+        const cheapFraction =
+          clamp01(raw.pctCheap);
+
+        const escalatedFraction =
+          clamp01(raw.pctEscalated);
+
+        const cacheFraction =
+          clamp01(raw.pctCache);
+
+        const regressionFraction =
+          clamp01(raw.regressionRate);
+
+        const cheapAcceptedFraction =
+          Math.max(
+            0,
+            cheapFraction - escalatedFraction
+          );
+
+        const frontierFraction =
+          Math.max(
+            0,
+            1 - cacheFraction - cheapFraction
+          );
+
+        const avgCost =
+          totalCost / n;
+
+        const costSavedPercent =
+          frontierCost > 0
+            ? Math.max(
+                0,
+                (1 - totalCost / frontierCost) * 100
+              )
+            : 0;
+
+        const overheadPercent =
+          frontierCost > 0
+            ? (
+                (Number(raw.overheadCost) || 0) /
+                frontierCost
+              ) * 100
+            : 0;
+
+        return {
+          ...raw,
+
+          // Cost
+          totalCost,
+          cost: avgCost,
+          avgCost,
+          costSavedPercent,
+
+          // Accuracy
+          accuracy:
+            clamp01(raw.accuracy),
+
+          // Regression
+          regression:
+            regressionFraction,
+          regressionPercent:
+            regressionFraction * 100,
+
+          // Main traffic statistic
+          cheapPercent:
+            cheapFraction * 100,
+
+          // Flow-bar percentages
+          cacheHitPercent:
+            cacheFraction * 100,
+
+          cheapAcceptedPercent:
+            cheapAcceptedFraction * 100,
+
+          escalatedPercent:
+            escalatedFraction * 100,
+
+          frontierPercent:
+            frontierFraction * 100,
+
+          // Overhead
+          overheadPercent,
+
+          // Regret as fraction
+          regret:
+            (Number(raw.regretCount) || 0) / n
+        };
+      }
+
+    } catch (error) {
+      console.error(
+        "WARRANTY Router.simulate error:",
+        error
+      );
+    }
+  }
+
+  return directPolicy(
+    rows,
+    row =>
+      Number(row.phat) >= tau
+        ? "cheap"
+        : "frontier"
+  );
+}
 
   // ============================================================
   // CERTIFICATION

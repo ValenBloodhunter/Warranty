@@ -1009,19 +1009,17 @@ const frontier =
 
 
     function flowPercent(x) {
+  const n = Number(x);
 
-      // Already a percentage.
-      if (x > 1) {
-        return x;
-      }
+  if (!Number.isFinite(n)) {
+    return 0;
+  }
 
-      // Decimal fraction.
-      if (x > 0) {
-        return x * 100;
-      }
-
-      return 0;
-    }
+  return Math.max(
+    0,
+    Math.min(100, n)
+  );
+}
 
 
     function set(id, x) {

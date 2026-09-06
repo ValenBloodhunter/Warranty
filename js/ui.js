@@ -22,6 +22,9 @@
 
   const state = {
     eps: 8,
+    requestedEps: 8,
+    lastNormalEps: 8,
+    mode: "normal",
 
     tau: 1.01,
 
@@ -924,6 +927,13 @@ rows.forEach((row, index) => {
         ]
       );
 
+    const regret =
+    value(
+    result,
+    ["regret"],
+    0
+  ) * 100;
+
 
     if ($("stat-cost-saved")) {
 
@@ -955,6 +965,13 @@ rows.forEach((row, index) => {
         .textContent =
         pct(overhead);
     }
+
+    if ($("stat-regret")) {
+
+  $("stat-regret")
+    .textContent =
+    pct(regret);
+}
   }
 
 
@@ -1619,13 +1636,60 @@ const frontier =
   async function render() {
 
     const slider =
-      $("epsSlider");
+  $("epsSlider");
 
+const modeSelect =
+  $("criticalityMode");
 
-    state.eps =
-      Number(
-        slider?.value ?? state.eps
-      );
+state.requestedEps =
+  Number(
+    slider?.value ?? state.requestedEps
+  );
+
+if (!Number.isFinite(state.requestedEps)) {
+  state.requestedEps = 8;
+}
+
+state.requestedEps =
+  Math.max(
+    0,
+    Math.min(
+      25,
+      state.requestedEps
+    )
+  );
+
+state.mode =
+  modeSelect?.value === "critical"
+    ? "critical"
+    : "normal";
+
+/*
+  CRITICAL behaves like epsilon = 0,
+  while preserving the user's slider value.
+*/
+state.eps =
+  state.mode === "critical"
+    ? 0
+    : state.requestedEps;
+
+if ($("epsValue")) {
+
+  $("epsValue").textContent =
+    state.mode === "critical"
+      ? state.requestedEps + "% · CRITICAL override → 0%"
+      : state.requestedEps + "%";
+}
+
+if (slider) {
+  slider.disabled =
+    state.mode === "critical";
+
+  slider.style.opacity =
+    state.mode === "critical"
+      ? "0.45"
+      : "1";
+}
 
 
     if (
@@ -1998,8 +2062,14 @@ const frontier =
     window.UI = {
 
       getState() {
+        
 
         return {
+          mode:
+            state.mode,
+
+          requestedEps:
+            state.requestedEps,
 
           eps:
             state.eps,
@@ -2074,6 +2144,12 @@ const frontier =
                 slider.value
               );
 
+            state.requestedEps =
+              Number(slider.value);
+
+            state.lastNormalEps =
+              state.requestedEps;
+
 
             if ($("epsValue")) {
 
@@ -2087,6 +2163,50 @@ const frontier =
           }
         );
       }
+
+      //test
+      const modeSelect =
+  $("criticalityMode");
+
+if (modeSelect) {
+
+  modeSelect.addEventListener(
+  "change",
+  async () => {
+
+    const slider =
+      $("epsSlider");
+
+    if (modeSelect.value === "critical") {
+
+      // Remember the user's NORMAL epsilon
+      // before entering CRITICAL mode.
+      const current =
+        Number(slider?.value);
+
+      if (Number.isFinite(current)) {
+        state.lastNormalEps = current;
+        state.requestedEps = current;
+      }
+
+    } else {
+
+      // Restore the exact epsilon the user
+      // had before entering CRITICAL mode.
+      state.requestedEps =
+        state.lastNormalEps;
+
+      if (slider) {
+        slider.value =
+          state.lastNormalEps;
+      }
+    }
+
+    await render();
+  }
+);
+}
+//test
 
 
       init();

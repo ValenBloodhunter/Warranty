@@ -1221,7 +1221,7 @@ const frontier =
         tau,
         {
           verify: false,
-          cache: false
+          cache: true
         }
       );
 

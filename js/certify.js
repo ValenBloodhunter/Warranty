@@ -199,242 +199,213 @@
   // ============================================================
   // WARRANTY CERTIFICATION
   // ============================================================
+function certify(scores, losses, eps, delta) {
 
-  function certify(scores, losses, eps, delta) {
+  delta =
+    Number.isFinite(Number(delta))
+      ? Number(delta)
+      : 0.05;
 
-    delta =
-      Number.isFinite(Number(delta))
-        ? Number(delta)
-        : 0.05;
+  eps = Number(eps);
 
-    eps = Number(eps);
+  if (
+    !Array.isArray(scores) ||
+    !Array.isArray(losses) ||
+    scores.length === 0 ||
+    scores.length !== losses.length ||
+    !Number.isFinite(eps)
+  ) {
+    console.error(
+      "WARRANTY certify(): invalid inputs"
+    );
 
-    // ----------------------------------------------------------
-    // Validate inputs
-    // ----------------------------------------------------------
+    return null;
+  }
 
-    if (!Array.isArray(scores)) {
-      console.error(
-        "WARRANTY certify(): scores is not an array"
-      );
-      return null;
+  eps = Math.max(
+    0,
+    Math.min(1, eps)
+  );
+
+  const paired = [];
+
+  for (let i = 0; i < scores.length; i++) {
+
+    const score = Number(scores[i]);
+
+    if (!Number.isFinite(score)) {
+      continue;
     }
 
-    if (!Array.isArray(losses)) {
-      console.error(
-        "WARRANTY certify(): losses is not an array"
+    paired.push({
+      score: Math.max(
+        0,
+        Math.min(1, score)
+      ),
+
+      loss:
+        Number(losses[i]) === 1
+          ? 1
+          : 0
+    });
+  }
+
+  if (!paired.length) {
+    return null;
+  }
+
+  /*
+    IMPORTANT:
+
+    n is ALL calibration queries.
+
+    A frontier-routed query contributes zero
+    routing-induced loss.
+
+    Therefore:
+
+        regression =
+        routing-induced failures / ALL queries
+  */
+
+  const n = paired.length;
+
+  /*
+    Use actual unique score thresholds.
+
+    Highest tau = most conservative.
+    Lower tau = progressively more aggressive.
+  */
+
+  const thresholds = [
+    ...new Set(
+      paired.map(row => row.score)
+    )
+  ].sort(
+    (a, b) => b - a
+  );
+
+  let best = null;
+
+  for (const tau of thresholds) {
+
+    const routed =
+      paired.filter(
+        row => row.score >= tau
       );
-      return null;
-    }
 
-    if (scores.length === 0) {
-      console.error(
-        "WARRANTY certify(): calibration set is empty"
-      );
-      return null;
-    }
-
-    if (scores.length !== losses.length) {
-      console.error(
-        "WARRANTY certify(): scores/losses length mismatch",
-        {
-          scores: scores.length,
-          losses: losses.length
-        }
+    const failures =
+      routed.reduce(
+        (sum, row) =>
+          sum + row.loss,
+        0
       );
 
-      return null;
-    }
+    /*
+      This is the crucial correction.
 
-    if (!Number.isFinite(eps)) {
-      console.error(
-        "WARRANTY certify(): invalid epsilon",
+      Denominator is n,
+      NOT routed.length.
+    */
+
+    const empiricalRisk =
+      failures / n;
+
+    const upperBound =
+      riskUpperBound(
+        failures,
+        n,
+        delta
+      );
+
+    const pValue =
+      binomCDF(
+        failures,
+        n,
         eps
       );
 
-      return null;
-    }
-
-    eps = Math.max(
-      0,
-      Math.min(1, eps)
-    );
-
-
-    // ----------------------------------------------------------
-    // Clean calibration examples
-    // ----------------------------------------------------------
-
-    const paired = [];
-
-    for (let i = 0; i < scores.length; i++) {
-
-      const score = Number(scores[i]);
-
-      if (!Number.isFinite(score)) {
-        console.warn(
-          "WARRANTY: skipping invalid score",
-          i,
-          scores[i]
-        );
-
-        continue;
-      }
-
-      const loss =
-        Number(losses[i]) === 1
-          ? 1
-          : 0;
-
-      paired.push({
-        score: Math.max(
-          0,
-          Math.min(1, score)
-        ),
-
-        loss
-      });
-    }
-
-
-    if (paired.length === 0) {
-      console.error(
-        "WARRANTY certify(): no valid calibration examples"
-      );
-
-      return null;
-    }
-
-
-    // ----------------------------------------------------------
-    // Sort highest confidence first.
-    // ----------------------------------------------------------
-
-    paired.sort(
-      (a, b) => b.score - a.score
-    );
-
-
-    // ----------------------------------------------------------
-    // Try every possible threshold.
-    //
-    // cut = number of calibration examples
-    // routed to cheap.
-    //
-    // Start with the most permissive threshold.
-    // ----------------------------------------------------------
-
-    let best = null;
-
-    for (
-      let cut = paired.length;
-      cut >= 0;
-      cut--
-    ) {
-
-      const routed =
-        paired.slice(0, cut);
-
-      const failures =
-        routed.reduce(
-          (total, row) =>
-            total + row.loss,
-          0
-        );
-
-      const empiricalRisk =
-        failures / cut;
-
-      const upperBound =
-        riskUpperBound(
-          failures,
-          cut,
-          delta
-        );
-
-      // --------------------------------------------------------
-      // Certification condition
-      // --------------------------------------------------------
-
-      if (upperBound <= eps) {
-
-        best = {
-          tau:
-            cut === 0
-             ? 1.01
-             : routed[routed.length - 1].score,
-
-          n: cut,
-
-          failures,
-
-          empiricalRisk,
-
-          risk: upperBound,
-
-          pValue:
-            binomCDF(
-              failures,
-              cut,
-              eps
-            ),
-
-          delta
-        };
-
-        break;
-      }
-    }
-
-
-    // ----------------------------------------------------------
-    // Debug information
-    // ----------------------------------------------------------
-
-    if (!best) {
-
-      const totalFailures =
-        paired.reduce(
-          (sum, row) =>
-            sum + row.loss,
-          0
-        );
-
-      const totalRisk =
-        totalFailures /
-        paired.length;
-
-      const totalUpper =
-        riskUpperBound(
-          totalFailures,
-          paired.length,
-          delta
-        );
-
-      console.warn(
-        "WARRANTY certification refused",
-        {
-          epsilon: eps,
-          delta,
-          calibrationN: paired.length,
-          calibrationFailures: totalFailures,
-          empiricalRisk: totalRisk,
-          upperBound: totalUpper
-        }
-      );
-
-      return null;
-    }
-
-
     console.log(
-      "WARRANTY CERTIFIED",
-      best
+      "WARRANTY candidate",
+      {
+        tau,
+        routed: routed.length,
+        n,
+        failures,
+        empiricalRisk,
+        upperBound,
+        pValue,
+        eps
+      }
     );
 
-    return best;
+    /*
+      Conservative → aggressive fixed sequence.
+
+      As long as policies pass,
+      keep moving toward cheaper routing.
+
+      Once one fails, stop.
+    */
+
+    if (upperBound <= eps) {
+
+      best = {
+        tau,
+
+        n,
+
+        routed:
+          routed.length,
+
+        failures,
+
+        empiricalRisk,
+
+        risk:
+          upperBound,
+
+        pValue,
+
+        delta
+      };
+
+    } else {
+
+      /*
+        If even the most conservative
+        non-empty policy fails,
+        there is no useful certified route.
+
+        If earlier policies passed,
+        best remains the last safe one.
+      */
+
+      break;
+    }
   }
 
+  if (!best) {
+
+    console.warn(
+      "WARRANTY certification refused",
+      {
+        epsilon: eps,
+        delta,
+        calibrationN: n
+      }
+    );
+
+    return null;
+  }
+
+  console.log(
+    "WARRANTY CERTIFIED",
+    best
+  );
+
+  return best;
+}
 
   // ============================================================
   // EXPORT

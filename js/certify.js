@@ -343,14 +343,18 @@
         );
 
       const empiricalRisk =
-        failures / cut;
+        cut === 0
+        ? 0
+        : failures / cut;
 
       const upperBound =
-        riskUpperBound(
-          failures,
-          cut,
-          delta
-        );
+       cut === 0
+       ? 0
+       : riskUpperBound(
+        failures,
+        cut,
+        delta
+      );
 
       // --------------------------------------------------------
       // Certification condition

@@ -1,589 +1,150 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0a0d0b">
-  <meta name="description" content="WARRANTY routes each prompt to the lowest-cost model that meets your quality bar.">
-
-  <title>WARRANTY — Certified LLM Router</title>
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-
-  <style>
-    html,
-    body {
-      height: 100%;
-    }
-
-    body {
-      overflow: hidden;
-    }
-
-    #trace-panel {
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100%;
-      width: 340px;
-      transform: translateX(100%);
-      transition: transform 180ms ease-out;
-      z-index: 50;
-    }
-
-    #trace-panel.open {
-      transform: translateX(0);
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080a12">
+  <meta name="description" content="WARRANTY reads your task, balances intelligence against your accuracy preference, and routes it to the right AI model.">
+  <title>WARRANTY — Intelligence, allocated</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/studio.css">
 </head>
-
-<body class="bg-slate-950 text-white h-screen">
-
-  <div class="h-full max-w-7xl mx-auto p-4 grid grid-rows-[auto_auto_auto_1fr] gap-4">
-
-    <!-- HEADER -->
-    <header class="flex items-center justify-between">
-      <div>
-        <h1 class="text-2xl font-bold tracking-tight">
-          WARRANTY
-        </h1>
-
-        <p class="text-slate-400 text-sm mt-0.5">
-          Certified LLM Router
-        </p>
-      </div>
-
-      <button
-        id="judge-mode-btn"
-        class="px-4 py-2 rounded-xl bg-white text-black font-semibold text-sm">
-        ▶ Judge Mode
-      </button>
-    </header>
-
-    <nav class="site-nav" aria-label="Page sections">
-      <a href="#quality-control">Quality bar</a>
-      <a href="#overview">Performance</a>
-      <a href="#benchmark">Benchmarks</a>
-      <a href="#live-router">Try live</a>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="topbar wrap">
+    <a class="brand" href="#top" aria-label="WARRANTY home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>WARRANTY</span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#router">Router</a>
+      <a href="#models">Model tiers</a>
+      <a href="#method">How it works</a>
     </nav>
+    <a class="status-pill" href="#router"><span class="status-dot"></span><span id="connection-label">ROUTER READY</span></a>
+  </header>
 
-    <section class="warranty-hero" aria-labelledby="hero-title">
-      <div>
-        <p class="hero-kicker">An instrument for intelligent spend</p>
-        <h2 id="hero-title">Less cost.<br><em>Same conviction.</em></h2>
-        <p class="hero-description">WARRANTY learns when a smaller model is enough, then keeps the quality bar visible at every turn.</p>
+  <main id="top">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span>01 / ADAPTIVE INTELLIGENCE</span><span class="eyebrow-line"></span></p>
+        <h1 id="hero-title">One question.<br><em>The right mind.</em></h1>
+        <p class="hero-lede">Tell us what you need. WARRANTY reads the task, weighs your accuracy preference, and picks the smallest model that fits.</p>
+        <a class="text-link" href="#router">Find your route <span aria-hidden="true">↘</span></a>
       </div>
-      <aside class="hero-aside">
-        <strong>Every route has a reason.</strong>
-        <span>Set your acceptable quality regression. WARRANTY finds the most cost-efficient route it can certify from the benchmark.</span>
-      </aside>
+
+      <div class="route-visual" id="route-visual" aria-label="Interactive 3D model routing visualization">
+        <div class="visual-grid" aria-hidden="true"></div>
+        <div class="visual-caption caption-top"><span>LIVE ROUTING ENGINE</span><b>W / 03</b></div>
+        <svg class="route-lines" viewBox="0 0 520 400" aria-hidden="true">
+          <defs>
+            <linearGradient id="routeGlow" x1="0" x2="1"><stop stop-color="#a68cff" stop-opacity=".04"/><stop offset=".5" stop-color="#6be0ff" stop-opacity=".8"/><stop offset="1" stop-color="#b4ff8c" stop-opacity=".12"/></linearGradient>
+          </defs>
+          <path class="route-path path-a" d="M91 109 C151 76 174 103 230 171"/>
+          <path class="route-path path-b" d="M420 95 C360 88 343 121 286 169"/>
+          <path class="route-path path-c" d="M135 321 C169 270 190 242 231 216"/>
+          <path class="route-path path-d" d="M404 310 C352 278 337 247 286 219"/>
+        </svg>
+        <div class="orbit orbit-one" aria-hidden="true"></div>
+        <div class="orbit orbit-two" aria-hidden="true"></div>
+        <div class="orbit orbit-three" aria-hidden="true"></div>
+        <div class="core-object" aria-hidden="true">
+          <div class="core-halo"></div><div class="core-sphere"><span>W</span></div>
+          <i class="spark spark-one"></i><i class="spark spark-two"></i><i class="spark spark-three"></i>
+        </div>
+        <div class="visual-node node-low" data-visual-tier="low"><span class="node-orb"></span><b>LOW</b><small>quick · light</small></div>
+        <div class="visual-node node-good" data-visual-tier="good"><span class="node-orb"></span><b>GOOD</b><small>balanced · capable</small></div>
+        <div class="visual-node node-best" data-visual-tier="best"><span class="node-orb"></span><b>BEST</b><small>deep · precise</small></div>
+        <div class="visual-caption caption-bottom"><span>ROUTE BY NEED</span><span class="live-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>01—03</b></div>
+      </div>
     </section>
 
+    <section class="router wrap" id="router" aria-labelledby="router-title">
+      <div class="section-heading">
+        <div><p class="eyebrow"><span>02 / THE ROUTER</span></p><h2 id="router-title">What are you working on?</h2></div>
+        <p class="section-note">A quick scan helps us pick the level of intelligence your question calls for.</p>
+      </div>
 
-    <!-- PROMISE BAR -->
-    <section id="quality-control" class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
-
-      <div class="flex items-center justify-between">
-
-        <div class="flex items-end gap-6">
-
-  <div>
-    <p class="text-xs text-slate-400">
-      Allowed Quality Regression
-    </p>
-
-    <p class="text-xl font-semibold">
-      ε = <span id="epsValue">8%</span>
-    </p>
-  </div>
-
-  <div>
-    <p class="text-xs text-slate-400 mb-1">
-      Mode
-    </p>
-
-    <select
-      id="criticalityMode"
-      class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-white cursor-pointer">
-
-      <option value="normal">
-        NORMAL
-      </option>
-
-      <option value="critical">
-        CRITICAL
-      </option>
-
-    </select>
-  </div>
-
-</div>
-
-        <div
-          id="certStamp"
-          class="px-4 py-1.5 rounded-full border border-green-500 text-green-400 text-sm font-medium">
-          ✓ CERTIFIED
+      <div class="router-shell">
+        <div class="prompt-column">
+          <label class="field-label" for="try-prompt"><span>YOUR QUESTION</span><span class="field-hint">UP TO 6,000 CHARACTERS</span></label>
+          <textarea id="try-prompt" maxlength="6000" placeholder="Ask anything. A quick explanation, a tricky bug, a deep research question…" rows="5" required></textarea>
+          <div class="prompt-footer">
+            <div class="prompt-examples" aria-label="Example questions">
+              <button type="button" data-example="Explain how compound interest works in one simple example.">Explain</button>
+              <button type="button" data-example="Find the bug in this function and suggest a robust fix: ">Code</button>
+              <button type="button" data-example="Compare the strongest evidence for and against this claim, and cite the assumptions: ">Research</button>
+            </div>
+            <span class="char-count"><span id="char-count">0</span> / 6000</span>
+          </div>
+          <div class="intent-read" aria-live="polite">
+            <div class="intent-icon" aria-hidden="true"><span>⌁</span></div>
+            <div class="intent-copy"><span class="micro-label">QUESTION INTELLIGENCE</span><strong id="intent-type">Waiting for your question</strong><p id="intent-reason">We’ll look for task type, complexity, and risk signals.</p></div>
+            <div class="difficulty-wrap"><span class="micro-label">COMPLEXITY</span><div class="difficulty-meter"><i id="difficulty-fill"></i></div><strong id="difficulty-label">—</strong></div>
+          </div>
+          <div class="signal-list" id="signal-list" aria-live="polite"><span class="signal-placeholder">Signals appear as you type</span></div>
         </div>
 
+        <aside class="preference-column">
+          <div class="accuracy-control">
+            <div class="control-top"><div><span class="micro-label">YOUR PRIORITY</span><h3>Accuracy preference</h3></div><div class="accuracy-value"><b id="accuracy-value">85</b><small>/ 100</small></div></div>
+            <input id="accuracy-slider" type="range" min="50" max="100" value="85" step="1" aria-label="Accuracy preference from 50 to 100">
+            <div class="range-ends"><span>Lower cost</span><span>Higher accuracy</span></div>
+            <p class="accuracy-note">A stronger preference favors a more capable model. This is a routing preference, not a promised accuracy score.</p>
+          </div>
+
+          <div class="recommendation" aria-live="polite">
+            <span class="recommendation-icon" aria-hidden="true">✳</span>
+            <div><span class="micro-label">WARRANTY RECOMMENDS</span><strong id="recommended-tier">Add a question</strong><p id="recommendation-reason">Your route will update as we read your task.</p></div>
+            <span class="recommendation-mark" id="recommendation-mark">—</span>
+          </div>
+          <div class="manual-label"><span>CHOOSE A TIER</span><span>OR LET WARRANTY DECIDE</span></div>
+          <div class="tier-picker" role="group" aria-label="Choose an AI model tier">
+            <button class="tier-option tier-auto" type="button" data-tier="auto" aria-pressed="true"><span class="tier-select-dot"></span><span class="tier-option-copy"><b>Automatic</b><small>Use the recommendation above</small></span><span class="tier-option-model">AUTO</span></button>
+            <button class="tier-option" type="button" data-tier="low" aria-pressed="false"><span class="tier-select-dot"></span><span class="tier-option-copy"><b>Low</b><small>Fast & economical</small></span><span class="tier-option-model">20B</span></button>
+            <button class="tier-option" type="button" data-tier="good" aria-pressed="false"><span class="tier-select-dot"></span><span class="tier-option-copy"><b>Good</b><small>Balanced capability</small></span><span class="tier-option-model">LUNA</span></button>
+            <button class="tier-option" type="button" data-tier="best" aria-pressed="false"><span class="tier-select-dot"></span><span class="tier-option-copy"><b>Best</b><small>Maximum reasoning</small></span><span class="tier-option-model">ASTRA</span></button>
+          </div>
+
+          <form id="try-form" class="route-form">
+            <label class="access-field" for="try-access-code"><span>DEMO ACCESS CODE</span><input id="try-access-code" type="password" autocomplete="off" placeholder="Enter access code" aria-label="Demo access code"></label>
+            <button id="try-submit" type="submit"><span id="submit-label">Route my question</span><span class="submit-arrow" aria-hidden="true">↗</span></button>
+            <p class="access-note" id="access-note">The provider key stays on the server. Your code is held for this tab only.</p>
+          </form>
+        </aside>
+
+        <div class="answer-zone" id="answer-zone" aria-live="polite" hidden>
+          <div class="answer-heading"><div><span class="micro-label">ROUTED RESPONSE</span><h3 id="answer-title">Your answer</h3></div><span class="answer-status" id="answer-status">WORKING</span></div>
+          <div class="answer-meta" id="answer-meta"></div>
+          <div class="conversation" id="try-thread" role="log" aria-live="polite"></div>
+          <div class="answer-foot"><span id="try-usage"></span><button id="try-clear" type="button">Clear conversation</button></div>
+        </div>
       </div>
-
-      <input
-        id="epsSlider"
-        type="range"
-        min="0"
-        max="25"
-        step="1"
-        value="8"
-        class="w-full mt-4 cursor-pointer"
-        aria-label="Allowed Quality Regression"
-      >
-
-      <div class="flex justify-between text-xs text-slate-500 mt-1">
-        <span>0%</span>
-        <span>25%</span>
-      </div>
-
-      <p
-        id="stampDetail"
-        class="text-xs text-slate-400 mt-3">
-        Certification statistics loading...
-      </p>
-
     </section>
 
-
-    <!-- STAT TILES -->
-    <section id="overview" class="grid grid-cols-10 gap-3">
-
-      <!-- COST -->
-      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-        <p class="text-slate-400 text-xs">
-          Cost Saved
-        </p>
-
-        <p
-          id="stat-cost-saved"
-          class="text-2xl font-bold mt-1">
-          —
-        </p>
+    <section class="tier-section wrap" id="models" aria-labelledby="models-title">
+      <div class="section-heading">
+        <div><p class="eyebrow"><span>03 / THREE INTELLIGENCE TIERS</span></p><h2 id="models-title">A mind for every kind of work.</h2></div>
+        <p class="section-note">Each tier uses a different model. WARRANTY can choose automatically, or you can take control.</p>
       </div>
-
-
-      <!-- CHEAP TRAFFIC -->
-      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-        <p class="text-slate-400 text-xs">
-          Cheap Traffic
-        </p>
-
-        <p
-          id="stat-cheap-traffic"
-          class="text-2xl font-bold mt-1">
-          —
-        </p>
+      <div class="model-cards">
+        <article class="model-card model-low" data-tier-card="low"><div class="model-card-head"><span class="model-index">01</span><span class="tier-badge">LOW</span></div><div class="model-orb-wrap"><span class="model-orb"></span><span class="orb-ring"></span></div><h3>Quick & focused</h3><p>For direct questions, clean rewrites, simple explanations, and everyday tasks.</p><div class="model-card-foot"><span>OpenAI · gpt-oss-20b</span><b>$0.018 in · $0.09 out <small>/ 1M tokens</small></b></div></article>
+        <article class="model-card model-good" data-tier-card="good"><div class="model-card-head"><span class="model-index">02</span><span class="tier-badge">GOOD</span></div><div class="model-orb-wrap"><span class="model-orb"></span><span class="orb-ring"></span></div><h3>Balanced & capable</h3><p>For layered instructions, code, comparison, and careful multi-step reasoning.</p><div class="model-card-foot"><span>OpenAI · GPT‑6 Luna</span><b>$0.10 in · $0.50 out <small>/ 1M tokens</small></b></div></article>
+        <article class="model-card model-best" data-tier-card="best"><div class="model-card-head"><span class="model-index">03</span><span class="tier-badge">BEST</span></div><div class="model-orb-wrap"><span class="model-orb"></span><span class="orb-ring"></span></div><h3>Deep & precise</h3><p>For difficult analysis, high-stakes context, complex code, and your toughest questions.</p><div class="model-card-foot"><span>OpenAI · GPT‑6 Astra</span><b>$10 in · $50 out <small>/ 1M tokens</small></b></div></article>
       </div>
-
-
-      <!-- REGRESSION -->
-      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-        <p class="text-slate-400 text-xs">
-          Regression
-        </p>
-
-        <p
-          id="stat-regression"
-          class="text-2xl font-bold mt-1">
-          —
-        </p>
-      </div>
-
-
-      <!-- OVERHEAD -->
-      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-        <p class="text-slate-400 text-xs">
-          Overhead
-        </p>
-
-        <p
-          id="stat-overhead"
-          class="text-2xl font-bold mt-1">
-          —
-        </p>
-      </div>
-
-      <!-- REGRET -->
-      <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-        <p class="text-slate-400 text-xs">
-          Regret
-        </p>
-
-        <p
-          id="stat-regret"
-          class="text-2xl font-bold mt-1">
-          —
-        </p>
-      </div>
-
-
-      <!-- ROUTING FLOW -->
-      <div class="col-span-10 bg-slate-900 border border-slate-800 rounded-2xl p-3">
-
-        <p class="text-xs text-slate-400 mb-2">
-          ROUTING FLOW
-        </p>
-
-        <div class="grid grid-cols-4 gap-3">
-
-          <div class="bg-slate-800 rounded-xl p-2 text-center">
-            <div class="text-[10px] text-slate-400">
-              CACHE HIT
-            </div>
-
-            <div
-              id="flow-cache"
-              class="font-semibold mt-0.5">
-              0%
-            </div>
-          </div>
-
-
-          <div class="bg-slate-800 rounded-xl p-2 text-center">
-            <div class="text-[10px] text-slate-400">
-              CHEAP ACCEPTED
-            </div>
-
-            <div
-              id="flow-cheap"
-              class="font-semibold mt-0.5">
-              0%
-            </div>
-          </div>
-
-
-          <div class="bg-slate-800 rounded-xl p-2 text-center">
-            <div class="text-[10px] text-slate-400">
-              ESCALATED
-            </div>
-
-            <div
-              id="flow-escalated"
-              class="font-semibold mt-0.5">
-              0%
-            </div>
-          </div>
-
-
-          <div class="bg-slate-800 rounded-xl p-2 text-center">
-            <div class="text-[10px] text-slate-400">
-              FRONTIER
-            </div>
-
-            <div
-              id="flow-frontier"
-              class="font-semibold mt-0.5">
-              100%
-            </div>
-          </div>
-
-        </div>
-      </div>
-
+      <p class="pricing-footnote">Model rates shown are OpenRouter list prices and can change. Output tokens have separate rates. Model choice does not guarantee correctness.</p>
     </section>
 
-
-    <!-- MAIN CONTENT -->
-    <section id="benchmark" class="grid grid-cols-2 grid-rows-[1fr_auto] gap-4 min-h-0">
-
-
-      <!-- PARETO -->
-      <div
-        class="bg-slate-900 border border-slate-800 rounded-2xl p-4 min-h-0 flex flex-col">
-
-        <div class="flex items-center justify-between mb-2">
-
-          <h2 class="text-sm font-semibold text-slate-300">
-            Pareto Frontier
-          </h2>
-
-          <span class="text-[10px] text-slate-500">
-            cost vs accuracy
-          </span>
-
-        </div>
-
-        <div class="flex-1 min-h-0 relative">
-
-          <canvas id="paretoChart"></canvas>
-
-        </div>
-
-      </div>
-
-
-      <!-- ABLATION -->
-      <div
-        class="bg-slate-900 border border-slate-800 rounded-2xl p-4 min-h-0 flex flex-col">
-
-        <div class="flex items-center justify-between mb-2">
-
-          <h2 class="text-sm font-semibold text-slate-300">
-            Ablation
-          </h2>
-
-          <span class="text-[10px] text-slate-500">
-            held-out test
-          </span>
-
-        </div>
-
-
-        <div class="grid grid-cols-4 text-[10px] text-slate-500 px-1">
-          <span>Variant</span>
-          <span>Acc</span>
-          <span>Cost</span>
-          <span>Regret</span>
-        </div>
-
-
-        <div
-          id="ablationBody"
-          class="flex-1 overflow-y-auto mt-1 space-y-1 text-xs">
-        </div>
-
-      </div>
-
-
-      <!-- REPLAY -->
-      <div
-        class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center gap-4">
-
-        <button
-          id="replay-btn"
-          class="px-4 py-2 rounded-lg bg-white text-black text-sm whitespace-nowrap">
-          ▶ Replay
-        </button>
-
-
-        <button
-          id="drift-btn"
-          class="px-4 py-2 rounded-lg bg-slate-800 text-sm whitespace-nowrap">
-          ⚡ Inject Drift
-        </button>
-
-
-        <div
-          id="replay-ticker"
-          class="flex-1 flex items-center gap-[2px] overflow-hidden h-6">
-        </div>
-
-        <!-- TRY WARRANTY -->
-<div id="live-router" class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4">
-
-  <div class="flex items-center justify-between mb-3">
-
-    <div>
-      <h2 class="text-sm font-semibold text-slate-200">
-        Try WARRANTY
-      </h2>
-
-      <p class="text-[11px] text-slate-500 mt-1">
-        Live model calls use the server API. The benchmark certification is a separate offline estimate.
-      </p>
-    </div>
-
-    <span
-      id="try-status"
-      class="text-[10px] px-2 py-1 rounded-lg bg-slate-800 text-slate-400">
-      READY
-    </span>
-
-  </div>
-
-
-  <form
-    id="try-form"
-    class="flex flex-wrap gap-2">
-
-    <input
-      id="try-access-code"
-      type="password"
-      autocomplete="off"
-      placeholder="Demo access code"
-      aria-label="Demo access code"
-      class="w-44 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-slate-500"
-    >
-
-    <select id="try-mode" aria-label="Live routing mode" class="bg-slate-950 border border-slate-700 px-3 py-2.5 text-sm text-white">
-      <option value="auto">Auto route</option>
-      <option value="cheap">Always cheap</option>
-      <option value="frontier">Always frontier</option>
-    </select>
-
-    <input
-      id="try-prompt"
-      type="text"
-      autocomplete="off"
-      placeholder="Ask something... e.g. What is photosynthesis?"
-      class="flex-1 min-w-48 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-slate-500"
-    >
-
-    <button
-      id="try-submit"
-      type="submit"
-      class="px-5 py-2.5 rounded-xl bg-white text-black text-sm font-semibold whitespace-nowrap">
-      Route
-    </button>
-
-  </form>
-
-  <div class="flex items-center justify-between mt-3">
-    <p class="text-[10px] text-slate-500">Auto compares text similarity with the learned threshold. Manual modes bypass that choice.</p>
-    <button id="try-clear" type="button" class="text-[10px] text-slate-400 hover:text-white">Clear conversation</button>
-  </div>
-
-  <div id="try-thread" class="mt-4 space-y-3" role="log" aria-live="polite"></div>
-
-
-  <div
-    id="try-result"
-    class="hidden mt-4 grid grid-cols-1 md:grid-cols-4 gap-3">
-
-    <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
-      <p class="text-[10px] text-slate-500 uppercase">
-        p-hat
-      </p>
-
-      <p
-        id="try-phat"
-        class="text-xl font-bold mt-1">
-        —
-      </p>
-    </div>
-
-
-    <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
-      <p class="text-[10px] text-slate-500 uppercase">
-        Offline τ
-      </p>
-
-      <p
-        id="try-tau"
-        class="text-xl font-bold mt-1">
-        —
-      </p>
-    </div>
-
-
-    <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
-      <p class="text-[10px] text-slate-500 uppercase">
-        Route
-      </p>
-
-      <p
-        id="try-route"
-        class="text-xl font-bold mt-1">
-        —
-      </p>
-    </div>
-
-
-    <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
-      <p class="text-[10px] text-slate-500 uppercase">
-        Similarity
-      </p>
-
-      <p
-        id="try-similarity"
-        class="text-xl font-bold mt-1">
-        —
-      </p>
-    </div>
-
-  </div>
-
-
-  <div
-    id="try-neighbours"
-    class="hidden mt-3 text-xs text-slate-400">
-  </div>
-
-  <div
-    id="try-answer-panel"
-    class="hidden mt-4 bg-slate-950 border border-slate-800 rounded-xl p-4">
-    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-      <p class="text-xs font-semibold text-slate-300">Live answer</p>
-      <p id="try-model" class="text-[10px] text-slate-500"></p>
-    </div>
-    <pre id="try-answer" class="whitespace-pre-wrap break-words font-sans text-sm text-slate-200"></pre>
-    <p id="try-usage" class="mt-3 text-[10px] text-slate-500"></p>
-    <p class="mt-3 text-[10px] text-amber-300/80">Live routing uses text similarity to the benchmark. The offline certification does not guarantee live-query quality.</p>
-  </div>
-
-</div>
-
-
-        <canvas
-          id="regression-gauge"
-          width="90"
-          height="50"
-          class="flex-shrink-0">
-        </canvas>
-
-      </div>
-
+    <section class="method-section wrap" id="method" aria-labelledby="method-title">
+      <div class="method-index"><span class="eyebrow">04 / WHY THIS ROUTE</span><div class="method-line"></div><span class="method-stamp">WARRANTY<br>INTELLIGENCE SYSTEM</span></div>
+      <div class="method-copy"><h2 id="method-title">Better allocation.<br><em>More control.</em></h2><div class="method-steps"><article><b>01</b><div><h3>Read the task</h3><p>A local signal scan estimates intent and complexity from the words you provide. It shows its cues before the request is sent.</p></div></article><article><b>02</b><div><h3>Set your bar</h3><p>Choose a more economical route or lean toward the stronger model. You can override the automatic recommendation at any time.</p></div></article><article><b>03</b><div><h3>See what happened</h3><p>The result shows the model that answered and the token usage returned by the provider. This evidence is separate from the question scan.</p></div></article></div></div>
     </section>
+  </main>
 
-  </div>
-
-
-  <!-- TRACE PANEL -->
-  <div
-    id="trace-panel"
-    class="bg-slate-900 border-l border-slate-800 p-4 flex flex-col gap-2 overflow-y-auto">
-
-    <div class="flex items-center justify-between">
-
-      <span class="text-sm font-semibold text-slate-200">
-        Decision Trace
-      </span>
-
-      <button
-        id="trace-close-btn"
-        class="text-slate-500 hover:text-slate-200 text-xs">
-        ✕ ESC
-      </button>
-
-    </div>
-
-
-    <div
-      id="trace-content"
-      class="text-sm text-slate-400 flex flex-col gap-2">
-    </div>
-
-  </div>
-
-
-  <!-- JUDGE MODE CAPTION -->
-  <div
-    id="judge-caption"
-    class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-sm text-slate-200 z-40">
-  </div>
-
-
-  <!-- SCRIPTS -->
-  <script src="js/router.js"></script>
-  <script src="js/certify.js"></script>
-  <script src="js/charts.js"></script>
-  <script src="js/ui.js"></script>
+  <footer class="footer wrap"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>WARRANTY</span></a><p>Routing intelligence, with the choice in your hands.</p><a href="#top" class="back-top">BACK TO TOP ↑</a></footer>
   <script src="js/live.js"></script>
-  <script src="js/replay.js"></script>
-  <script src="js/trace.js"></script>
-  <script src="js/judge.js"></script>
-
 </body>
 </html>

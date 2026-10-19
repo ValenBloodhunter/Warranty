@@ -1,6 +1,5 @@
 [
   {
-<<<<<<< HEAD
     "id": "math_0001",
     "slice": "math",
     "query": "A shop starts the day with 120 notebooks. It sells 18 before lunch and 15 after lunch, then receives a delivery of 25 notebooks. How many notebooks does the shop have at the end of the day?",
@@ -3599,7 +3598,8 @@
     "slice": "support",
     "query": "I was charged twice for the same monthly subscription. What should I do? Additional context: case reference 070; please give the safest next steps.",
     "gold": "Verify the duplicate transactions, keep the valid charge, refund or reverse the duplicate if confirmed, and tell the customer the expected posting time."
-=======
+  },
+  {
     "id": "math_001",
     "slice": "math",
     "query": "Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?",
@@ -6598,6 +6598,5 @@
     "slice": "support",
     "query": "What happens if my package is marked delivered but I did not receive it?",
     "gold": null
->>>>>>> eed19bfe62eb7394bffeab9c3da77cfee1538ec4
   }
 ]

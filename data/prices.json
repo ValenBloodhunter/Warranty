@@ -1,14 +1,19 @@
 {
-  "as_of": "2026-09-06",
+  "as_of": "2026-10-20",
   "currency": "USD",
-  "cheap": {
+  "low": {
     "id": "openai/gpt-oss-20b",
-    "in_per_1m": 0.075,
-    "out_per_1m": 0.30
+    "in_per_1m": 0.018,
+    "out_per_1m": 0.09
   },
-  "frontier": {
-    "id": "openai/gpt-oss-120b",
-    "in_per_1m": 0.15,
-    "out_per_1m": 0.60
+  "good": {
+    "id": "openai/gpt-6-luna",
+    "in_per_1m": 0.10,
+    "out_per_1m": 0.50
+  },
+  "best": {
+    "id": "openai/gpt-6-astra",
+    "in_per_1m": 10,
+    "out_per_1m": 50
   }
 }

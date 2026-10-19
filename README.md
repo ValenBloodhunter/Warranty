@@ -2,9 +2,9 @@
 
 ## A Cost-Optimising LLM Router with a Statistical Quality Guarantee
 
-WARRANTY is an LLM routing system that reduces inference cost by sending queries to a cheaper model whenever it can do so while maintaining a user-defined quality-regression budget.
+WARRANTY is an LLM router with three live model tiers—Low, Good, and Best—and a separate offline benchmark simulator. In the live interface, a local heuristic estimates task type and complexity, then combines that estimate with the user's accuracy preference. Users can follow the recommendation or choose a tier themselves.
 
-Instead of choosing a routing threshold arbitrarily, WARRANTY learns the most aggressive threshold that passes a statistical certification test at 95% confidence.
+The offline simulator studies a different two-model policy and uses a 95% confidence certification procedure. That certificate applies only to its benchmark data and does not guarantee the quality of live requests.
 
 ---
 
@@ -349,15 +349,12 @@ The project includes a simulated drift mode demonstrating this behaviour.
 
 ## Implementation
 
-WARRANTY's dashboard and offline benchmark run in the browser. Live prompts use a small Vercel Function so provider credentials stay on the server.
+WARRANTY is a responsive model-routing interface with an interactive 3D route visual, a transparent question scan, and three live model tiers. The scan labels task cues and estimates complexity; it is a lightweight heuristic, not a calibrated accuracy predictor. The user can set an accuracy preference or choose a tier manually.
 
 ### Frontend
 
-* HTML
-* Tailwind CSS via CDN
-* Vanilla JavaScript
-* Chart.js
-* Vercel
+* HTML, custom CSS, and vanilla JavaScript
+* CSS 3D and motion effects with reduced-motion support
 * Vercel Function at `api/chat.js`
 
 ### Data and Evaluation
@@ -371,7 +368,15 @@ WARRANTY's dashboard and offline benchmark run in the browser. Live prompts use 
 
 ### Models
 
-The system uses one cheaper model and one more capable frontier model. Their exact model IDs and pricing are stored in `data/prices.json`.
+The router has three server-side model tiers. Their default IDs and listed rates are in `data/prices.json`:
+
+| Tier | Model | Input / 1M tokens | Output / 1M tokens |
+| --- | --- | ---: | ---: |
+| Low | `openai/gpt-oss-20b` | $0.018 | $0.09 |
+| Good | `openai/gpt-6-luna` | $0.10 | $0.50 |
+| Best | `openai/gpt-6-astra` | $10.00 | $50.00 |
+
+Rates can change. The Best tier is substantially more expensive, so automatic routing only selects it for high complexity or high-impact prompts. The slider is a preference that influences the heuristic; it is not an accuracy guarantee.
 
 ### Storage and live requests
 
@@ -381,9 +386,9 @@ The benchmark is stored locally in:
 data/bank.json
 ```
 
-The offline benchmark is loaded by the browser. Live prompts are routed using TF-IDF text similarity against the training rows, then sent to `/api/chat`. The function calls OpenRouter with the selected model and returns the answer and token usage.
+The offline benchmark data supports the research simulator. The live interface separately scans task type, complexity, and high-impact cues, then combines that scan with the user's accuracy preference. Users can accept the recommended tier or manually select Low, Good, or Best. The selected tier is sent to `/api/chat`, which calls OpenRouter and returns the answer, model ID, and token usage.
 
-The live text-similarity score is a lightweight estimate. The certification shown on the dashboard is computed from the offline calibration set and is not a guarantee for live prompts.
+The live scan is a heuristic and does not assess the eventual answer's correctness. Offline benchmark certification does not certify the three-tier live route or guarantee correctness on live prompts.
 
 ### Credentials and access
 
@@ -391,7 +396,7 @@ The app does not have individual user accounts. Live requests require a shared d
 
 * `WARRANTY_DEMO_TOKEN` is checked by the function against the browser's `Authorization: Bearer` header. The browser keeps the code in `sessionStorage` for the current tab session.
 * `OPENROUTER_API_KEY` is used only by `api/chat.js`; it is never sent to the browser.
-* `WARRANTY_CHEAP_MODEL` and `WARRANTY_FRONTIER_MODEL` can override the model IDs in `data/prices.json`.
+* `WARRANTY_LOW_MODEL`, `WARRANTY_GOOD_MODEL`, and `WARRANTY_BEST_MODEL` can override the model IDs in `data/prices.json`.
 
 The access code is shared by everyone you give it to; it identifies authorized demo access, not an individual user. Use HTTPS, keep the code private, and rotate it if it is shared too widely.
 
@@ -434,7 +439,7 @@ warranty/
 
 ### Option 1: Vercel
 
-Add `OPENROUTER_API_KEY` and `WARRANTY_DEMO_TOKEN` in the Vercel project's Environment Variables, then deploy. Enter the demo access code in the live prompt panel.
+Add `OPENROUTER_API_KEY` and `WARRANTY_DEMO_TOKEN` in the Vercel project's Environment Variables, then deploy. Enter the shared demo access code in the router panel. A `GET /api/chat` health check reports whether both server values are configured without exposing either value.
 
 ### Option 2: Local
 
@@ -451,7 +456,7 @@ data/bank.json
 data/prices.json
 ```
 
-Offline routing, certification, simulation, visualisation, replay and auditing run in the browser. Live requests go through the server function; the provider key stays server-side. Opening `index.html` directly still works for the offline benchmark, but live calls need `/api/chat`.
+The question scan and model-tier controls work in the browser. Live requests go through the server function; the provider key stays server-side. Run through `vercel dev` for live calls. The live interface explains when the server-side model connection has not been configured.
 
 ---
 

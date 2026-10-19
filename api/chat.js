@@ -2,8 +2,21 @@
 
 const crypto = require("node:crypto");
 
-const OPENROUTER_CHAT_URL =
-  "https://openrouter.ai/api/v1/chat/completions";
+const OPENROUTER_CHAT_URL = "https://openrouter.ai/api/v1/chat/completions";
+const DEFAULT_MODELS = Object.freeze({
+  low: "openai/gpt-oss-20b",
+  good: "openai/gpt-6-luna",
+  best: "openai/gpt-6-astra"
+});
+const ALLOWED_TASK_TYPES = new Set([
+  "General question",
+  "Software & systems",
+  "Math & analysis",
+  "Research & comparison",
+  "Reasoning & planning",
+  "Writing & language",
+  "High-impact decision"
+]);
 
 function reply(res, status, payload) {
   res.setHeader("Cache-Control", "no-store");
@@ -22,6 +35,13 @@ function tokenMatches(candidate, expected) {
 }
 
 module.exports = async function chat(req, res) {
+  if (req.method === "GET") {
+    return reply(res, 200, {
+      ready: Boolean(process.env.WARRANTY_DEMO_TOKEN && process.env.OPENROUTER_API_KEY),
+      tiers: Object.keys(DEFAULT_MODELS)
+    });
+  }
+
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return reply(res, 405, { error: "Use POST." });
@@ -53,7 +73,12 @@ module.exports = async function chat(req, res) {
   const prompt = typeof req.body?.prompt === "string"
     ? req.body.prompt.trim()
     : "";
-  const route = req.body?.route;
+  const tier = req.body?.tier;
+  const accuracyPreference = Number(req.body?.accuracyPreference);
+  const requestedTaskType = req.body?.taskType;
+  const taskType = ALLOWED_TASK_TYPES.has(requestedTaskType)
+    ? requestedTaskType
+    : "General question";
   const messages = Array.isArray(req.body?.messages)
     ? req.body.messages
     : [{ role: "user", content: prompt }];
@@ -64,8 +89,12 @@ module.exports = async function chat(req, res) {
     });
   }
 
-  if (route !== "cheap" && route !== "frontier") {
-    return reply(res, 400, { error: "Route must be cheap or frontier." });
+  if (!Object.hasOwn(DEFAULT_MODELS, tier)) {
+    return reply(res, 400, { error: "Tier must be low, good, or best." });
+  }
+
+  if (!Number.isInteger(accuracyPreference) || accuracyPreference < 50 || accuracyPreference > 100) {
+    return reply(res, 400, { error: "Accuracy preference must be between 50 and 100." });
   }
 
   if (
@@ -85,9 +114,14 @@ module.exports = async function chat(req, res) {
     return reply(res, 400, { error: "Conversation is too long or has an invalid message." });
   }
 
-  const model = route === "cheap"
-    ? process.env.WARRANTY_CHEAP_MODEL || "openai/gpt-oss-20b"
-    : process.env.WARRANTY_FRONTIER_MODEL || "openai/gpt-oss-120b";
+  const model = process.env[`WARRANTY_${tier.toUpperCase()}_MODEL`] || DEFAULT_MODELS[tier];
+  const routedMessages = [
+    {
+      role: "system",
+      content: `You are WARRANTY, a helpful assistant. The user's task was classified as "${taskType}" and their accuracy preference is ${accuracyPreference}/100. Give a careful answer appropriate to that request. Do not claim certainty you do not have. For medical, legal, financial, or safety topics, state limits and encourage checking a qualified source.`
+    },
+    ...messages
+  ];
 
   try {
     const upstream = await fetch(OPENROUTER_CHAT_URL, {
@@ -100,9 +134,8 @@ module.exports = async function chat(req, res) {
       },
       body: JSON.stringify({
         model,
-        messages,
-        max_tokens: 1200,
-        temperature: 0.2
+        messages: routedMessages,
+        max_completion_tokens: tier === "best" ? 1400 : 1000
       })
     });
 
@@ -126,6 +159,7 @@ module.exports = async function chat(req, res) {
     return reply(res, 200, {
       answer,
       model: result.model || model,
+      tier,
       usage: result.usage || null
     });
   } catch (_) {

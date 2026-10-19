@@ -349,7 +349,7 @@ The project includes a simulated drift mode demonstrating this behaviour.
 
 ## Implementation
 
-WARRANTY is intentionally implemented as a browser-based system.
+WARRANTY's dashboard and offline benchmark run in the browser. Live prompts use a small Vercel Function so provider credentials stay on the server.
 
 ### Frontend
 
@@ -358,6 +358,7 @@ WARRANTY is intentionally implemented as a browser-based system.
 * Vanilla JavaScript
 * Chart.js
 * Vercel
+* Vercel Function at `api/chat.js`
 
 ### Data and Evaluation
 
@@ -372,7 +373,7 @@ WARRANTY is intentionally implemented as a browser-based system.
 
 The system uses one cheaper model and one more capable frontier model. Their exact model IDs and pricing are stored in `data/prices.json`.
 
-### Storage
+### Storage and live requests
 
 The benchmark is stored locally in:
 
@@ -380,9 +381,19 @@ The benchmark is stored locally in:
 data/bank.json
 ```
 
-No backend server is required for the demo.
+The offline benchmark is loaded by the browser. Live prompts are routed using TF-IDF text similarity against the training rows, then sent to `/api/chat`. The function calls OpenRouter with the selected model and returns the answer and token usage.
 
-Routing, certification, simulation, visualisation, replay and auditing run in the browser.
+The live text-similarity score is a lightweight estimate. The certification shown on the dashboard is computed from the offline calibration set and is not a guarantee for live prompts.
+
+### Credentials and access
+
+The app does not have individual user accounts. Live requests require a shared demo access code and a server-side OpenRouter API key:
+
+* `WARRANTY_DEMO_TOKEN` is checked by the function against the browser's `Authorization: Bearer` header. The browser keeps the code in `sessionStorage` for the current tab session.
+* `OPENROUTER_API_KEY` is used only by `api/chat.js`; it is never sent to the browser.
+* `WARRANTY_CHEAP_MODEL` and `WARRANTY_FRONTIER_MODEL` can override the model IDs in `data/prices.json`.
+
+The access code is shared by everyone you give it to; it identifies authorized demo access, not an individual user. Use HTTPS, keep the code private, and rotate it if it is shared too widely.
 
 ---
 
@@ -390,9 +401,14 @@ Routing, certification, simulation, visualisation, replay and auditing run in th
 
 ```text
 warranty/
-├── PLAN.md
 ├── README.md
 ├── index.html
+├── api/
+│   └── chat.js
+├── css/
+│   └── studio.css
+├── .gitignore
+├── .env.example
 │
 ├── js/
 │   ├── router.js
@@ -401,50 +417,32 @@ warranty/
 │   ├── charts.js
 │   ├── replay.js
 │   ├── trace.js
-│   └── judge.js
+│   ├── judge.js
+│   └── live.js
 │
 ├── data/
 │   ├── questions.json
 │   ├── bank.sample.json
 │   ├── bank.json
-│   └── prices.json
-│
-├── notebooks/
-│   ├── 00_gate
-│   ├── 01_questions
-│   ├── 02_bank_part1
-│   ├── 02_bank_part2
-│   ├── 02_bank_part3
-│   ├── 02_bank_part4
-│   ├── 02_bank_part5
-│   ├── 03_merge
-│   └── 04_vectors_split
-│
-└── pitch/
-    ├── slides.pdf
-    ├── one_pager.pdf
-    └── demo_backup_link.txt
+│   ├── prices.json
+│   └── questions copy.json
 ```
 
 ---
 
 ## Running the Project
 
-WARRANTY is a static web application.
-
 ### Option 1: Vercel
 
-Open the deployed Vercel URL.
+Add `OPENROUTER_API_KEY` and `WARRANTY_DEMO_TOKEN` in the Vercel project's Environment Variables, then deploy. Enter the demo access code in the live prompt panel.
 
 ### Option 2: Local
 
-Clone the repository and open:
+Clone the repository, copy `.env.example` to `.env.local`, fill in both secrets, and run the app with the Vercel CLI:
 
 ```text
-index.html
+vercel dev
 ```
-
-in a browser.
 
 The application loads:
 
@@ -453,9 +451,7 @@ data/bank.json
 data/prices.json
 ```
 
-and performs routing and evaluation in the browser.
-
-No backend server or build step is required for the current implementation.
+Offline routing, certification, simulation, visualisation, replay and auditing run in the browser. Live requests go through the server function; the provider key stays server-side. Opening `index.html` directly still works for the offline benchmark, but live calls need `/api/chat`.
 
 ---
 

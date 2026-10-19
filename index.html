@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0d0b">
+  <meta name="description" content="WARRANTY routes each prompt to the lowest-cost model that meets your quality bar.">
 
   <title>WARRANTY — Certified LLM Router</title>
 
@@ -37,6 +39,7 @@
       transform: translateX(0);
     }
   </style>
+  <link rel="stylesheet" href="css/studio.css">
 </head>
 
 <body class="bg-slate-950 text-white h-screen">
@@ -62,9 +65,28 @@
       </button>
     </header>
 
+    <nav class="site-nav" aria-label="Page sections">
+      <a href="#quality-control">Quality bar</a>
+      <a href="#overview">Performance</a>
+      <a href="#benchmark">Benchmarks</a>
+      <a href="#live-router">Try live</a>
+    </nav>
+
+    <section class="warranty-hero" aria-labelledby="hero-title">
+      <div>
+        <p class="hero-kicker">An instrument for intelligent spend</p>
+        <h2 id="hero-title">Less cost.<br><em>Same conviction.</em></h2>
+        <p class="hero-description">WARRANTY learns when a smaller model is enough, then keeps the quality bar visible at every turn.</p>
+      </div>
+      <aside class="hero-aside">
+        <strong>Every route has a reason.</strong>
+        <span>Set your acceptable quality regression. WARRANTY finds the most cost-efficient route it can certify from the benchmark.</span>
+      </aside>
+    </section>
+
 
     <!-- PROMISE BAR -->
-    <section class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+    <section id="quality-control" class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
 
       <div class="flex items-center justify-between">
 
@@ -136,7 +158,7 @@
 
 
     <!-- STAT TILES -->
-    <section class="grid grid-cols-10 gap-3">
+    <section id="overview" class="grid grid-cols-10 gap-3">
 
       <!-- COST -->
       <div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-3">
@@ -274,7 +296,7 @@
 
 
     <!-- MAIN CONTENT -->
-    <section class="grid grid-cols-2 grid-rows-[1fr_auto] gap-4 min-h-0">
+    <section id="benchmark" class="grid grid-cols-2 grid-rows-[1fr_auto] gap-4 min-h-0">
 
 
       <!-- PARETO -->
@@ -359,7 +381,7 @@
         </div>
 
         <!-- TRY WARRANTY -->
-<div class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4">
+<div id="live-router" class="col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4">
 
   <div class="flex items-center justify-between mb-3">
 
@@ -369,7 +391,7 @@
       </h2>
 
       <p class="text-[11px] text-slate-500 mt-1">
-        Offline routing demo — no API calls
+        Live model calls use the server API. The benchmark certification is a separate offline estimate.
       </p>
     </div>
 
@@ -384,23 +406,46 @@
 
   <form
     id="try-form"
-    class="flex gap-2">
+    class="flex flex-wrap gap-2">
+
+    <input
+      id="try-access-code"
+      type="password"
+      autocomplete="off"
+      placeholder="Demo access code"
+      aria-label="Demo access code"
+      class="w-44 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-slate-500"
+    >
+
+    <select id="try-mode" aria-label="Live routing mode" class="bg-slate-950 border border-slate-700 px-3 py-2.5 text-sm text-white">
+      <option value="auto">Auto route</option>
+      <option value="cheap">Always cheap</option>
+      <option value="frontier">Always frontier</option>
+    </select>
 
     <input
       id="try-prompt"
       type="text"
       autocomplete="off"
       placeholder="Ask something... e.g. What is photosynthesis?"
-      class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-slate-500"
+      class="flex-1 min-w-48 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-slate-500"
     >
 
     <button
+      id="try-submit"
       type="submit"
       class="px-5 py-2.5 rounded-xl bg-white text-black text-sm font-semibold whitespace-nowrap">
       Route
     </button>
 
   </form>
+
+  <div class="flex items-center justify-between mt-3">
+    <p class="text-[10px] text-slate-500">Auto compares text similarity with the learned threshold. Manual modes bypass that choice.</p>
+    <button id="try-clear" type="button" class="text-[10px] text-slate-400 hover:text-white">Clear conversation</button>
+  </div>
+
+  <div id="try-thread" class="mt-4 space-y-3" role="log" aria-live="polite"></div>
 
 
   <div
@@ -422,7 +467,7 @@
 
     <div class="bg-slate-950 border border-slate-800 rounded-xl p-3">
       <p class="text-[10px] text-slate-500 uppercase">
-        Certified τ
+        Offline τ
       </p>
 
       <p
@@ -464,6 +509,18 @@
   <div
     id="try-neighbours"
     class="hidden mt-3 text-xs text-slate-400">
+  </div>
+
+  <div
+    id="try-answer-panel"
+    class="hidden mt-4 bg-slate-950 border border-slate-800 rounded-xl p-4">
+    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+      <p class="text-xs font-semibold text-slate-300">Live answer</p>
+      <p id="try-model" class="text-[10px] text-slate-500"></p>
+    </div>
+    <pre id="try-answer" class="whitespace-pre-wrap break-words font-sans text-sm text-slate-200"></pre>
+    <p id="try-usage" class="mt-3 text-[10px] text-slate-500"></p>
+    <p class="mt-3 text-[10px] text-amber-300/80">Live routing uses text similarity to the benchmark. The offline certification does not guarantee live-query quality.</p>
   </div>
 
 </div>
@@ -523,6 +580,7 @@
   <script src="js/certify.js"></script>
   <script src="js/charts.js"></script>
   <script src="js/ui.js"></script>
+  <script src="js/live.js"></script>
   <script src="js/replay.js"></script>
   <script src="js/trace.js"></script>
   <script src="js/judge.js"></script>
